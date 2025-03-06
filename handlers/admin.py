@@ -5,6 +5,7 @@ from aiogram import Dispatcher, Bot, F
 from aiogram.filters import Command
 from aiogram.types import Message, CallbackQuery, FSInputFile, InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.fsm.context import FSMContext
+from aiogram.fsm.state import State, StatesGroup
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text
 
@@ -13,10 +14,15 @@ from database.base import async_session
 from database.repositories import UserRepository, PasswordRepository, LogRepository
 from database.models import User, Password, Log
 from keyboards import (
-    get_admin_keyboard, get_passwords_keyboard, get_password_management_keyboard,
+    get_admin_inline_keyboard, get_passwords_keyboard, get_password_management_keyboard,
     get_users_keyboard, get_user_management_keyboard, get_confirmation_keyboard
 )
 from states import AdminState
+from handlers.common import get_welcome_message
+
+# Состояния для рассылки сообщений
+class BroadcastState(StatesGroup):
+    waiting_for_message = State()
 
 logger = logging.getLogger(__name__)
 
@@ -428,7 +434,7 @@ async def process_log_file(message: Message, state: FSMContext, bot: Bot) -> Non
     # Получаем сессию базы данных
     async with async_session() as session:
         log_repo = LogRepository(session)
-        user_repo = UserRepository(session)
+        # user_repo = UserRepository(session)  # Закомментировано
         
         # Сохраняем информацию о файле в базе данных
         log = await log_repo.create_log(
@@ -442,19 +448,20 @@ async def process_log_file(message: Message, state: FSMContext, bot: Bot) -> Non
             f"Файл '{file_name}' успешно загружен и добавлен в базу данных."
         )
         
-        # Получаем всех активных пользователей
-        users = await user_repo.get_all_active_users()
-        
-        # Отправляем уведомление всем активным пользователям
-        for user in users:
-            if not user.is_admin:  # Не отправляем уведомление администраторам
-                try:
-                    await bot.send_message(
-                        chat_id=user.user_id,
-                        text=f"Администратор загрузил новый лог: {file_name}"
-                    )
-                except Exception as e:
-                    logger.error(f"Ошибка при отправке уведомления пользователю {user.user_id}: {e}")
+        # Закомментированная логика оповещения пользователей
+        # # Получаем всех активных пользователей
+        # users = await user_repo.get_all_active_users()
+        # 
+        # # Отправляем уведомление всем активным пользователям
+        # for user in users:
+        #     if not user.is_admin:  # Не отправляем уведомление администраторам
+        #         try:
+        #             await bot.send_message(
+        #                 chat_id=user.user_id,
+        #                 text=f"Администратор загрузил новый лог: {file_name}"
+        #             )
+        #         except Exception as e:
+        #             logger.error(f"Ошибка при отправке уведомления пользователю {user.user_id}: {e}")
     
     # Очищаем состояние
     await state.clear()
@@ -514,26 +521,90 @@ async def cancel_clear_logs(callback: CallbackQuery) -> None:
 # Обработчик кнопки "Назад" (к главному меню)
 async def back_to_main(callback: CallbackQuery) -> None:
     """Обработчик кнопки 'Назад' (к главному меню)"""
+    # Формируем приветственное сообщение
+    welcome_text = await get_welcome_message(callback.from_user.id)
+    
     # Отправляем сообщение с главным меню
     await callback.message.answer(
-        "Главное меню. Выберите действие:",
-        reply_markup=get_admin_keyboard()
+        welcome_text,
+        reply_markup=get_admin_inline_keyboard(),
+        disable_web_page_preview=True
     )
     
     # Отвечаем на callback, чтобы убрать часы загрузки
     await callback.answer()
 
+# Обработчик кнопки "Сообщение"
+async def broadcast_message(callback: CallbackQuery, state: FSMContext) -> None:
+    """Обработчик кнопки 'Сообщение'"""
+    await callback.message.answer(
+        "Введите сообщение, которое хотите разослать всем пользователям бота:"
+    )
+    await state.set_state(BroadcastState.waiting_for_message)
+    
+    # Отвечаем на callback, чтобы убрать часы загрузки
+    await callback.answer()
+
+# Обработчик ввода сообщения для рассылки
+async def process_broadcast_message(message: Message, state: FSMContext, bot: Bot) -> None:
+    """Обработчик ввода сообщения для рассылки"""
+    broadcast_text = message.text
+    
+    if not broadcast_text:
+        await message.answer("Сообщение не может быть пустым. Попробуйте еще раз:")
+        return
+    
+    # Получаем сессию базы данных
+    async with async_session() as session:
+        user_repo = UserRepository(session)
+        
+        # Получаем всех активных пользователей
+        users = await user_repo.get_all_active_users()
+        
+        # Отправляем сообщение о начале рассылки
+        status_message = await message.answer(
+            f"Начинаю рассылку сообщения {len(users)} пользователям..."
+        )
+        
+        # Счетчики для статистики
+        success_count = 0
+        error_count = 0
+        
+        # Отправляем сообщение всем пользователям
+        for user in users:
+            try:
+                await bot.send_message(
+                    chat_id=user.user_id,
+                    text=broadcast_text
+                )
+                success_count += 1
+            except Exception as e:
+                logger.error(f"Ошибка при отправке сообщения пользователю {user.user_id}: {e}")
+                error_count += 1
+        
+        # Обновляем сообщение о статусе рассылки
+        await bot.edit_message_text(
+            chat_id=message.chat.id,
+            message_id=status_message.message_id,
+            text=f"Рассылка завершена!\n\n"
+                 f"✅ Успешно отправлено: {success_count}\n"
+                 f"❌ Ошибок: {error_count}"
+        )
+    
+    # Очищаем состояние
+    await state.clear()
+    
+    # Отправляем приветственное сообщение с клавиатурой
+    welcome_text = await get_welcome_message(message.from_user.id)
+    await message.answer(
+        welcome_text,
+        reply_markup=get_admin_inline_keyboard(),
+        disable_web_page_preview=True
+    )
+
 def register_admin_handlers(dp: Dispatcher, bot: Bot) -> None:
     """Регистрация обработчиков команд администратора"""
-    # Регистрация обработчиков кнопок главного меню
-    dp.message.register(show_passwords, F.text == "Пароли")
-    dp.message.register(show_users, F.text == "Пользователи")
-    dp.message.register(upload_logs, F.text == "Загрузить логи")
-    dp.message.register(stop_logs, F.text == "Стоп логи")
-    dp.message.register(allow_logs, F.text == "Разрешить логи")
-    dp.message.register(clear_logs, F.text == "Очистить базу логов")
-    
-    # Регистрация обработчиков callback-запросов для паролей
+    # Регистрация обработчиков для паролей
     dp.callback_query.register(create_password, F.data == "create_password")
     dp.callback_query.register(password_selected, F.data.startswith("password_"))
     dp.callback_query.register(delete_password, F.data.startswith("delete_password_"))
@@ -541,21 +612,22 @@ def register_admin_handlers(dp: Dispatcher, bot: Bot) -> None:
     dp.callback_query.register(cancel_delete_password, F.data.startswith("cancel_delete_password_"))
     dp.callback_query.register(back_to_passwords, F.data == "back_to_passwords")
     
-    # Регистрация обработчиков callback-запросов для пользователей
+    # Регистрация обработчиков для пользователей
     dp.callback_query.register(user_selected, F.data.startswith("user_"))
     dp.callback_query.register(delete_user, F.data.startswith("delete_user_"))
+    dp.callback_query.register(confirm_delete_user, F.data.startswith("confirm_delete_user_"))
+    dp.callback_query.register(cancel_delete_user, F.data.startswith("cancel_delete_user_"))
+    dp.callback_query.register(back_to_users, F.data == "back_to_users")
     
-    # Регистрация обработчиков callback-запросов для подтверждения/отмены действий
-    dp.callback_query.register(confirm_delete_user, F.data.startswith("confirm_user_"))
-    dp.callback_query.register(cancel_delete_user, F.data.startswith("cancel_user_"))
+    # Регистрация обработчиков для логов
     dp.callback_query.register(confirm_clear_logs, F.data == "confirm_clear_logs")
     dp.callback_query.register(cancel_clear_logs, F.data == "cancel_clear_logs")
     
-    # Регистрация обработчиков навигации
-    dp.callback_query.register(back_to_users, F.data == "back_to_users")
+    # Регистрация обработчика кнопки "Назад"
     dp.callback_query.register(back_to_main, F.data == "back_to_main")
     
     # Регистрация обработчиков состояний
     dp.message.register(process_new_password, AdminState.waiting_for_password)
     dp.message.register(process_max_uses, AdminState.waiting_for_max_uses)
-    dp.message.register(process_log_file, AdminState.waiting_for_log_file) 
+    dp.message.register(process_log_file, AdminState.waiting_for_log_file)
+    dp.message.register(process_broadcast_message, BroadcastState.waiting_for_message) 

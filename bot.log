@@ -704,3 +704,1062 @@ WHERE passwords.password = ? AND passwords.is_active = 1
 2025-03-07 00:12:48,600 - aiogram.dispatcher - INFO - Polling stopped
 2025-03-07 00:12:48,858 - aiogram.dispatcher - INFO - Polling stopped for bot @testsirderobot id=8126821875 - 'test_botik'
 2025-03-07 00:12:48,859 - __main__ - INFO - Бот остановлен
+2025-03-07 00:22:46,968 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:22:46,968 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("users")
+2025-03-07 00:22:46,969 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:22:46,970 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("passwords")
+2025-03-07 00:22:46,970 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:22:46,972 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("logs")
+2025-03-07 00:22:46,972 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:22:46,973 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:22:46,974 - database.base - INFO - База данных успешно инициализирована
+2025-03-07 00:22:46,974 - __main__ - INFO - Используется MemoryStorage для хранения состояний
+2025-03-07 00:22:47,216 - __main__ - INFO - Бот запущен
+2025-03-07 00:22:47,216 - aiogram.dispatcher - INFO - Start polling
+2025-03-07 00:22:47,450 - aiogram.dispatcher - INFO - Run polling for bot @testsirderobot id=8126821875 - 'test_botik'
+2025-03-07 00:22:48,334 - aiogram.dispatcher - INFO - Polling stopped
+2025-03-07 00:22:48,584 - aiogram.dispatcher - INFO - Polling stopped for bot @testsirderobot id=8126821875 - 'test_botik'
+2025-03-07 00:22:48,586 - __main__ - INFO - Бот остановлен
+2025-03-07 00:22:54,882 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:22:54,883 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("users")
+2025-03-07 00:22:54,883 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:22:54,884 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("passwords")
+2025-03-07 00:22:54,885 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:22:54,885 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("logs")
+2025-03-07 00:22:54,886 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:22:54,887 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:22:54,887 - database.base - INFO - База данных успешно инициализирована
+2025-03-07 00:22:54,887 - __main__ - INFO - Используется MemoryStorage для хранения состояний
+2025-03-07 00:22:55,117 - __main__ - INFO - Бот запущен
+2025-03-07 00:22:55,117 - aiogram.dispatcher - INFO - Start polling
+2025-03-07 00:22:55,346 - aiogram.dispatcher - INFO - Run polling for bot @testsirderobot id=8126821875 - 'test_botik'
+2025-03-07 00:24:18,671 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:24:18,677 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:24:18,678 - sqlalchemy.engine.Engine - INFO - [generated in 0.00062s] (7699005037,)
+2025-03-07 00:24:18,681 - sqlalchemy.engine.Engine - INFO - INSERT INTO users (user_id, username, first_name, last_name, is_admin, is_active, created_at, updated_at, taken_logs_count, empty_logs_count, daily_empty_logs_count, last_empty_log_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:24:18,682 - sqlalchemy.engine.Engine - INFO - [generated in 0.00066s] (7699005037, 'tnwfo', 'rostislav', None, 1, 1, '2025-03-06 21:24:18.681114', '2025-03-06 21:24:18.681114', 0, 0, 0, None)
+2025-03-07 00:24:18,685 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:24:18,690 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:24:18,691 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.id = ?
+2025-03-07 00:24:18,692 - sqlalchemy.engine.Engine - INFO - [generated in 0.00042s] (3,)
+2025-03-07 00:24:18,789 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:24:18,790 - aiogram.event - INFO - Update id=117255860 is handled. Duration 1452 ms by bot id=8126821875
+2025-03-07 00:24:24,250 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:24:24,250 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:24:24,250 - sqlalchemy.engine.Engine - INFO - [cached since 5.574s ago] (7699005037,)
+2025-03-07 00:24:24,369 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:24:24,370 - aiogram.event - INFO - Update id=117255861 is handled. Duration 1406 ms by bot id=8126821875
+2025-03-07 00:30:30,724 - aiogram.event - INFO - Update id=117255862 is handled. Duration 250 ms by bot id=8126821875
+2025-03-07 00:31:21,925 - aiogram.dispatcher - INFO - Polling stopped
+2025-03-07 00:31:22,177 - aiogram.dispatcher - INFO - Polling stopped for bot @testsirderobot id=8126821875 - 'test_botik'
+2025-03-07 00:31:22,179 - __main__ - INFO - Бот остановлен
+2025-03-07 00:31:24,660 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:31:24,661 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("users")
+2025-03-07 00:31:24,661 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:31:24,662 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("passwords")
+2025-03-07 00:31:24,663 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:31:24,664 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("logs")
+2025-03-07 00:31:24,664 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:31:24,664 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:31:24,666 - database.base - INFO - База данных успешно инициализирована
+2025-03-07 00:31:24,666 - __main__ - INFO - Используется MemoryStorage для хранения состояний
+2025-03-07 00:31:24,888 - __main__ - INFO - Бот запущен
+2025-03-07 00:31:24,889 - aiogram.dispatcher - INFO - Start polling
+2025-03-07 00:31:25,126 - aiogram.dispatcher - INFO - Run polling for bot @testsirderobot id=8126821875 - 'test_botik'
+2025-03-07 00:31:32,056 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:31:32,062 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:31:32,062 - sqlalchemy.engine.Engine - INFO - [generated in 0.00052s] (1083294848,)
+2025-03-07 00:31:32,160 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:31:32,161 - aiogram.event - INFO - Update id=117255863 is handled. Duration 1421 ms by bot id=8126821875
+2025-03-07 00:36:47,795 - aiogram.dispatcher - INFO - Polling stopped
+2025-03-07 00:36:48,046 - aiogram.dispatcher - INFO - Polling stopped for bot @testsirderobot id=8126821875 - 'test_botik'
+2025-03-07 00:36:48,048 - __main__ - INFO - Бот остановлен
+2025-03-07 00:36:50,620 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:36:50,620 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("users")
+2025-03-07 00:36:50,622 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:36:50,623 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("passwords")
+2025-03-07 00:36:50,623 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:36:50,624 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("logs")
+2025-03-07 00:36:50,625 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:36:50,625 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:36:50,626 - database.base - INFO - База данных успешно инициализирована
+2025-03-07 00:36:50,627 - __main__ - INFO - Используется MemoryStorage для хранения состояний
+2025-03-07 00:36:50,941 - __main__ - INFO - Бот запущен
+2025-03-07 00:36:50,942 - aiogram.dispatcher - INFO - Start polling
+2025-03-07 00:36:51,186 - aiogram.dispatcher - INFO - Run polling for bot @testsirderobot id=8126821875 - 'test_botik'
+2025-03-07 00:36:54,400 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:36:54,407 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:36:54,408 - sqlalchemy.engine.Engine - INFO - [generated in 0.00075s] (1083294848,)
+2025-03-07 00:36:54,528 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:36:54,530 - aiogram.event - INFO - Update id=117255864 is handled. Duration 1468 ms by bot id=8126821875
+2025-03-07 00:36:58,870 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:36:58,872 - sqlalchemy.engine.Engine - INFO - SELECT passwords.id, passwords.password, passwords.max_uses, passwords.used_count, passwords.is_active, passwords.created_at, passwords.created_by 
+FROM passwords 
+WHERE passwords.is_active = 1
+2025-03-07 00:36:58,872 - sqlalchemy.engine.Engine - INFO - [generated in 0.00055s] ()
+2025-03-07 00:36:58,976 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:36:58,979 - aiogram.event - INFO - Update id=117255865 is handled. Duration 187 ms by bot id=8126821875
+2025-03-07 00:37:02,611 - aiogram.event - INFO - Update id=117255866 is handled. Duration 172 ms by bot id=8126821875
+2025-03-07 00:37:03,987 - aiogram.event - INFO - Update id=117255867 is handled. Duration 110 ms by bot id=8126821875
+2025-03-07 00:37:04,756 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:37:04,758 - sqlalchemy.engine.Engine - INFO - INSERT INTO passwords (password, max_uses, used_count, is_active, created_at, created_by) VALUES (?, ?, ?, ?, ?, ?)
+2025-03-07 00:37:04,759 - sqlalchemy.engine.Engine - INFO - [generated in 0.00068s] ('123', 2, 0, 1, '2025-03-06 21:37:04.758530', 1083294848)
+2025-03-07 00:37:04,763 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:37:04,770 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:37:04,771 - sqlalchemy.engine.Engine - INFO - SELECT passwords.id, passwords.password, passwords.max_uses, passwords.used_count, passwords.is_active, passwords.created_at, passwords.created_by 
+FROM passwords 
+WHERE passwords.id = ?
+2025-03-07 00:37:04,771 - sqlalchemy.engine.Engine - INFO - [generated in 0.00051s] (2,)
+2025-03-07 00:37:04,772 - sqlalchemy.engine.Engine - INFO - SELECT passwords.id, passwords.password, passwords.max_uses, passwords.used_count, passwords.is_active, passwords.created_at, passwords.created_by 
+FROM passwords 
+WHERE passwords.is_active = 1
+2025-03-07 00:37:04,773 - sqlalchemy.engine.Engine - INFO - [cached since 5.901s ago] ()
+2025-03-07 00:37:04,993 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:37:04,994 - aiogram.event - INFO - Update id=117255868 is handled. Duration 235 ms by bot id=8126821875
+2025-03-07 00:37:15,554 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:37:15,556 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:37:15,556 - sqlalchemy.engine.Engine - INFO - [cached since 21.15s ago] (7442982117,)
+2025-03-07 00:37:15,685 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:37:15,686 - aiogram.event - INFO - Update id=117255869 is handled. Duration 1375 ms by bot id=8126821875
+2025-03-07 00:37:17,622 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:37:17,623 - sqlalchemy.engine.Engine - INFO - SELECT passwords.id, passwords.password, passwords.max_uses, passwords.used_count, passwords.is_active, passwords.created_at, passwords.created_by 
+FROM passwords 
+WHERE passwords.password = ? AND passwords.is_active = 1
+2025-03-07 00:37:17,623 - sqlalchemy.engine.Engine - INFO - [generated in 0.00031s] ('123',)
+2025-03-07 00:37:17,625 - sqlalchemy.engine.Engine - INFO - UPDATE passwords SET used_count=(passwords.used_count + ?) WHERE passwords.id = ?
+2025-03-07 00:37:17,625 - sqlalchemy.engine.Engine - INFO - [generated in 0.00034s] (1, 2)
+2025-03-07 00:37:17,629 - sqlalchemy.engine.Engine - INFO - UPDATE passwords SET is_active=? WHERE passwords.id = ?
+2025-03-07 00:37:17,629 - sqlalchemy.engine.Engine - INFO - [generated in 0.00042s] (0, 2)
+2025-03-07 00:37:17,630 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:37:17,634 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:37:17,634 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:37:17,634 - sqlalchemy.engine.Engine - INFO - [cached since 23.23s ago] (7442982117,)
+2025-03-07 00:37:17,637 - sqlalchemy.engine.Engine - INFO - UPDATE users SET is_active=?, updated_at=? WHERE users.user_id = ?
+2025-03-07 00:37:17,637 - sqlalchemy.engine.Engine - INFO - [generated in 0.00041s] (1, '2025-03-06 21:37:17.637263', 7442982117)
+2025-03-07 00:37:17,639 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:37:17,643 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:37:17,643 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:37:17,644 - sqlalchemy.engine.Engine - INFO - [cached since 23.24s ago] (7442982117,)
+2025-03-07 00:37:17,741 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:37:17,742 - aiogram.event - INFO - Update id=117255870 is handled. Duration 125 ms by bot id=8126821875
+2025-03-07 00:38:59,669 - aiogram.event - INFO - Update id=117255871 is handled. Duration 390 ms by bot id=8126821875
+2025-03-07 00:40:33,159 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:40:33,160 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:40:33,160 - sqlalchemy.engine.Engine - INFO - [cached since 218.8s ago] (1083294848,)
+2025-03-07 00:40:33,405 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:40:33,406 - aiogram.event - INFO - Update id=117255872 is handled. Duration 1766 ms by bot id=8126821875
+2025-03-07 00:42:17,436 - aiogram.event - INFO - Update id=117255873 is not handled. Duration 0 ms by bot id=8126821875
+2025-03-07 00:43:16,693 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:43:16,694 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:43:16,694 - sqlalchemy.engine.Engine - INFO - [cached since 382.3s ago] (8014080433,)
+2025-03-07 00:43:16,699 - sqlalchemy.engine.Engine - INFO - INSERT INTO users (user_id, username, first_name, last_name, is_admin, is_active, created_at, updated_at, taken_logs_count, empty_logs_count, daily_empty_logs_count, last_empty_log_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:43:16,699 - sqlalchemy.engine.Engine - INFO - [generated in 0.00040s] (8014080433, 'Sxldmy', 'picme', None, 0, 1, '2025-03-06 21:43:16.699237', '2025-03-06 21:43:16.699237', 0, 0, 0, None)
+2025-03-07 00:43:16,702 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:43:16,707 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:43:16,708 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.id = ?
+2025-03-07 00:43:16,708 - sqlalchemy.engine.Engine - INFO - [generated in 0.00043s] (4,)
+2025-03-07 00:43:16,848 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:43:16,849 - aiogram.event - INFO - Update id=117255874 is handled. Duration 1515 ms by bot id=8126821875
+2025-03-07 00:43:51,400 - aiogram.event - INFO - Update id=117255875 is handled. Duration 452 ms by bot id=8126821875
+2025-03-07 00:43:57,770 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:43:57,771 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:43:57,772 - sqlalchemy.engine.Engine - INFO - [generated in 0.00048s] ('BQACAgIAAxkBAAIKF2fKFx04axANBZdTDdj7OhPmOO3-AAKVcAACR41RStfjb3udF1LbNgQ', 'tz.rar', 126, 0, '2025-03-06 21:43:57.771580', None, None)
+2025-03-07 00:43:57,773 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:43:57,778 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:43:57,780 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:43:57,780 - sqlalchemy.engine.Engine - INFO - [generated in 0.00050s] (1,)
+2025-03-07 00:43:57,884 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:43:57,884 - sqlalchemy.engine.Engine - INFO - [generated in 0.00048s] ()
+2025-03-07 00:43:58,209 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:43:58,210 - aiogram.event - INFO - Update id=117255876 is handled. Duration 438 ms by bot id=8126821875
+2025-03-07 00:44:40,816 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:44:40,817 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:44:40,817 - sqlalchemy.engine.Engine - INFO - [cached since 466.4s ago] (7699005037,)
+2025-03-07 00:44:40,915 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:44:40,916 - aiogram.event - INFO - Update id=117255877 is handled. Duration 1577 ms by bot id=8126821875
+2025-03-07 00:44:46,362 - aiogram.event - INFO - Update id=117255878 is handled. Duration 328 ms by bot id=8126821875
+2025-03-07 00:44:53,567 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:44:53,568 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:44:53,569 - sqlalchemy.engine.Engine - INFO - [cached since 55.8s ago] ('BQACAgIAAxkBAAIKEmfKFrlj1WxxQ2pgr5fS2uQiBp-QAAInbAACiIhJSqvNSMK1uBPPNgQ', '10 ВЦ Тест.rar', 130137795, 0, '2025-03-06 21:44:53.568486', None, None)
+2025-03-07 00:44:53,571 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:44:53,575 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:44:53,576 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:44:53,576 - sqlalchemy.engine.Engine - INFO - [cached since 55.8s ago] (2,)
+2025-03-07 00:44:53,675 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:44:53,675 - sqlalchemy.engine.Engine - INFO - [cached since 55.79s ago] ()
+2025-03-07 00:44:53,865 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:44:53,866 - aiogram.event - INFO - Update id=117255879 is handled. Duration 297 ms by bot id=8126821875
+2025-03-07 00:45:04,263 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:45:04,263 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:45:04,264 - sqlalchemy.engine.Engine - INFO - [cached since 489.9s ago] (8014080433,)
+2025-03-07 00:45:04,443 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:45:04,444 - aiogram.event - INFO - Update id=117255880 is handled. Duration 1358 ms by bot id=8126821875
+2025-03-07 00:45:07,227 - aiogram.event - INFO - Update id=117255881 is not handled. Duration 16 ms by bot id=8126821875
+2025-03-07 00:45:09,864 - aiogram.event - INFO - Update id=117255882 is not handled. Duration 0 ms by bot id=8126821875
+2025-03-07 00:45:29,029 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:45:29,029 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:45:29,030 - sqlalchemy.engine.Engine - INFO - [cached since 514.6s ago] (7699005037,)
+2025-03-07 00:45:29,122 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:45:29,123 - aiogram.event - INFO - Update id=117255883 is handled. Duration 1405 ms by bot id=8126821875
+2025-03-07 00:45:33,892 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:45:33,892 - sqlalchemy.engine.Engine - INFO - SELECT passwords.id, passwords.password, passwords.max_uses, passwords.used_count, passwords.is_active, passwords.created_at, passwords.created_by 
+FROM passwords 
+WHERE passwords.is_active = 1
+2025-03-07 00:45:33,894 - sqlalchemy.engine.Engine - INFO - [cached since 515s ago] ()
+2025-03-07 00:45:33,996 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:45:33,997 - aiogram.event - INFO - Update id=117255884 is handled. Duration 186 ms by bot id=8126821875
+2025-03-07 00:45:35,512 - aiogram.event - INFO - Update id=117255885 is handled. Duration 171 ms by bot id=8126821875
+2025-03-07 00:45:52,436 - aiogram.event - INFO - Update id=117255886 is handled. Duration 266 ms by bot id=8126821875
+2025-03-07 00:45:54,721 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:45:54,722 - sqlalchemy.engine.Engine - INFO - INSERT INTO passwords (password, max_uses, used_count, is_active, created_at, created_by) VALUES (?, ?, ?, ?, ?, ?)
+2025-03-07 00:45:54,733 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:45:54,738 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:45:54,738 - sqlalchemy.engine.Engine - INFO - SELECT passwords.id, passwords.password, passwords.max_uses, passwords.used_count, passwords.is_active, passwords.created_at, passwords.created_by 
+FROM passwords 
+WHERE passwords.id = ?
+2025-03-07 00:45:54,739 - sqlalchemy.engine.Engine - INFO - [cached since 530s ago] (3,)
+2025-03-07 00:45:54,741 - sqlalchemy.engine.Engine - INFO - SELECT passwords.id, passwords.password, passwords.max_uses, passwords.used_count, passwords.is_active, passwords.created_at, passwords.created_by 
+FROM passwords 
+WHERE passwords.is_active = 1
+2025-03-07 00:45:54,741 - sqlalchemy.engine.Engine - INFO - [cached since 535.9s ago] ()
+2025-03-07 00:45:54,933 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:45:54,934 - aiogram.event - INFO - Update id=117255887 is handled. Duration 218 ms by bot id=8126821875
+2025-03-07 00:46:16,316 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:46:16,316 - sqlalchemy.engine.Engine - INFO - SELECT passwords.id, passwords.password, passwords.max_uses, passwords.used_count, passwords.is_active, passwords.created_at, passwords.created_by 
+FROM passwords 
+WHERE passwords.password = ? AND passwords.is_active = 1
+2025-03-07 00:46:16,321 - sqlalchemy.engine.Engine - INFO - UPDATE passwords SET used_count=(passwords.used_count + ?) WHERE passwords.id = ?
+2025-03-07 00:46:16,321 - sqlalchemy.engine.Engine - INFO - [cached since 538.7s ago] (1, 3)
+2025-03-07 00:46:16,326 - sqlalchemy.engine.Engine - INFO - UPDATE passwords SET is_active=? WHERE passwords.id = ?
+2025-03-07 00:46:16,326 - sqlalchemy.engine.Engine - INFO - [cached since 538.7s ago] (0, 3)
+2025-03-07 00:46:16,327 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:46:16,332 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:46:16,332 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:46:16,332 - sqlalchemy.engine.Engine - INFO - [cached since 561.9s ago] (8014080433,)
+2025-03-07 00:46:16,617 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:46:16,617 - aiogram.event - INFO - Update id=117255888 is handled. Duration 311 ms by bot id=8126821875
+2025-03-07 00:46:18,723 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:46:18,726 - sqlalchemy.engine.Engine - INFO - SELECT count(*) AS count_1 
+FROM logs 
+WHERE logs.is_taken = 0
+2025-03-07 00:46:18,726 - sqlalchemy.engine.Engine - INFO - [generated in 0.00034s] ()
+2025-03-07 00:46:18,835 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:46:18,836 - aiogram.event - INFO - Update id=117255889 is handled. Duration 203 ms by bot id=8126821875
+2025-03-07 00:46:21,762 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:46:21,762 - sqlalchemy.engine.Engine - INFO - SELECT count(*) AS count_1 
+FROM logs 
+WHERE logs.is_taken = 0
+2025-03-07 00:46:21,763 - sqlalchemy.engine.Engine - INFO - [cached since 3.036s ago] ()
+2025-03-07 00:46:21,764 - sqlalchemy.engine.Engine - INFO - SELECT users.id 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:46:21,765 - sqlalchemy.engine.Engine - INFO - [generated in 0.00031s] (8014080433,)
+2025-03-07 00:46:21,766 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.is_taken = 0 ORDER BY logs.uploaded_at
+ LIMIT ? OFFSET ?
+2025-03-07 00:46:21,766 - sqlalchemy.engine.Engine - INFO - [generated in 0.00031s] (2, 0)
+2025-03-07 00:46:21,769 - sqlalchemy.engine.Engine - INFO - UPDATE logs SET is_taken=?, taken_at=?, user_id=? WHERE logs.id = ?
+2025-03-07 00:46:21,769 - sqlalchemy.engine.Engine - INFO - [generated in 0.00038s] (1, '2025-03-06 21:46:21.768582', 4, 1)
+2025-03-07 00:46:21,772 - sqlalchemy.engine.Engine - INFO - UPDATE logs SET is_taken=?, taken_at=?, user_id=? WHERE logs.id = ?
+2025-03-07 00:46:21,773 - sqlalchemy.engine.Engine - INFO - [cached since 0.004868s ago] (1, '2025-03-06 21:46:21.772601', 4, 2)
+2025-03-07 00:46:21,775 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:46:21,778 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:46:21,779 - sqlalchemy.engine.Engine - INFO - UPDATE users SET updated_at=?, taken_logs_count=(users.taken_logs_count + ?) WHERE users.user_id = ?
+2025-03-07 00:46:21,779 - sqlalchemy.engine.Engine - INFO - [generated in 0.00036s] ('2025-03-06 21:46:21.779772', 2, 8014080433)
+2025-03-07 00:46:21,781 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:46:22,076 - aiogram.event - INFO - Update id=117255890 is handled. Duration 313 ms by bot id=8126821875
+2025-03-07 00:49:25,114 - aiogram.event - INFO - Update id=117255891 is not handled. Duration 14 ms by bot id=8126821875
+2025-03-07 00:49:27,943 - aiogram.event - INFO - Update id=117255892 is not handled. Duration 16 ms by bot id=8126821875
+2025-03-07 00:49:28,838 - aiogram.event - INFO - Update id=117255893 is handled. Duration 358 ms by bot id=8126821875
+2025-03-07 00:49:30,601 - aiogram.event - INFO - Update id=117255894 is handled. Duration 235 ms by bot id=8126821875
+2025-03-07 00:49:32,761 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,762 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,762 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKPWfKGGzeoLFXx-Etk87lBpMmRZktAAJnYgACtA5ISi1b1Anyu--kNgQ', 'session-79083262756.zip', 15104492, 0, '2025-03-06 21:49:32.762708', None, None)
+2025-03-07 00:49:32,762 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,763 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,763 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKPmfKGGxA_8ONJ0_PYXVD59VbRIpsAAJoYgACtA5ISpoJiYADJHUMNgQ', 'session-79091511861.zip', 16812062, 0, '2025-03-06 21:49:32.763709', None, None)
+2025-03-07 00:49:32,763 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,763 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,763 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKP2fKGGwtDzTtfCLI1NF0XPPJOx4WAAJpYgACtA5ISnWP0I024rT-NgQ', 'session-79093394251.zip', 15119771, 0, '2025-03-06 21:49:32.763709', None, None)
+2025-03-07 00:49:32,764 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,764 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,764 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKQWfKGGxyo8xuraq5nJhTnFqjdIlzAAJrYgACtA5ISkjv43tzRIxbNgQ', 'session-79093747498.zip', 15278767, 0, '2025-03-06 21:49:32.764708', None, None)
+2025-03-07 00:49:32,765 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,765 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,765 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKQmfKGGzGJu0MvdBbSdklCi_EDMYGAAJsYgACtA5ISsBOq_q4H0IKNgQ', 'session-79113960624.zip', 12225249, 0, '2025-03-06 21:49:32.765711', None, None)
+2025-03-07 00:49:32,766 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,766 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,766 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKRGfKGGxJ1zDlNdX9acMoHPi1WMCqAAJuYgACtA5ISu7_jjP3Tz0rNgQ', 'session-79132157917.zip', 15273288, 0, '2025-03-06 21:49:32.766780', None, None)
+2025-03-07 00:49:32,767 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,767 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,767 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKRmfKGGxNpGNK9u9Wg0DbmKReMXVyAAKjagACVbJJSkFCA5y9awGNNgQ', 'session-79143546510.zip', 15036370, 0, '2025-03-06 21:49:32.767780', None, None)
+2025-03-07 00:49:32,768 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,768 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,768 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKSGfKGGzagYalK9hKuyhApmX3m53VAAKkagACVbJJSo6-RL__1qnwNgQ', 'session-79145893030.zip', 15161559, 0, '2025-03-06 21:49:32.768779', None, None)
+2025-03-07 00:49:32,769 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,770 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,770 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKSWfKGGxeDVvch-CvBwnX253lv7Y1AAJ1YgACtA5ISpwO8xYReD6fNgQ', 'session-79147013582.zip', 15172549, 0, '2025-03-06 21:49:32.770783', None, None)
+2025-03-07 00:49:32,770 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,772 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,772 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKSmfKGGw5Xs2unvooGOUFF4GR-1D3AAJ2YgACtA5ISp86OGVTlidoNgQ', 'session-79162539758.zip', 15280335, 0, '2025-03-06 21:49:32.772037', None, None)
+2025-03-07 00:49:32,773 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,773 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,773 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKTGfKGGy0wMssuSBty8PJow663JR-AAJ3YgACtA5ISucQP-YCh0RjNgQ', 'session-79168206790.zip', 15306246, 0, '2025-03-06 21:49:32.773036', None, None)
+2025-03-07 00:49:32,774 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,774 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,774 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKTWfKGGwZYAd-uMCesdGnY3t56WCbAAJ4YgACtA5ISmKu83Zs_H0UNgQ', 'session-79182280748.zip', 12094105, 0, '2025-03-06 21:49:32.774036', None, None)
+2025-03-07 00:49:32,774 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,775 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,776 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKT2fKGGz2IPVjhtqt-FExfEykDQoXAAJ6YgACtA5ISgIsQbVxR-z_NgQ', 'session-79205937908.zip', 12318878, 0, '2025-03-06 21:49:32.775560', None, None)
+2025-03-07 00:49:32,776 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,777 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,777 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKUGfKGGyAmlr3tfJSMQc6Hftj4P_NAALWbQAC6mtJSsQY6UaisKFaNgQ', 'session-79213128675.zip', 15470746, 0, '2025-03-06 21:49:32.777565', None, None)
+2025-03-07 00:49:32,777 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,778 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,778 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKUmfKGGwZyh34dPMdPD4S5igGQcC0AAJ8YgACtA5ISr0AAWufzqJfxTYE', 'session-79243073009.zip', 16320557, 0, '2025-03-06 21:49:32.778565', None, None)
+2025-03-07 00:49:32,779 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,779 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,779 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKU2fKGGw4CouyaCnbLnQ_R8kXb6N7AAJ9YgACtA5ISnzlDFW19biKNgQ', 'session-79243671680.zip', 17248050, 0, '2025-03-06 21:49:32.779567', None, None)
+2025-03-07 00:49:32,780 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,780 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,780 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKVGfKGGxpCslpq0TttDGCGGw2EUmMAAJ-YgACtA5ISpB4Z3uaVSTqNgQ', 'session-79257419082.zip', 15840904, 0, '2025-03-06 21:49:32.780565', None, None)
+2025-03-07 00:49:32,781 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,781 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,781 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKQGfKGGwnq_OhNN-Va1Vmr5qsyrckAAJqYgACtA5ISkVAI_bKXsOINgQ', 'session-79093510010.zip', 15321908, 0, '2025-03-06 21:49:32.781593', None, None)
+2025-03-07 00:49:32,782 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,782 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,782 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKQ2fKGGxmp_j64zEMJIyQ3667bM8tAAJtYgACtA5ISmqHrerxCNwqNgQ', 'session-79121435047.zip', 15096076, 0, '2025-03-06 21:49:32.782593', None, None)
+2025-03-07 00:49:32,783 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,783 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,783 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKRWfKGGyZOW10Js8AAdMpizegnaAZCwACb2IAArQOSEqFIhgI93HdbTYE', 'session-79136799083.zip', 15215631, 0, '2025-03-06 21:49:32.783592', None, None)
+2025-03-07 00:49:32,784 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,784 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,784 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKR2fKGGyMUhnwg2AT21esAf9gfvEzAAJ0YgACtA5ISr5H2QpsuH3vNgQ', 'session-79144217466.zip', 15283104, 0, '2025-03-06 21:49:32.784593', None, None)
+2025-03-07 00:49:32,785 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,785 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,785 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKS2fKGGwksxycRpoyi5DvptjshdbuAAKlagACVbJJSpfR_hwv2CpaNgQ', 'session-79167674567.zip', 15865167, 0, '2025-03-06 21:49:32.785593', None, None)
+2025-03-07 00:49:32,786 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,787 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,787 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKTmfKGGy9JvMpxlOt0UO1C4y3jqmbAAJ5YgACtA5ISjmh7HMnw9Z_NgQ', 'session-79193267572.zip', 15130593, 0, '2025-03-06 21:49:32.786803', None, None)
+2025-03-07 00:49:32,788 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,788 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,788 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKUWfKGGyeGTPz48ldROV8S518f4shAAJ7YgACtA5ISvMvjvU6NEL5NgQ', 'session-79229504622.zip', 12276516, 0, '2025-03-06 21:49:32.788804', None, None)
+2025-03-07 00:49:32,789 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,789 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,790 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKVWfKGGyR8A1lEqUMTxCLio3N1oQ8AAKBYgACtA5ISg_9Jlea85NhNgQ', 'session-79272771723.zip', 12331333, 0, '2025-03-06 21:49:32.789803', None, None)
+2025-03-07 00:49:32,790 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,790 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,791 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKV2fKGGy9Ujz3K_gAARFCgCmXRW0q3wACg2IAArQOSEoNO7_kSiBf6TYE', 'session-79280041938.zip', 13335141, 0, '2025-03-06 21:49:32.790804', None, None)
+2025-03-07 00:49:32,791 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,791 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,792 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKVmfKGGye3o1QJ_RLPIdbfabKDQABBgACgmIAArQOSErKL8x8XqPwjDYE', 'session-79275971986.zip', 12230541, 0, '2025-03-06 21:49:32.791886', None, None)
+2025-03-07 00:49:32,792 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,792 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,793 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKWGfKGGyDTD9VJmMfEXJnHaQLPt8WAAKEYgACtA5ISrzarl7jTCgoNgQ', 'session-79296952195.zip', 16090586, 0, '2025-03-06 21:49:32.792884', None, None)
+2025-03-07 00:49:32,793 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,793 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,793 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKWWfKGGxz8RNzRV1ORPZMQr-qd_7LAAKFYgACtA5ISqB8UXTPOZ3TNgQ', 'session-79299661404.zip', 21396711, 0, '2025-03-06 21:49:32.793883', None, None)
+2025-03-07 00:49:32,793 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,793 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,795 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKWmfKGGwzGDFnQa1W2S0xJ-3sB8i8AAKGYgACtA5ISqjxnr1ahWC4NgQ', 'session-79313226025.zip', 12252823, 0, '2025-03-06 21:49:32.793883', None, None)
+2025-03-07 00:49:32,795 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,795 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,796 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKW2fKGGxc07gafalZI1q4z2Xux2KeAAKHYgACtA5ISv71HtL_mWMRNgQ', 'session-79371673213.zip', 12322692, 0, '2025-03-06 21:49:32.795388', None, None)
+2025-03-07 00:49:32,796 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,796 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,797 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKXGfKGGwB122foxsgX_tufbAzNEzUAAKIYgACtA5ISv6EI7a5qULaNgQ', 'session-79385016153.zip', 12081909, 0, '2025-03-06 21:49:32.796394', None, None)
+2025-03-07 00:49:32,797 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,798 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,798 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKXWfKGGxZl3lbMEq607u2eI3iqzpJAAKJYgACtA5ISnrKhTPZhcFvNgQ', 'session-79398057596.zip', 15460842, 0, '2025-03-06 21:49:32.798394', None, None)
+2025-03-07 00:49:32,799 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,799 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,799 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKXmfKGGwSk53GcCphgKdPAAGcpPGQkwACimIAArQOSEpzV4OlkdjkijYE', 'session-79398851637.zip', 12347240, 0, '2025-03-06 21:49:32.799394', None, None)
+2025-03-07 00:49:32,800 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,800 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,800 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKX2fKGGydMCNBE2fKZJ2qLN9M2Z8LAAKLYgACtA5ISpjhAxnybUOQNgQ', 'session-79504368392.zip', 15446217, 0, '2025-03-06 21:49:32.800394', None, None)
+2025-03-07 00:49:32,800 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,801 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,801 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKYGfKGGzNKhZ0_fGWNmP1l3aVPbZRAAKMYgACtA5ISuRdaPX6cpTLNgQ', 'session-79514997611.zip', 12343121, 0, '2025-03-06 21:49:32.801601', None, None)
+2025-03-07 00:49:32,802 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,802 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,802 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKYWfKGGyiUy2L9kMNj9c8XOjmS1x9AAKNYgACtA5ISjeuEeR-P73BNgQ', 'session-79515105639.zip', 15887548, 0, '2025-03-06 21:49:32.802601', None, None)
+2025-03-07 00:49:32,803 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,803 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,803 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKYmfKGGyuv23UvJ2wdpVJp8mLsP6IAAKOYgACtA5ISv8iYnCU5xr-NgQ', 'session-79520330095.zip', 15915062, 0, '2025-03-06 21:49:32.803600', None, None)
+2025-03-07 00:49:32,803 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,804 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:49:32,805 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ('BQACAgIAAxkBAAIKY2fKGGz03Z3GViFXZZghq0TufdsXAAKPYgACtA5ISlcgUTW4Iw6JNgQ', 'session-79521696013.zip', 12562027, 0, '2025-03-06 21:49:32.804603', None, None)
+2025-03-07 00:49:32,808 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,818 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,819 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,819 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,819 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] (3,)
+2025-03-07 00:49:32,822 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,822 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,823 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,823 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] (4,)
+2025-03-07 00:49:32,828 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,828 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,829 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,829 - sqlalchemy.engine.Engine - INFO - [cached since 335.1s ago] (5,)
+2025-03-07 00:49:32,831 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,831 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,832 - sqlalchemy.engine.Engine - INFO - [cached since 335.1s ago] (6,)
+2025-03-07 00:49:32,832 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,838 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,838 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,839 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,839 - sqlalchemy.engine.Engine - INFO - [cached since 335.1s ago] (7,)
+2025-03-07 00:49:32,842 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,843 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,843 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,844 - sqlalchemy.engine.Engine - INFO - [cached since 335.1s ago] (8,)
+2025-03-07 00:49:32,845 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,847 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,847 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,847 - sqlalchemy.engine.Engine - INFO - [cached since 335.1s ago] (9,)
+2025-03-07 00:49:32,850 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,851 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,851 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,851 - sqlalchemy.engine.Engine - INFO - [cached since 335.1s ago] (10,)
+2025-03-07 00:49:32,856 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,857 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,857 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,857 - sqlalchemy.engine.Engine - INFO - [cached since 335.1s ago] (11,)
+2025-03-07 00:49:32,862 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,862 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,863 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,863 - sqlalchemy.engine.Engine - INFO - [cached since 335.1s ago] (12,)
+2025-03-07 00:49:32,866 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,867 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,867 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,868 - sqlalchemy.engine.Engine - INFO - [cached since 335.1s ago] (13,)
+2025-03-07 00:49:32,872 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,873 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,873 - sqlalchemy.engine.Engine - INFO - [cached since 335.1s ago] (14,)
+2025-03-07 00:49:32,878 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,881 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,882 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,882 - sqlalchemy.engine.Engine - INFO - [cached since 335.1s ago] (15,)
+2025-03-07 00:49:32,883 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,887 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,888 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,888 - sqlalchemy.engine.Engine - INFO - [cached since 335.1s ago] (16,)
+2025-03-07 00:49:32,889 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,894 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,894 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,895 - sqlalchemy.engine.Engine - INFO - [cached since 335.1s ago] (17,)
+2025-03-07 00:49:32,895 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,901 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,902 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,902 - sqlalchemy.engine.Engine - INFO - [cached since 335.1s ago] (18,)
+2025-03-07 00:49:32,904 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,907 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,908 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,908 - sqlalchemy.engine.Engine - INFO - [cached since 335.1s ago] (19,)
+2025-03-07 00:49:32,909 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,912 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,913 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,913 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,914 - sqlalchemy.engine.Engine - INFO - [cached since 335.1s ago] (20,)
+2025-03-07 00:49:32,924 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:32,925 - sqlalchemy.engine.Engine - INFO - [cached since 335s ago] ()
+2025-03-07 00:49:32,927 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,929 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,930 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,930 - sqlalchemy.engine.Engine - INFO - [cached since 335.2s ago] (21,)
+2025-03-07 00:49:32,932 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,934 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,934 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,934 - sqlalchemy.engine.Engine - INFO - [cached since 335.2s ago] (22,)
+2025-03-07 00:49:32,938 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,939 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,939 - sqlalchemy.engine.Engine - INFO - [cached since 335.2s ago] (23,)
+2025-03-07 00:49:32,939 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,943 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,946 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,946 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,946 - sqlalchemy.engine.Engine - INFO - [cached since 335.2s ago] (24,)
+2025-03-07 00:49:32,949 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,950 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,950 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,950 - sqlalchemy.engine.Engine - INFO - [cached since 335.2s ago] (25,)
+2025-03-07 00:49:32,953 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,953 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,953 - sqlalchemy.engine.Engine - INFO - [cached since 335.2s ago] (26,)
+2025-03-07 00:49:32,963 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,967 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,969 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,969 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,969 - sqlalchemy.engine.Engine - INFO - [cached since 335.2s ago] (27,)
+2025-03-07 00:49:32,972 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:32,975 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,976 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,976 - sqlalchemy.engine.Engine - INFO - [cached since 335.2s ago] (28,)
+2025-03-07 00:49:32,980 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:32,981 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:32,981 - sqlalchemy.engine.Engine - INFO - [cached since 335.2s ago] (29,)
+2025-03-07 00:49:33,020 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:33,025 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:33,026 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:33,027 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:33,027 - sqlalchemy.engine.Engine - INFO - [cached since 335.3s ago] (30,)
+2025-03-07 00:49:33,029 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:33,029 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:33,029 - sqlalchemy.engine.Engine - INFO - [cached since 335.3s ago] (31,)
+2025-03-07 00:49:33,033 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,035 - sqlalchemy.engine.Engine - INFO - [cached since 335.2s ago] ()
+2025-03-07 00:49:33,065 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:33,069 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:33,070 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:33,070 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:33,071 - sqlalchemy.engine.Engine - INFO - [cached since 335.3s ago] (32,)
+2025-03-07 00:49:33,074 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:33,078 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:33,078 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:33,078 - sqlalchemy.engine.Engine - INFO - [cached since 335.3s ago] (33,)
+2025-03-07 00:49:33,083 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:33,085 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:33,085 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:33,085 - sqlalchemy.engine.Engine - INFO - [cached since 335.3s ago] (34,)
+2025-03-07 00:49:33,089 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,089 - sqlalchemy.engine.Engine - INFO - [cached since 335.2s ago] ()
+2025-03-07 00:49:33,091 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:33,091 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:33,092 - sqlalchemy.engine.Engine - INFO - [cached since 335.3s ago] (35,)
+2025-03-07 00:49:33,098 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,099 - sqlalchemy.engine.Engine - INFO - [cached since 335.2s ago] ()
+2025-03-07 00:49:33,119 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,119 - sqlalchemy.engine.Engine - INFO - [cached since 335.2s ago] ()
+2025-03-07 00:49:33,133 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,134 - sqlalchemy.engine.Engine - INFO - [cached since 335.3s ago] ()
+2025-03-07 00:49:33,160 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,160 - sqlalchemy.engine.Engine - INFO - [cached since 335.3s ago] ()
+2025-03-07 00:49:33,168 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:33,171 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:33,172 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:33,172 - sqlalchemy.engine.Engine - INFO - [cached since 335.4s ago] (36,)
+2025-03-07 00:49:33,173 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:33,176 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,177 - sqlalchemy.engine.Engine - INFO - [cached since 335.3s ago] ()
+2025-03-07 00:49:33,183 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:33,184 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:33,185 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:33,186 - sqlalchemy.engine.Engine - INFO - [cached since 335.4s ago] (37,)
+2025-03-07 00:49:33,188 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:33,189 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:33,189 - sqlalchemy.engine.Engine - INFO - [cached since 335.4s ago] (38,)
+2025-03-07 00:49:33,198 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,198 - sqlalchemy.engine.Engine - INFO - [cached since 335.3s ago] ()
+2025-03-07 00:49:33,222 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,223 - sqlalchemy.engine.Engine - INFO - [cached since 335.3s ago] ()
+2025-03-07 00:49:33,241 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,242 - sqlalchemy.engine.Engine - INFO - [cached since 335.4s ago] ()
+2025-03-07 00:49:33,259 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,259 - sqlalchemy.engine.Engine - INFO - [cached since 335.4s ago] ()
+2025-03-07 00:49:33,272 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:33,278 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:33,278 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:33,279 - sqlalchemy.engine.Engine - INFO - [cached since 335.5s ago] (39,)
+2025-03-07 00:49:33,279 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:33,280 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,281 - sqlalchemy.engine.Engine - INFO - [cached since 335.4s ago] ()
+2025-03-07 00:49:33,284 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:49:33,284 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:33,284 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:33,285 - sqlalchemy.engine.Engine - INFO - [cached since 335.5s ago] (40,)
+2025-03-07 00:49:33,290 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:33,290 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:49:33,291 - sqlalchemy.engine.Engine - INFO - [cached since 335.5s ago] (41,)
+2025-03-07 00:49:33,301 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,301 - sqlalchemy.engine.Engine - INFO - [cached since 335.4s ago] ()
+2025-03-07 00:49:33,324 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,324 - sqlalchemy.engine.Engine - INFO - [cached since 335.4s ago] ()
+2025-03-07 00:49:33,348 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,349 - sqlalchemy.engine.Engine - INFO - [cached since 335.5s ago] ()
+2025-03-07 00:49:33,362 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,363 - sqlalchemy.engine.Engine - INFO - [cached since 335.5s ago] ()
+2025-03-07 00:49:33,377 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:33,378 - aiogram.event - INFO - Update id=117255913 is handled. Duration 671 ms by bot id=8126821875
+2025-03-07 00:49:33,388 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,389 - sqlalchemy.engine.Engine - INFO - [cached since 335.5s ago] ()
+2025-03-07 00:49:33,410 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,411 - sqlalchemy.engine.Engine - INFO - [cached since 335.5s ago] ()
+2025-03-07 00:49:33,432 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,432 - sqlalchemy.engine.Engine - INFO - [cached since 335.6s ago] ()
+2025-03-07 00:49:33,450 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,450 - sqlalchemy.engine.Engine - INFO - [cached since 335.6s ago] ()
+2025-03-07 00:49:33,471 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,471 - sqlalchemy.engine.Engine - INFO - [cached since 335.6s ago] ()
+2025-03-07 00:49:33,478 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:33,479 - aiogram.event - INFO - Update id=117255896 is handled. Duration 766 ms by bot id=8126821875
+2025-03-07 00:49:33,490 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,490 - sqlalchemy.engine.Engine - INFO - [cached since 335.6s ago] ()
+2025-03-07 00:49:33,499 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:33,500 - aiogram.event - INFO - Update id=117255931 is handled. Duration 780 ms by bot id=8126821875
+2025-03-07 00:49:33,516 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,517 - sqlalchemy.engine.Engine - INFO - [cached since 335.6s ago] ()
+2025-03-07 00:49:33,526 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:33,527 - aiogram.event - INFO - Update id=117255897 is handled. Duration 812 ms by bot id=8126821875
+2025-03-07 00:49:33,541 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,541 - sqlalchemy.engine.Engine - INFO - [cached since 335.7s ago] ()
+2025-03-07 00:49:33,560 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,560 - sqlalchemy.engine.Engine - INFO - [cached since 335.7s ago] ()
+2025-03-07 00:49:33,563 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:33,564 - aiogram.event - INFO - Update id=117255900 is handled. Duration 843 ms by bot id=8126821875
+2025-03-07 00:49:33,582 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,582 - sqlalchemy.engine.Engine - INFO - [cached since 335.7s ago] ()
+2025-03-07 00:49:33,590 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:33,591 - aiogram.event - INFO - Update id=117255901 is handled. Duration 875 ms by bot id=8126821875
+2025-03-07 00:49:33,600 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,600 - sqlalchemy.engine.Engine - INFO - [cached since 335.7s ago] ()
+2025-03-07 00:49:33,618 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,618 - sqlalchemy.engine.Engine - INFO - [cached since 335.7s ago] ()
+2025-03-07 00:49:33,619 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:33,621 - aiogram.event - INFO - Update id=117255912 is handled. Duration 905 ms by bot id=8126821875
+2025-03-07 00:49:33,636 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,637 - sqlalchemy.engine.Engine - INFO - [cached since 335.8s ago] ()
+2025-03-07 00:49:33,640 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:33,641 - aiogram.event - INFO - Update id=117255918 is handled. Duration 921 ms by bot id=8126821875
+2025-03-07 00:49:33,649 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:33,649 - sqlalchemy.engine.Engine - INFO - [cached since 335.8s ago] ()
+2025-03-07 00:49:33,657 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:33,658 - aiogram.event - INFO - Update id=117255924 is handled. Duration 937 ms by bot id=8126821875
+2025-03-07 00:49:33,679 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:33,680 - aiogram.event - INFO - Update id=117255911 is handled. Duration 968 ms by bot id=8126821875
+2025-03-07 00:49:33,703 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:33,705 - aiogram.event - INFO - Update id=117255904 is handled. Duration 984 ms by bot id=8126821875
+2025-03-07 00:49:33,738 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:33,740 - aiogram.event - INFO - Update id=117255906 is handled. Duration 1030 ms by bot id=8126821875
+2025-03-07 00:49:33,767 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:33,768 - aiogram.event - INFO - Update id=117255916 is handled. Duration 1046 ms by bot id=8126821875
+2025-03-07 00:49:33,781 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:33,782 - aiogram.event - INFO - Update id=117255895 is handled. Duration 1062 ms by bot id=8126821875
+2025-03-07 00:49:33,799 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:33,800 - aiogram.event - INFO - Update id=117255908 is handled. Duration 1093 ms by bot id=8126821875
+2025-03-07 00:49:33,815 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:33,817 - aiogram.event - INFO - Update id=117255921 is handled. Duration 1109 ms by bot id=8126821875
+2025-03-07 00:49:33,841 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:33,842 - aiogram.event - INFO - Update id=117255905 is handled. Duration 1125 ms by bot id=8126821875
+2025-03-07 00:49:33,868 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:33,869 - aiogram.event - INFO - Update id=117255925 is handled. Duration 1155 ms by bot id=8126821875
+2025-03-07 00:49:33,884 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:33,885 - aiogram.event - INFO - Update id=117255909 is handled. Duration 1171 ms by bot id=8126821875
+2025-03-07 00:49:33,906 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:33,907 - aiogram.event - INFO - Update id=117255926 is handled. Duration 1187 ms by bot id=8126821875
+2025-03-07 00:49:33,923 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:33,924 - aiogram.event - INFO - Update id=117255899 is handled. Duration 1202 ms by bot id=8126821875
+2025-03-07 00:49:33,944 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:33,945 - aiogram.event - INFO - Update id=117255930 is handled. Duration 1234 ms by bot id=8126821875
+2025-03-07 00:49:33,968 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:33,969 - aiogram.event - INFO - Update id=117255920 is handled. Duration 1250 ms by bot id=8126821875
+2025-03-07 00:49:33,994 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:33,995 - aiogram.event - INFO - Update id=117255898 is handled. Duration 1280 ms by bot id=8126821875
+2025-03-07 00:49:34,005 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:34,006 - aiogram.event - INFO - Update id=117255910 is handled. Duration 1296 ms by bot id=8126821875
+2025-03-07 00:49:34,026 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:34,027 - aiogram.event - INFO - Update id=117255915 is handled. Duration 1312 ms by bot id=8126821875
+2025-03-07 00:49:34,049 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:34,050 - aiogram.event - INFO - Update id=117255922 is handled. Duration 1343 ms by bot id=8126821875
+2025-03-07 00:49:34,068 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:34,069 - aiogram.event - INFO - Update id=117255917 is handled. Duration 1359 ms by bot id=8126821875
+2025-03-07 00:49:34,088 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:34,089 - aiogram.event - INFO - Update id=117255928 is handled. Duration 1375 ms by bot id=8126821875
+2025-03-07 00:49:34,109 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:34,110 - aiogram.event - INFO - Update id=117255933 is handled. Duration 1391 ms by bot id=8126821875
+2025-03-07 00:49:38,525 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:38,527 - aiogram.event - INFO - Update id=117255919 is handled. Duration 5812 ms by bot id=8126821875
+2025-03-07 00:49:38,684 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:38,685 - sqlalchemy.engine.Engine - INFO - [cached since 340.8s ago] ()
+2025-03-07 00:49:38,706 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:38,706 - sqlalchemy.engine.Engine - INFO - [cached since 340.8s ago] ()
+2025-03-07 00:49:38,722 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:38,723 - sqlalchemy.engine.Engine - INFO - [cached since 340.8s ago] ()
+2025-03-07 00:49:38,748 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:38,748 - sqlalchemy.engine.Engine - INFO - [cached since 340.9s ago] ()
+2025-03-07 00:49:38,770 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:38,770 - sqlalchemy.engine.Engine - INFO - [cached since 340.9s ago] ()
+2025-03-07 00:49:38,791 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:38,792 - sqlalchemy.engine.Engine - INFO - [cached since 340.9s ago] ()
+2025-03-07 00:49:38,808 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:38,809 - sqlalchemy.engine.Engine - INFO - [cached since 340.9s ago] ()
+2025-03-07 00:49:38,835 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:49:38,836 - sqlalchemy.engine.Engine - INFO - [cached since 341s ago] ()
+2025-03-07 00:49:38,865 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:38,867 - aiogram.event - INFO - Update id=117255927 is handled. Duration 6155 ms by bot id=8126821875
+2025-03-07 00:49:38,903 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:38,903 - aiogram.event - INFO - Update id=117255907 is handled. Duration 6187 ms by bot id=8126821875
+2025-03-07 00:49:38,938 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:38,940 - aiogram.event - INFO - Update id=117255932 is handled. Duration 6218 ms by bot id=8126821875
+2025-03-07 00:49:38,960 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:38,961 - aiogram.event - INFO - Update id=117255903 is handled. Duration 6250 ms by bot id=8126821875
+2025-03-07 00:49:38,981 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:38,982 - aiogram.event - INFO - Update id=117255902 is handled. Duration 6266 ms by bot id=8126821875
+2025-03-07 00:49:39,000 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:39,000 - aiogram.event - INFO - Update id=117255929 is handled. Duration 6280 ms by bot id=8126821875
+2025-03-07 00:49:39,016 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:39,017 - aiogram.event - INFO - Update id=117255923 is handled. Duration 6296 ms by bot id=8126821875
+2025-03-07 00:49:39,036 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:39,037 - aiogram.event - INFO - Update id=117255914 is handled. Duration 6327 ms by bot id=8126821875
+2025-03-07 00:49:45,323 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:45,324 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:49:45,324 - sqlalchemy.engine.Engine - INFO - [cached since 770.9s ago] (8014080433,)
+2025-03-07 00:49:45,416 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:45,417 - aiogram.event - INFO - Update id=117255934 is handled. Duration 1265 ms by bot id=8126821875
+2025-03-07 00:49:55,758 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:49:55,759 - sqlalchemy.engine.Engine - INFO - SELECT passwords.id, passwords.password, passwords.max_uses, passwords.used_count, passwords.is_active, passwords.created_at, passwords.created_by 
+FROM passwords 
+WHERE passwords.password = ? AND passwords.is_active = 1
+2025-03-07 00:49:56,096 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:49:56,097 - aiogram.event - INFO - Update id=117255935 is handled. Duration 344 ms by bot id=8126821875
+2025-03-07 00:55:06,346 - aiogram.dispatcher - INFO - Polling stopped
+2025-03-07 00:55:06,598 - aiogram.dispatcher - INFO - Polling stopped for bot @testsirderobot id=8126821875 - 'test_botik'
+2025-03-07 00:55:06,599 - __main__ - INFO - Бот остановлен
+2025-03-07 00:55:09,498 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:55:09,498 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("users")
+2025-03-07 00:55:09,498 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:55:09,501 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("passwords")
+2025-03-07 00:55:09,501 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:55:09,502 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("logs")
+2025-03-07 00:55:09,502 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:55:09,503 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:55:09,504 - database.base - INFO - База данных успешно инициализирована
+2025-03-07 00:55:09,504 - __main__ - INFO - Используется MemoryStorage для хранения состояний
+2025-03-07 00:55:09,750 - __main__ - ERROR - Произошла ошибка при запуске бота: unsupported callable
+Traceback (most recent call last):
+  File "C:\Users\semen\AppData\Local\Programs\Python\Python312\Lib\inspect.py", line 1384, in getfullargspec
+    sig = _signature_from_callable(func,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\AppData\Local\Programs\Python\Python312\Lib\inspect.py", line 2491, in _signature_from_callable
+    raise TypeError('{!r} is not a callable object'.format(obj))
+TypeError: 'waiting_for_message' is not a callable object
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\semen\botikrost\bot.py", line 50, in main
+    register_all_handlers(dp, bot)
+  File "C:\Users\semen\botikrost\handlers\__init__.py", line 10, in register_all_handlers
+    register_admin_handlers(dp, bot)
+  File "C:\Users\semen\botikrost\handlers\admin.py", line 632, in register_admin_handlers
+    dp.message.register(process_broadcast_message, BroadcastState.waiting_for_message)
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 87, in register
+    filters=[FilterObject(filter_) for filter_ in filters],
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 5, in __init__
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 72, in __post_init__
+    super(FilterObject, self).__post_init__()
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 30, in __post_init__
+    spec = inspect.getfullargspec(callback)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\AppData\Local\Programs\Python\Python312\Lib\inspect.py", line 1394, in getfullargspec
+    raise TypeError('unsupported callable') from ex
+TypeError: unsupported callable
+2025-03-07 00:57:13,279 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:57:13,279 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("users")
+2025-03-07 00:57:13,280 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:57:13,281 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("passwords")
+2025-03-07 00:57:13,282 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:57:13,283 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("logs")
+2025-03-07 00:57:13,283 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:57:13,284 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:57:13,285 - database.base - INFO - База данных успешно инициализирована
+2025-03-07 00:57:13,285 - __main__ - INFO - Используется MemoryStorage для хранения состояний
+2025-03-07 00:57:13,528 - __main__ - INFO - Бот запущен
+2025-03-07 00:57:13,528 - aiogram.dispatcher - INFO - Start polling
+2025-03-07 00:57:13,755 - aiogram.dispatcher - INFO - Run polling for bot @testsirderobot id=8126821875 - 'test_botik'
+2025-03-07 00:57:18,716 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:57:18,722 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:57:18,722 - sqlalchemy.engine.Engine - INFO - [generated in 0.00050s] (1083294848,)
+2025-03-07 00:57:18,725 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:57:18,727 - sqlalchemy.engine.Engine - INFO - SELECT count(*) AS count_1 
+FROM logs
+2025-03-07 00:57:18,727 - sqlalchemy.engine.Engine - INFO - [generated in 0.00042s] ()
+2025-03-07 00:57:18,728 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:57:18,829 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:57:18,830 - aiogram.event - INFO - Update id=117255936 is handled. Duration 1469 ms by bot id=8126821875
+2025-03-07 00:57:21,161 - aiogram.event - INFO - Update id=117255937 is handled. Duration 281 ms by bot id=8126821875
+2025-03-07 00:57:22,868 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:57:22,870 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:57:22,870 - sqlalchemy.engine.Engine - INFO - [generated in 0.00046s] ()
+2025-03-07 00:57:23,554 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:57:23,555 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:57:23,556 - sqlalchemy.engine.Engine - INFO - SELECT count(*) AS count_1 
+FROM logs
+2025-03-07 00:57:23,556 - sqlalchemy.engine.Engine - INFO - [cached since 4.83s ago] ()
+2025-03-07 00:57:23,557 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:57:23,741 - aiogram.event - INFO - Update id=117255938 is handled. Duration 875 ms by bot id=8126821875
+2025-03-07 00:57:38,097 - aiogram.event - INFO - Update id=117255939 is handled. Duration 172 ms by bot id=8126821875
+2025-03-07 00:57:42,733 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:57:42,734 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:57:42,734 - sqlalchemy.engine.Engine - INFO - [generated in 0.00048s] ('BQACAgIAAxkBAAIK6mfKGlZjMDC3ZTwITMevygOU1AZVAAKncAACR41RSu3Spq6zogwnNgQ', 'tz.rar', 126, 0, '2025-03-06 21:57:42.734702', None, None)
+2025-03-07 00:57:42,736 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:57:42,741 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:57:42,743 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:57:42,743 - sqlalchemy.engine.Engine - INFO - [generated in 0.00033s] (42,)
+2025-03-07 00:57:42,835 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:57:42,836 - aiogram.event - INFO - Update id=117255940 is handled. Duration 108 ms by bot id=8126821875
+2025-03-07 00:59:35,240 - aiogram.dispatcher - INFO - Polling stopped
+2025-03-07 00:59:35,491 - aiogram.dispatcher - INFO - Polling stopped for bot @testsirderobot id=8126821875 - 'test_botik'
+2025-03-07 00:59:35,492 - __main__ - INFO - Бот остановлен
+2025-03-07 00:59:38,209 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:59:38,210 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("users")
+2025-03-07 00:59:38,211 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:59:38,213 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("passwords")
+2025-03-07 00:59:38,213 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:59:38,215 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("logs")
+2025-03-07 00:59:38,216 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:59:38,218 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:59:38,220 - database.base - INFO - База данных успешно инициализирована
+2025-03-07 00:59:38,220 - __main__ - INFO - Используется MemoryStorage для хранения состояний
+2025-03-07 00:59:38,542 - __main__ - INFO - Бот запущен
+2025-03-07 00:59:38,542 - aiogram.dispatcher - INFO - Start polling
+2025-03-07 00:59:38,769 - aiogram.dispatcher - INFO - Run polling for bot @testsirderobot id=8126821875 - 'test_botik'
+2025-03-07 00:59:46,277 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:59:46,284 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:59:46,285 - sqlalchemy.engine.Engine - INFO - [generated in 0.00059s] (1083294848,)
+2025-03-07 00:59:46,287 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:59:46,289 - sqlalchemy.engine.Engine - INFO - SELECT count(*) AS count_1 
+FROM logs
+2025-03-07 00:59:46,289 - sqlalchemy.engine.Engine - INFO - [generated in 0.00054s] ()
+2025-03-07 00:59:46,291 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:59:46,386 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:59:46,390 - aiogram.event - INFO - Update id=117255941 is handled. Duration 1452 ms by bot id=8126821875
+2025-03-07 00:59:49,396 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:59:49,397 - sqlalchemy.engine.Engine - INFO - SELECT passwords.id, passwords.password, passwords.max_uses, passwords.used_count, passwords.is_active, passwords.created_at, passwords.created_by 
+FROM passwords 
+WHERE passwords.is_active = 1
+2025-03-07 00:59:49,398 - sqlalchemy.engine.Engine - INFO - [generated in 0.00035s] ()
+2025-03-07 00:59:49,535 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:59:49,536 - aiogram.event - INFO - Update id=117255942 is handled. Duration 217 ms by bot id=8126821875
+2025-03-07 00:59:50,720 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:59:50,721 - sqlalchemy.engine.Engine - INFO - SELECT count(*) AS count_1 
+FROM logs
+2025-03-07 00:59:50,722 - sqlalchemy.engine.Engine - INFO - [cached since 4.433s ago] ()
+2025-03-07 00:59:50,724 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:59:50,911 - aiogram.event - INFO - Update id=117255943 is handled. Duration 202 ms by bot id=8126821875
+2025-03-07 00:59:51,698 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:59:51,699 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:59:51,700 - sqlalchemy.engine.Engine - INFO - [generated in 0.00039s] ()
+2025-03-07 00:59:51,701 - keyboards - INFO - Создаем кнопку для пользователя 1083294848 с callback_data: user_1083294848
+2025-03-07 00:59:51,701 - keyboards - INFO - Создаем кнопку для пользователя 7442982117 с callback_data: user_7442982117
+2025-03-07 00:59:51,701 - keyboards - INFO - Создаем кнопку для пользователя 7699005037 с callback_data: user_7699005037
+2025-03-07 00:59:51,701 - keyboards - INFO - Создаем кнопку для пользователя 8014080433 с callback_data: user_8014080433
+2025-03-07 00:59:51,793 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:59:51,794 - aiogram.event - INFO - Update id=117255944 is handled. Duration 188 ms by bot id=8126821875
+2025-03-07 00:59:54,474 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:59:54,474 - sqlalchemy.engine.Engine - INFO - SELECT count(*) AS count_1 
+FROM logs
+2025-03-07 00:59:54,474 - sqlalchemy.engine.Engine - INFO - [cached since 8.186s ago] ()
+2025-03-07 00:59:54,476 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:59:54,644 - aiogram.event - INFO - Update id=117255945 is handled. Duration 171 ms by bot id=8126821875
+2025-03-07 01:01:17,178 - aiogram.dispatcher - INFO - Polling stopped
+2025-03-07 01:01:17,428 - aiogram.dispatcher - INFO - Polling stopped for bot @testsirderobot id=8126821875 - 'test_botik'
+2025-03-07 01:01:17,430 - __main__ - INFO - Бот остановлен

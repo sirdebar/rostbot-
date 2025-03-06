@@ -193,6 +193,11 @@ class LogRepository:
         result = await self.session.execute(select(Log).where(Log.id == log_id))
         return result.scalars().first()
     
+    async def get_logs_count(self) -> int:
+        """Получить общее количество логов в базе данных"""
+        result = await self.session.execute(select(func.count()).select_from(Log))
+        return result.scalar() or 0
+    
     async def get_available_logs_count(self) -> int:
         """Получить количество доступных логов"""
         result = await self.session.execute(

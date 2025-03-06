@@ -9,24 +9,59 @@ logger = logging.getLogger(__name__)
 def get_admin_keyboard() -> ReplyKeyboardMarkup:
     """Клавиатура для администратора"""
     keyboard = [
-        [KeyboardButton(text="Пароли")],
-        [KeyboardButton(text="Пользователи")],
-        [KeyboardButton(text="Загрузить логи")],
-        [KeyboardButton(text="Стоп логи"), KeyboardButton(text="Разрешить логи")],
-        [KeyboardButton(text="Очистить базу логов")]
+        [KeyboardButton(text="🔑 Пароли")],
+        [KeyboardButton(text="👥 Пользователи")],
+        [KeyboardButton(text="📤 Загрузить логи")],
+        [KeyboardButton(text="🚫 Стоп логи"), KeyboardButton(text="✅ Разрешить логи")],
+        [KeyboardButton(text="🗑️ Очистить базу логов")]
     ]
     return ReplyKeyboardMarkup(keyboard=keyboard, resize_keyboard=True)
+
+# Инлайн-клавиатура для администратора
+def get_admin_inline_keyboard() -> InlineKeyboardMarkup:
+    """Инлайн-клавиатура для администратора"""
+    keyboard = [
+        [
+            InlineKeyboardButton(text="🔑 Пароли", callback_data="admin_passwords"),
+            InlineKeyboardButton(text="👥 Пользователи", callback_data="admin_users")
+        ],
+        [
+            InlineKeyboardButton(text="📤 Загрузить логи", callback_data="admin_upload_logs")
+        ],
+        [
+            InlineKeyboardButton(text="🚫 Стоп логи", callback_data="admin_stop_logs"),
+            InlineKeyboardButton(text="✅ Разрешить логи", callback_data="admin_allow_logs")
+        ],
+        [
+            InlineKeyboardButton(text="🗑️ Очистить базу логов", callback_data="admin_clear_logs")
+        ],
+        [
+            InlineKeyboardButton(text="📢 Сообщение", callback_data="admin_broadcast")
+        ]
+    ]
+    return InlineKeyboardMarkup(inline_keyboard=keyboard)
 
 # Клавиатура для работника
 def get_worker_keyboard() -> ReplyKeyboardMarkup:
     """Клавиатура для работника"""
     keyboard = [
-        [KeyboardButton(text="Статистика")],
-        [KeyboardButton(text="Пустой лог")],
-        [KeyboardButton(text="Взять логи")],
-        [KeyboardButton(text="Ваши логи")]
+        [KeyboardButton(text="📊 Статистика")],
+        [KeyboardButton(text="🗑️ Пустой лог")],
+        [KeyboardButton(text="📥 Взять логи")],
+        [KeyboardButton(text="📋 Ваши логи")]
     ]
     return ReplyKeyboardMarkup(keyboard=keyboard, resize_keyboard=True)
+
+# Инлайн-клавиатура для работника
+def get_worker_inline_keyboard() -> InlineKeyboardMarkup:
+    """Инлайн-клавиатура для работника"""
+    keyboard = [
+        [InlineKeyboardButton(text="📊 Статистика", callback_data="worker_statistics")],
+        [InlineKeyboardButton(text="🗑️ Пустой лог", callback_data="worker_empty_log")],
+        [InlineKeyboardButton(text="📥 Взять логи", callback_data="worker_take_logs")],
+        [InlineKeyboardButton(text="📋 Ваши логи", callback_data="worker_your_logs")]
+    ]
+    return InlineKeyboardMarkup(inline_keyboard=keyboard)
 
 # Клавиатура для управления паролями
 def get_passwords_keyboard(passwords: List) -> InlineKeyboardMarkup:
@@ -41,7 +76,7 @@ def get_passwords_keyboard(passwords: List) -> InlineKeyboardMarkup:
         remaining_uses = password.max_uses - password.used_count
         keyboard.append([
             InlineKeyboardButton(
-                text=f"{password.password} ({remaining_uses}/{password.max_uses})",
+                text=f"🔐 {password.password} ({remaining_uses}/{password.max_uses})",
                 callback_data=f"password_{password.id}"
             )
         ])
@@ -72,7 +107,7 @@ def get_users_keyboard(users: List[User]) -> InlineKeyboardMarkup:
         logger.info(f"Создаем кнопку для пользователя {user.user_id} с callback_data: {callback_data}")
         keyboard.append([
             InlineKeyboardButton(
-                text=f"{'👑 ' if user.is_admin else ''}{display_name}",
+                text=f"{'👑 ' if user.is_admin else '👤 '}{display_name}",
                 callback_data=callback_data
             )
         ])

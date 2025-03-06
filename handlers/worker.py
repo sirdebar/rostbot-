@@ -11,6 +11,7 @@ from database.base import async_session
 from database.repositories import UserRepository, LogRepository
 from keyboards import get_worker_keyboard
 from states import WorkerState
+from handlers.common import get_welcome_message
 
 logger = logging.getLogger(__name__)
 
@@ -209,10 +210,10 @@ async def show_user_logs(message: Message, bot: Bot) -> None:
 def register_worker_handlers(dp: Dispatcher, bot: Bot) -> None:
     """Регистрация обработчиков команд работника"""
     # Регистрация обработчиков кнопок главного меню
-    dp.message.register(show_statistics, F.text == "Статистика")
-    dp.message.register(empty_log, F.text == "Пустой лог")
-    dp.message.register(take_logs, F.text == "Взять логи")
-    dp.message.register(show_user_logs, F.text == "Ваши логи")
+    dp.message.register(show_statistics, F.text == "📊 Статистика")
+    dp.message.register(empty_log, F.text == "🗑️ Пустой лог")
+    dp.message.register(take_logs, F.text == "📥 Взять логи")
+    dp.message.register(show_user_logs, F.text == "📋 Ваши логи")
     
     # Регистрация обработчиков состояний
     dp.message.register(process_empty_logs_count, WorkerState.waiting_for_empty_logs_count)
