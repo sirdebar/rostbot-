@@ -1,0 +1,706 @@
+2025-03-06 23:52:12,030 - __main__ - ERROR - Не удалось инициализировать базу данных. Проверьте настройки подключения.
+2025-03-06 23:54:13,695 - __main__ - ERROR - Не удалось инициализировать базу данных. Проверьте настройки подключения.
+2025-03-06 23:54:36,135 - database.base - ERROR - Ошибка при инициализации базы данных: connection was closed in the middle of operation
+Traceback (most recent call last):
+  File "C:\Users\semen\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 462, in finish_socket_func
+    return ov.getresult()
+           ^^^^^^^^^^^^^^
+OSError: [WinError 64] Указанное сетевое имя более недоступно
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\semen\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 286, in _loop_reading
+    length = fut.result()
+             ^^^^^^^^^^^^
+  File "C:\Users\semen\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 803, in _poll
+    value = callback(transferred, key, ov)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 466, in finish_socket_func
+    raise ConnectionResetError(*exc.args)
+ConnectionResetError: [WinError 64] Указанное сетевое имя более недоступно
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\semen\botikrost\database\base.py", line 51, in init_db
+    async with engine.connect() as conn:
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\ext\asyncio\base.py", line 121, in __aenter__
+    return await self.start(is_ctxmanager=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\ext\asyncio\engine.py", line 270, in start
+    await greenlet_spawn(self.sync_engine.connect)
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 197, in greenlet_spawn
+    result = context.throw(*sys.exc_info())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 3258, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 3282, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\pool\base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\pool\base.py", line 1263, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\pool\base.py", line 712, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\pool\impl.py", line 168, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\pool\impl.py", line 166, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\pool\base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\pool\base.py", line 674, in __init__
+    self.__connect()
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\pool\base.py", line 900, in __connect
+    with util.safe_reraise():
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\pool\base.py", line 896, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\engine\create.py", line 643, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 616, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\dialects\postgresql\asyncpg.py", line 937, in connect
+    await_only(creator_fn(*arg, **kw)),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 127, in await_only
+    return current.driver.switch(awaitable)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 192, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\asyncpg\connection.py", line 2329, in connect
+    return await connect_utils._connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\asyncpg\connect_utils.py", line 991, in _connect
+    conn = await _connect_addr(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\asyncpg\connect_utils.py", line 828, in _connect_addr
+    return await __connect_addr(params, True, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\asyncpg\connect_utils.py", line 876, in __connect_addr
+    await connected
+asyncpg.exceptions.ConnectionDoesNotExistError: connection was closed in the middle of operation
+2025-03-06 23:54:36,143 - __main__ - ERROR - Не удалось инициализировать базу данных. Проверьте настройки подключения.
+2025-03-06 23:55:17,410 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-06 23:55:17,411 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("users")
+2025-03-06 23:55:17,411 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-06 23:55:17,412 - sqlalchemy.engine.Engine - INFO - PRAGMA temp.table_info("users")
+2025-03-06 23:55:17,412 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-06 23:55:17,413 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("passwords")
+2025-03-06 23:55:17,413 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-06 23:55:17,414 - sqlalchemy.engine.Engine - INFO - PRAGMA temp.table_info("passwords")
+2025-03-06 23:55:17,414 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-06 23:55:17,415 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("logs")
+2025-03-06 23:55:17,415 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-06 23:55:17,416 - sqlalchemy.engine.Engine - INFO - PRAGMA temp.table_info("logs")
+2025-03-06 23:55:17,416 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-06 23:55:17,418 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE users (
+	id INTEGER NOT NULL, 
+	user_id BIGINT NOT NULL, 
+	username VARCHAR(255), 
+	first_name VARCHAR(255), 
+	last_name VARCHAR(255), 
+	is_admin BOOLEAN, 
+	is_active BOOLEAN, 
+	created_at DATETIME, 
+	updated_at DATETIME, 
+	taken_logs_count INTEGER, 
+	empty_logs_count INTEGER, 
+	daily_empty_logs_count INTEGER, 
+	last_empty_log_date DATETIME, 
+	PRIMARY KEY (id), 
+	UNIQUE (user_id)
+)
+
+
+2025-03-06 23:55:17,418 - sqlalchemy.engine.Engine - INFO - [no key 0.00059s] ()
+2025-03-06 23:55:17,422 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE passwords (
+	id INTEGER NOT NULL, 
+	password VARCHAR(255) NOT NULL, 
+	max_uses INTEGER, 
+	used_count INTEGER, 
+	is_active BOOLEAN, 
+	created_at DATETIME, 
+	created_by BIGINT, 
+	PRIMARY KEY (id)
+)
+
+
+2025-03-06 23:55:17,423 - sqlalchemy.engine.Engine - INFO - [no key 0.00075s] ()
+2025-03-06 23:55:17,428 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE logs (
+	id INTEGER NOT NULL, 
+	file_id VARCHAR(255) NOT NULL, 
+	file_name VARCHAR(255) NOT NULL, 
+	file_size INTEGER, 
+	is_taken BOOLEAN, 
+	uploaded_at DATETIME, 
+	taken_at DATETIME, 
+	user_id INTEGER, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(user_id) REFERENCES users (id)
+)
+
+
+2025-03-06 23:55:17,428 - sqlalchemy.engine.Engine - INFO - [no key 0.00052s] ()
+2025-03-06 23:55:17,432 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-06 23:55:17,433 - database.base - INFO - База данных успешно инициализирована
+2025-03-06 23:55:17,433 - __main__ - INFO - Используется MemoryStorage для хранения состояний
+2025-03-06 23:55:17,655 - __main__ - INFO - Бот запущен
+2025-03-06 23:55:17,656 - aiogram.dispatcher - INFO - Start polling
+2025-03-06 23:55:17,895 - aiogram.dispatcher - INFO - Run polling for bot @testsirderobot id=8126821875 - 'test_botik'
+2025-03-06 23:55:25,395 - aiogram.event - INFO - Update id=117255811 is handled. Duration 0 ms by bot id=8126821875
+2025-03-06 23:55:50,813 - aiogram.event - INFO - Update id=117255812 is handled. Duration 0 ms by bot id=8126821875
+2025-03-06 23:56:10,139 - aiogram.dispatcher - INFO - Polling stopped
+2025-03-06 23:56:10,391 - aiogram.dispatcher - INFO - Polling stopped for bot @testsirderobot id=8126821875 - 'test_botik'
+2025-03-06 23:56:10,392 - __main__ - INFO - Бот остановлен
+2025-03-06 23:58:29,263 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-06 23:58:29,264 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("users")
+2025-03-06 23:58:29,264 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-06 23:58:29,265 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("passwords")
+2025-03-06 23:58:29,265 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-06 23:58:29,266 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("logs")
+2025-03-06 23:58:29,266 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-06 23:58:29,267 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-06 23:58:29,268 - database.base - INFO - База данных успешно инициализирована
+2025-03-06 23:58:29,268 - __main__ - INFO - Используется MemoryStorage для хранения состояний
+2025-03-06 23:58:29,486 - __main__ - INFO - Бот запущен
+2025-03-06 23:58:29,487 - aiogram.dispatcher - INFO - Start polling
+2025-03-06 23:58:29,708 - aiogram.dispatcher - INFO - Run polling for bot @testsirderobot id=8126821875 - 'test_botik'
+2025-03-06 23:58:38,999 - aiogram.event - INFO - Update id=117255813 is not handled. Duration 1343 ms by bot id=8126821875
+2025-03-06 23:58:39,000 - aiogram.event - ERROR - Cause exception while process update id=117255813 by bot id=8126821875
+UnboundExecutionError: Could not locate a bind configured on mapper Mapper[User(users)], SQL expression or this Session.
+Traceback (most recent call last):
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\fsm\middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\handlers\common.py", line 31, in cmd_start
+    user, created = await user_repo.get_or_create_user(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\database\repositories.py", line 33, in get_or_create_user
+    user = await self.get_by_user_id(user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\database\repositories.py", line 14, in get_by_user_id
+    result = await self.session.execute(select(User).where(User.user_id == user_id))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\ext\asyncio\session.py", line 452, in execute
+    result = await greenlet_spawn(
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\util\_concurrency_py3k.py", line 186, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2306, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2179, in _execute_internal
+    bind = self.get_bind(**bind_arguments)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2786, in get_bind
+    raise sa_exc.UnboundExecutionError(
+sqlalchemy.exc.UnboundExecutionError: Could not locate a bind configured on mapper Mapper[User(users)], SQL expression or this Session.
+2025-03-06 23:59:05,474 - aiogram.dispatcher - INFO - Polling stopped
+2025-03-06 23:59:05,725 - aiogram.dispatcher - INFO - Polling stopped for bot @testsirderobot id=8126821875 - 'test_botik'
+2025-03-06 23:59:05,726 - __main__ - INFO - Бот остановлен
+2025-03-07 00:01:41,436 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:01:41,436 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("users")
+2025-03-07 00:01:41,436 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:01:41,437 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("passwords")
+2025-03-07 00:01:41,438 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:01:41,438 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("logs")
+2025-03-07 00:01:41,439 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:01:41,439 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:01:41,441 - database.base - INFO - База данных успешно инициализирована
+2025-03-07 00:01:41,441 - __main__ - INFO - Используется MemoryStorage для хранения состояний
+2025-03-07 00:01:41,658 - __main__ - INFO - Бот запущен
+2025-03-07 00:01:41,658 - aiogram.dispatcher - INFO - Start polling
+2025-03-07 00:01:41,881 - aiogram.dispatcher - INFO - Run polling for bot @testsirderobot id=8126821875 - 'test_botik'
+2025-03-07 00:01:46,512 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:01:46,518 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:01:46,519 - sqlalchemy.engine.Engine - INFO - [generated in 0.00049s] (1083294848,)
+2025-03-07 00:01:46,521 - sqlalchemy.engine.Engine - INFO - INSERT INTO users (user_id, username, first_name, last_name, is_admin, is_active, created_at, updated_at, taken_logs_count, empty_logs_count, daily_empty_logs_count, last_empty_log_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:01:46,522 - sqlalchemy.engine.Engine - INFO - [generated in 0.00063s] (1083294848, 'sirdebar', 'doraemon', None, 1, 1, '2025-03-06 21:01:46.521787', '2025-03-06 21:01:46.521787', 0, 0, 0, None)
+2025-03-07 00:01:46,525 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:01:46,530 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:01:46,532 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.id = ?
+2025-03-07 00:01:46,533 - sqlalchemy.engine.Engine - INFO - [generated in 0.00050s] (1,)
+2025-03-07 00:01:46,712 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:01:46,713 - aiogram.event - INFO - Update id=117255814 is handled. Duration 1657 ms by bot id=8126821875
+2025-03-07 00:01:51,774 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:01:51,776 - sqlalchemy.engine.Engine - INFO - SELECT passwords.id, passwords.password, passwords.max_uses, passwords.used_count, passwords.is_active, passwords.created_at, passwords.created_by 
+FROM passwords 
+WHERE passwords.is_active = 1
+2025-03-07 00:01:51,776 - sqlalchemy.engine.Engine - INFO - [generated in 0.00037s] ()
+2025-03-07 00:01:51,875 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:01:51,876 - aiogram.event - INFO - Update id=117255815 is handled. Duration 93 ms by bot id=8126821875
+2025-03-07 00:01:54,217 - aiogram.event - INFO - Update id=117255816 is handled. Duration 1407 ms by bot id=8126821875
+2025-03-07 00:01:54,478 - aiogram.event - INFO - Update id=117255817 is handled. Duration 92 ms by bot id=8126821875
+2025-03-07 00:01:56,699 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:01:56,700 - sqlalchemy.engine.Engine - INFO - INSERT INTO passwords (password, max_uses, used_count, is_active, created_at, created_by) VALUES (?, ?, ?, ?, ?, ?)
+2025-03-07 00:01:56,701 - sqlalchemy.engine.Engine - INFO - [generated in 0.00037s] ('123', 1, 0, 1, '2025-03-06 21:01:56.700384', 1083294848)
+2025-03-07 00:01:56,704 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:01:56,708 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:01:56,708 - sqlalchemy.engine.Engine - INFO - SELECT passwords.id, passwords.password, passwords.max_uses, passwords.used_count, passwords.is_active, passwords.created_at, passwords.created_by 
+FROM passwords 
+WHERE passwords.id = ?
+2025-03-07 00:01:56,709 - sqlalchemy.engine.Engine - INFO - [generated in 0.00065s] (1,)
+2025-03-07 00:01:56,710 - sqlalchemy.engine.Engine - INFO - SELECT passwords.id, passwords.password, passwords.max_uses, passwords.used_count, passwords.is_active, passwords.created_at, passwords.created_by 
+FROM passwords 
+WHERE passwords.is_active = 1
+2025-03-07 00:01:56,711 - sqlalchemy.engine.Engine - INFO - [cached since 4.935s ago] ()
+2025-03-07 00:01:56,903 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:01:56,903 - aiogram.event - INFO - Update id=117255818 is handled. Duration 203 ms by bot id=8126821875
+2025-03-07 00:01:58,441 - aiogram.event - INFO - Update id=117255819 is handled. Duration 186 ms by bot id=8126821875
+2025-03-07 00:02:02,576 - aiogram.event - INFO - Update id=117255820 is handled. Duration 108 ms by bot id=8126821875
+2025-03-07 00:03:06,845 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:03:06,846 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:03:06,847 - sqlalchemy.engine.Engine - INFO - [generated in 0.00053s] ('BQACAgIAAxkBAAIJsmfKDYpCvJ5czyUUtPO7WeIjRlwSAALBawACCf9QSqM9XtLgN77-NgQ', 'tz.rar', 126, 0, '2025-03-06 21:03:06.846596', None, None)
+2025-03-07 00:03:06,849 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:03:06,853 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:03:06,857 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:03:06,857 - sqlalchemy.engine.Engine - INFO - [generated in 0.00047s] (1,)
+2025-03-07 00:03:07,121 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:03:07,121 - sqlalchemy.engine.Engine - INFO - [generated in 0.00055s] ()
+2025-03-07 00:03:07,122 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:03:07,123 - aiogram.event - INFO - Update id=117255821 is handled. Duration 281 ms by bot id=8126821875
+2025-03-07 00:03:16,840 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:03:16,842 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:03:16,842 - sqlalchemy.engine.Engine - INFO - [cached since 90.33s ago] (7442982117,)
+2025-03-07 00:03:16,843 - sqlalchemy.engine.Engine - INFO - INSERT INTO users (user_id, username, first_name, last_name, is_admin, is_active, created_at, updated_at, taken_logs_count, empty_logs_count, daily_empty_logs_count, last_empty_log_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:03:16,844 - sqlalchemy.engine.Engine - INFO - [cached since 90.33s ago] (7442982117, 'the_trueon', 'l', None, 0, 1, '2025-03-06 21:03:16.843114', '2025-03-06 21:03:16.843114', 0, 0, 0, None)
+2025-03-07 00:03:16,846 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:03:16,849 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:03:16,850 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.id = ?
+2025-03-07 00:03:16,850 - sqlalchemy.engine.Engine - INFO - [cached since 90.32s ago] (2,)
+2025-03-07 00:03:16,967 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:03:16,968 - aiogram.event - INFO - Update id=117255822 is handled. Duration 1343 ms by bot id=8126821875
+2025-03-07 00:03:18,976 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:03:18,977 - sqlalchemy.engine.Engine - INFO - SELECT passwords.id, passwords.password, passwords.max_uses, passwords.used_count, passwords.is_active, passwords.created_at, passwords.created_by 
+FROM passwords 
+WHERE passwords.password = ? AND passwords.is_active = 1
+2025-03-07 00:03:18,977 - sqlalchemy.engine.Engine - INFO - [generated in 0.00048s] ('123',)
+2025-03-07 00:03:18,980 - sqlalchemy.engine.Engine - INFO - UPDATE passwords SET used_count=(passwords.used_count + ?) WHERE passwords.id = ?
+2025-03-07 00:03:18,980 - sqlalchemy.engine.Engine - INFO - [generated in 0.00049s] (1, 1)
+2025-03-07 00:03:18,984 - sqlalchemy.engine.Engine - INFO - UPDATE passwords SET is_active=? WHERE passwords.id = ?
+2025-03-07 00:03:18,985 - sqlalchemy.engine.Engine - INFO - [generated in 0.00102s] (0, 1)
+2025-03-07 00:03:18,987 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:03:18,991 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:03:18,992 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:03:18,992 - sqlalchemy.engine.Engine - INFO - [cached since 92.48s ago] (7442982117,)
+2025-03-07 00:03:19,142 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:03:19,143 - aiogram.event - INFO - Update id=117255823 is handled. Duration 172 ms by bot id=8126821875
+2025-03-07 00:03:22,336 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:03:22,338 - sqlalchemy.engine.Engine - INFO - SELECT count(*) AS count_1 
+FROM logs 
+WHERE logs.is_taken = 0
+2025-03-07 00:03:22,338 - sqlalchemy.engine.Engine - INFO - [generated in 0.00044s] ()
+2025-03-07 00:03:22,444 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:03:22,445 - aiogram.event - INFO - Update id=117255824 is handled. Duration 108 ms by bot id=8126821875
+2025-03-07 00:03:25,263 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:03:25,264 - sqlalchemy.engine.Engine - INFO - SELECT count(*) AS count_1 
+FROM logs 
+WHERE logs.is_taken = 0
+2025-03-07 00:03:25,264 - sqlalchemy.engine.Engine - INFO - [cached since 2.927s ago] ()
+2025-03-07 00:03:25,265 - sqlalchemy.engine.Engine - INFO - SELECT users.id 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:03:25,266 - sqlalchemy.engine.Engine - INFO - [generated in 0.00045s] (7442982117,)
+2025-03-07 00:03:25,267 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.is_taken = 0 ORDER BY logs.uploaded_at
+ LIMIT ? OFFSET ?
+2025-03-07 00:03:25,268 - sqlalchemy.engine.Engine - INFO - [generated in 0.00033s] (1, 0)
+2025-03-07 00:03:25,271 - sqlalchemy.engine.Engine - INFO - UPDATE logs SET is_taken=?, taken_at=?, user_id=? WHERE logs.id = ?
+2025-03-07 00:03:25,272 - sqlalchemy.engine.Engine - INFO - [generated in 0.00038s] (1, '2025-03-06 21:03:25.270983', 2, 1)
+2025-03-07 00:03:25,274 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:03:25,279 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:03:25,280 - sqlalchemy.engine.Engine - INFO - UPDATE users SET updated_at=?, taken_logs_count=(users.taken_logs_count + ?) WHERE users.user_id = ?
+2025-03-07 00:03:25,280 - sqlalchemy.engine.Engine - INFO - [generated in 0.00044s] ('2025-03-06 21:03:25.280009', 1, 7442982117)
+2025-03-07 00:03:25,282 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:03:25,477 - aiogram.event - INFO - Update id=117255825 is handled. Duration 217 ms by bot id=8126821875
+2025-03-07 00:03:37,161 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:03:37,162 - sqlalchemy.engine.Engine - INFO - SELECT passwords.id, passwords.password, passwords.max_uses, passwords.used_count, passwords.is_active, passwords.created_at, passwords.created_by 
+FROM passwords 
+WHERE passwords.is_active = 1
+2025-03-07 00:03:37,162 - sqlalchemy.engine.Engine - INFO - [cached since 105.4s ago] ()
+2025-03-07 00:03:37,258 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:03:37,261 - aiogram.event - INFO - Update id=117255826 is handled. Duration 93 ms by bot id=8126821875
+2025-03-07 00:04:09,321 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:04:09,322 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:04:09,322 - sqlalchemy.engine.Engine - INFO - [cached since 62.2s ago] ()
+2025-03-07 00:04:09,607 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:04:09,608 - aiogram.event - INFO - Update id=117255827 is handled. Duration 281 ms by bot id=8126821875
+2025-03-07 00:04:12,933 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:04:12,934 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:04:12,934 - sqlalchemy.engine.Engine - INFO - [cached since 146.4s ago] (7442982117,)
+2025-03-07 00:04:13,024 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:04:13,105 - aiogram.event - INFO - Update id=117255828 is handled. Duration 172 ms by bot id=8126821875
+2025-03-07 00:04:14,470 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:04:14,472 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:04:14,472 - sqlalchemy.engine.Engine - INFO - [cached since 67.35s ago] ()
+2025-03-07 00:04:14,564 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:04:14,654 - aiogram.event - INFO - Update id=117255829 is handled. Duration 187 ms by bot id=8126821875
+2025-03-07 00:04:15,918 - aiogram.event - INFO - Update id=117255830 is handled. Duration 172 ms by bot id=8126821875
+2025-03-07 00:04:24,738 - aiogram.event - INFO - Update id=117255831 is handled. Duration 141 ms by bot id=8126821875
+2025-03-07 00:04:34,497 - aiogram.event - INFO - Update id=117255832 is handled. Duration 156 ms by bot id=8126821875
+2025-03-07 00:04:50,231 - aiogram.event - INFO - Update id=117255833 is handled. Duration 233 ms by bot id=8126821875
+2025-03-07 00:04:56,075 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:04:56,076 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:04:56,077 - sqlalchemy.engine.Engine - INFO - [cached since 189.6s ago] (7442982117,)
+2025-03-07 00:04:56,175 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:04:56,255 - aiogram.event - INFO - Update id=117255834 is handled. Duration 188 ms by bot id=8126821875
+2025-03-07 00:04:57,335 - aiogram.event - INFO - Update id=117255835 is handled. Duration 171 ms by bot id=8126821875
+2025-03-07 00:04:58,358 - aiogram.event - INFO - Update id=117255836 is not handled. Duration 0 ms by bot id=8126821875
+2025-03-07 00:04:58,358 - aiogram.event - ERROR - Cause exception while process update id=117255836 by bot id=8126821875
+ValueError: invalid literal for int() with base 10: 'user'
+Traceback (most recent call last):
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\fsm\middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\handlers\admin.py", line 293, in confirm_delete_user
+    user_id = int(callback.data.split("_")[2])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'user'
+2025-03-07 00:05:32,722 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:05:32,723 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:05:32,723 - sqlalchemy.engine.Engine - INFO - [cached since 145.6s ago] ()
+2025-03-07 00:05:32,963 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:05:32,964 - aiogram.event - INFO - Update id=117255837 is handled. Duration 234 ms by bot id=8126821875
+2025-03-07 00:05:34,390 - aiogram.event - INFO - Update id=117255838 is handled. Duration 187 ms by bot id=8126821875
+2025-03-07 00:05:52,321 - aiogram.event - INFO - Update id=117255839 is handled. Duration 233 ms by bot id=8126821875
+2025-03-07 00:06:02,101 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:06:02,102 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-07 00:06:02,102 - sqlalchemy.engine.Engine - INFO - [cached since 175.3s ago] ('BQACAgIAAxkBAAIJ0mfKDjoGBbqqNOTdSCaV6KhmFJRaAAIhcAACR41RSivdGP4y4XLVNgQ', 'tz.rar', 126, 0, '2025-03-06 21:06:02.102649', None, None)
+2025-03-07 00:06:02,105 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:06:02,109 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:06:02,109 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-07 00:06:02,110 - sqlalchemy.engine.Engine - INFO - [cached since 175.3s ago] (2,)
+2025-03-07 00:06:02,204 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:06:02,205 - sqlalchemy.engine.Engine - INFO - [cached since 175.1s ago] ()
+2025-03-07 00:06:02,303 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:06:02,304 - aiogram.event - INFO - Update id=117255840 is handled. Duration 202 ms by bot id=8126821875
+2025-03-07 00:06:05,843 - aiogram.event - INFO - Update id=117255841 is handled. Duration 92 ms by bot id=8126821875
+2025-03-07 00:06:07,888 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:06:07,889 - sqlalchemy.engine.Engine - INFO - DELETE FROM logs
+2025-03-07 00:06:07,889 - sqlalchemy.engine.Engine - INFO - [generated in 0.00029s] ()
+2025-03-07 00:06:07,894 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:06:08,077 - aiogram.event - INFO - Update id=117255842 is handled. Duration 202 ms by bot id=8126821875
+2025-03-07 00:06:22,829 - aiogram.event - INFO - Update id=117255843 is handled. Duration 109 ms by bot id=8126821875
+2025-03-07 00:06:24,923 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:06:24,923 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:06:24,924 - sqlalchemy.engine.Engine - INFO - [cached since 278.4s ago] (7442982117,)
+2025-03-07 00:06:24,925 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:06:24,925 - sqlalchemy.engine.Engine - INFO - [cached since 278.4s ago] (7442982117,)
+2025-03-07 00:06:24,927 - sqlalchemy.engine.Engine - INFO - UPDATE users SET updated_at=?, empty_logs_count=(users.empty_logs_count + ?), daily_empty_logs_count=?, last_empty_log_date=? WHERE users.user_id = ?
+2025-03-07 00:06:24,927 - sqlalchemy.engine.Engine - INFO - [generated in 0.00031s] ('2025-03-06 21:06:24.927732', 12, 12, '2025-03-06 21:06:24.926671', 7442982117)
+2025-03-07 00:06:24,930 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:06:24,934 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:06:24,935 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:06:24,935 - sqlalchemy.engine.Engine - INFO - [cached since 278.4s ago] (7442982117,)
+2025-03-07 00:06:25,040 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:06:25,041 - aiogram.event - INFO - Update id=117255844 is handled. Duration 110 ms by bot id=8126821875
+2025-03-07 00:06:27,116 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:06:27,116 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:06:27,117 - sqlalchemy.engine.Engine - INFO - [cached since 280.6s ago] (7442982117,)
+2025-03-07 00:06:27,335 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:06:27,336 - aiogram.event - INFO - Update id=117255845 is handled. Duration 218 ms by bot id=8126821875
+2025-03-07 00:06:29,545 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:06:29,545 - sqlalchemy.engine.Engine - INFO - SELECT count(*) AS count_1 
+FROM logs 
+WHERE logs.is_taken = 0
+2025-03-07 00:06:29,545 - sqlalchemy.engine.Engine - INFO - [cached since 187.2s ago] ()
+2025-03-07 00:06:29,715 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:06:29,715 - aiogram.event - INFO - Update id=117255846 is handled. Duration 171 ms by bot id=8126821875
+2025-03-07 00:06:34,115 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:06:34,115 - sqlalchemy.engine.Engine - INFO - SELECT users.id 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:06:34,115 - sqlalchemy.engine.Engine - INFO - [cached since 188.9s ago] (7442982117,)
+2025-03-07 00:06:34,116 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.user_id = ?
+2025-03-07 00:06:34,116 - sqlalchemy.engine.Engine - INFO - [generated in 0.00029s] (2,)
+2025-03-07 00:06:34,227 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:06:34,227 - aiogram.event - INFO - Update id=117255847 is handled. Duration 108 ms by bot id=8126821875
+2025-03-07 00:07:02,922 - aiogram.dispatcher - INFO - Polling stopped
+2025-03-07 00:07:03,173 - aiogram.dispatcher - INFO - Polling stopped for bot @testsirderobot id=8126821875 - 'test_botik'
+2025-03-07 00:07:03,174 - __main__ - INFO - Бот остановлен
+2025-03-07 00:08:20,621 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:08:20,622 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("users")
+2025-03-07 00:08:20,622 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:08:20,624 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("passwords")
+2025-03-07 00:08:20,624 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:08:20,625 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("logs")
+2025-03-07 00:08:20,625 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:08:20,626 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:08:20,626 - database.base - INFO - База данных успешно инициализирована
+2025-03-07 00:08:20,626 - __main__ - INFO - Используется MemoryStorage для хранения состояний
+2025-03-07 00:08:20,883 - __main__ - INFO - Бот запущен
+2025-03-07 00:08:20,884 - aiogram.dispatcher - INFO - Start polling
+2025-03-07 00:08:21,119 - aiogram.dispatcher - INFO - Run polling for bot @testsirderobot id=8126821875 - 'test_botik'
+2025-03-07 00:08:23,274 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:08:23,282 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:08:23,283 - sqlalchemy.engine.Engine - INFO - [generated in 0.00053s] ()
+2025-03-07 00:08:23,535 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:08:23,536 - aiogram.event - INFO - Update id=117255848 is handled. Duration 266 ms by bot id=8126821875
+2025-03-07 00:08:24,296 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:08:24,297 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:08:24,298 - sqlalchemy.engine.Engine - INFO - [generated in 0.00045s] (7442982117,)
+2025-03-07 00:08:24,400 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:08:24,481 - aiogram.event - INFO - Update id=117255849 is handled. Duration 188 ms by bot id=8126821875
+2025-03-07 00:08:25,593 - aiogram.event - INFO - Update id=117255850 is handled. Duration 265 ms by bot id=8126821875
+2025-03-07 00:08:26,226 - handlers.admin - INFO - Callback data: confirm_delete_user_7442982117, parts: ['confirm', 'delete', 'user', '7442982117']
+2025-03-07 00:08:26,226 - aiogram.event - INFO - Update id=117255851 is not handled. Duration 0 ms by bot id=8126821875
+2025-03-07 00:08:26,226 - aiogram.event - ERROR - Cause exception while process update id=117255851 by bot id=8126821875
+ValueError: invalid literal for int() with base 10: 'user'
+Traceback (most recent call last):
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\middlewares\error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\middlewares\user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\fsm\middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\event\telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\venv\Lib\site-packages\aiogram\dispatcher\event\handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\semen\botikrost\handlers\admin.py", line 301, in confirm_delete_user
+    user_id = int(parts[2])
+              ^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'user'
+2025-03-07 00:09:03,825 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:09:03,826 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:09:03,826 - sqlalchemy.engine.Engine - INFO - [cached since 40.55s ago] ()
+2025-03-07 00:09:03,939 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:09:04,021 - aiogram.event - INFO - Update id=117255852 is handled. Duration 437 ms by bot id=8126821875
+2025-03-07 00:09:05,252 - aiogram.event - INFO - Update id=117255853 is handled. Duration 172 ms by bot id=8126821875
+2025-03-07 00:11:47,257 - aiogram.dispatcher - INFO - Polling stopped
+2025-03-07 00:11:47,508 - aiogram.dispatcher - INFO - Polling stopped for bot @testsirderobot id=8126821875 - 'test_botik'
+2025-03-07 00:11:47,509 - __main__ - INFO - Бот остановлен
+2025-03-07 00:12:22,020 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:12:22,020 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("users")
+2025-03-07 00:12:22,021 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:12:22,022 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("passwords")
+2025-03-07 00:12:22,022 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:12:22,023 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("logs")
+2025-03-07 00:12:22,023 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-07 00:12:22,024 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:12:22,025 - database.base - INFO - База данных успешно инициализирована
+2025-03-07 00:12:22,025 - __main__ - INFO - Используется MemoryStorage для хранения состояний
+2025-03-07 00:12:22,259 - __main__ - INFO - Бот запущен
+2025-03-07 00:12:22,259 - aiogram.dispatcher - INFO - Start polling
+2025-03-07 00:12:22,500 - aiogram.dispatcher - INFO - Run polling for bot @testsirderobot id=8126821875 - 'test_botik'
+2025-03-07 00:12:25,075 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:12:25,082 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:12:25,083 - sqlalchemy.engine.Engine - INFO - [generated in 0.00073s] ()
+2025-03-07 00:12:25,085 - keyboards - INFO - Создаем кнопку для пользователя 1083294848 с callback_data: user_1083294848
+2025-03-07 00:12:25,085 - keyboards - INFO - Создаем кнопку для пользователя 7442982117 с callback_data: user_7442982117
+2025-03-07 00:12:25,390 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:12:25,391 - aiogram.event - INFO - Update id=117255854 is handled. Duration 312 ms by bot id=8126821875
+2025-03-07 00:12:26,245 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:12:26,246 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:12:26,246 - sqlalchemy.engine.Engine - INFO - [generated in 0.00038s] (7442982117,)
+2025-03-07 00:12:26,248 - keyboards - INFO - Создаем кнопку удаления для пользователя 7442982117 с callback_data: delete_user_7442982117
+2025-03-07 00:12:26,768 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:12:26,936 - aiogram.event - INFO - Update id=117255855 is handled. Duration 686 ms by bot id=8126821875
+2025-03-07 00:12:27,641 - handlers.admin - INFO - delete_user callback_data: delete_user_7442982117
+2025-03-07 00:12:27,829 - aiogram.event - INFO - Update id=117255856 is handled. Duration 187 ms by bot id=8126821875
+2025-03-07 00:12:28,387 - handlers.admin - INFO - confirm_delete_user callback_data: confirm_user_7442982117
+2025-03-07 00:12:28,389 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:12:28,390 - sqlalchemy.engine.Engine - INFO - UPDATE users SET is_active=?, updated_at=? WHERE users.user_id = ?
+2025-03-07 00:12:28,390 - sqlalchemy.engine.Engine - INFO - [generated in 0.00040s] (0, '2025-03-06 21:12:28.390057', 7442982117)
+2025-03-07 00:12:28,393 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-07 00:12:28,397 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:12:28,398 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:12:28,398 - sqlalchemy.engine.Engine - INFO - [cached since 2.152s ago] (7442982117,)
+2025-03-07 00:12:28,493 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-07 00:12:28,494 - sqlalchemy.engine.Engine - INFO - [cached since 3.412s ago] ()
+2025-03-07 00:12:28,495 - keyboards - INFO - Создаем кнопку для пользователя 1083294848 с callback_data: user_1083294848
+2025-03-07 00:12:28,584 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:12:28,662 - aiogram.event - INFO - Update id=117255857 is handled. Duration 280 ms by bot id=8126821875
+2025-03-07 00:12:38,173 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:12:38,174 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-07 00:12:38,174 - sqlalchemy.engine.Engine - INFO - [cached since 11.93s ago] (7442982117,)
+2025-03-07 00:12:38,284 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:12:38,285 - aiogram.event - INFO - Update id=117255858 is handled. Duration 1295 ms by bot id=8126821875
+2025-03-07 00:12:42,072 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-07 00:12:42,074 - sqlalchemy.engine.Engine - INFO - SELECT passwords.id, passwords.password, passwords.max_uses, passwords.used_count, passwords.is_active, passwords.created_at, passwords.created_by 
+FROM passwords 
+WHERE passwords.password = ? AND passwords.is_active = 1
+2025-03-07 00:12:42,075 - sqlalchemy.engine.Engine - INFO - [generated in 0.00086s] ('123',)
+2025-03-07 00:12:42,171 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-07 00:12:42,172 - aiogram.event - INFO - Update id=117255859 is handled. Duration 92 ms by bot id=8126821875
+2025-03-07 00:12:48,600 - aiogram.dispatcher - INFO - Polling stopped
+2025-03-07 00:12:48,858 - aiogram.dispatcher - INFO - Polling stopped for bot @testsirderobot id=8126821875 - 'test_botik'
+2025-03-07 00:12:48,859 - __main__ - INFO - Бот остановлен
