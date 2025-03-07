@@ -41,7 +41,7 @@ class Password(Base):
     created_by = Column(BigInteger, nullable=True)  # ID администратора, создавшего пароль
     
     def __repr__(self):
-        return f"<Password(id={self.id}, password={self.password}, max_uses={self.max_uses}, used_count={self.used_count})>"
+        return f"<Password(id={self.id}, password={self.password}, used_count={self.used_count}/{self.max_uses})>"
 
 class Log(Base):
     __tablename__ = "logs"
@@ -59,4 +59,30 @@ class Log(Base):
     user = relationship("User", back_populates="logs")
     
     def __repr__(self):
-        return f"<Log(id={self.id}, file_name={self.file_name}, is_taken={self.is_taken})>" 
+        return f"<Log(id={self.id}, file_name={self.file_name}, is_taken={self.is_taken})>"
+
+class Session(Base):
+    __tablename__ = "sessions"
+    
+    id = Column(Integer, primary_key=True)
+    phone_number = Column(String(255), nullable=False, unique=True)  # Номер телефона из названия папки
+    is_taken = Column(Boolean, default=False)  # Взята ли сессия
+    created_at = Column(DateTime, default=datetime.utcnow)
+    taken_at = Column(DateTime, nullable=True)
+    
+    # Отношения
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=True)
+    user = relationship("User")
+    
+    def __repr__(self):
+        return f"<Session(id={self.id}, phone_number={self.phone_number}, is_taken={self.is_taken})>"
+
+class UsedPhoneNumber(Base):
+    __tablename__ = "used_phone_numbers"
+    
+    id = Column(Integer, primary_key=True)
+    phone_number = Column(String(255), nullable=False, unique=True)  # Номер телефона из названия папки
+    created_at = Column(DateTime, default=datetime.utcnow)
+    
+    def __repr__(self):
+        return f"<UsedPhoneNumber(id={self.id}, phone_number={self.phone_number})>" 

@@ -7,7 +7,7 @@ from aiogram.fsm.context import FSMContext
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from database.base import async_session
-from database.repositories import UserRepository, PasswordRepository, LogRepository
+from database.repositories import UserRepository, PasswordRepository, LogRepository, SessionRepository
 from keyboards import get_admin_inline_keyboard, get_worker_inline_keyboard
 from states import AuthState
 
@@ -19,12 +19,6 @@ async def get_welcome_message(user_id: int) -> str:
     welcome_text = f"Твой 🆔 {user_id}\n\n"
     welcome_text += "Бот для удобной выдачи логов WhatsApp запущен! Теперь получать аккаунты стало проще и быстрее.\n\n"
     welcome_text += "По техническим вопросам обращайтесь: @wrldxrd. (https://t.me/wrldxrd)"
-    
-    # Добавляем информацию о количестве логов
-    async with async_session() as session:
-        log_repo = LogRepository(session)
-        logs_count = await log_repo.get_logs_count()
-        welcome_text += f"\n\n📥 Логов на данный момент: {logs_count}"
     
     return welcome_text
 
@@ -60,8 +54,18 @@ async def cmd_start(message: Message, bot: Bot, state: FSMContext) -> None:
                 disable_web_page_preview=True
             )
             await state.clear()
+        # Если пользователь активен (уже ввел пароль ранее), показываем клавиатуру работника
+        elif user.is_active:
+            welcome_text = await get_welcome_message(message.from_user.id)
+            
+            await message.answer(
+                welcome_text,
+                reply_markup=get_worker_inline_keyboard(),
+                disable_web_page_preview=True
+            )
+            await state.clear()
         else:
-            # Если пользователь не администратор, запрашиваем пароль
+            # Если пользователь не активен, запрашиваем пароль
             await message.answer(
                 "Добро пожаловать! Для доступа к боту введите пароль:"
             )
@@ -146,8 +150,8 @@ async def worker_button_handler(callback: CallbackQuery, state: FSMContext, bot:
     
     if action == "worker_statistics":
         # Перенаправляем на обработчик статистики
-        from handlers.worker import show_statistics
-        await show_statistics(callback.message)
+        from handlers.worker import show_statistics_inline
+        await show_statistics_inline(callback)
     elif action == "worker_empty_log":
         # Перенаправляем на обработчик пустых логов
         from handlers.worker import empty_log

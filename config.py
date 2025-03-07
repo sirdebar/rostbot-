@@ -40,16 +40,19 @@ class Settings:
             self.MAX_LOGS_PER_USER = 10
             print(f"Ошибка при преобразовании MAX_LOGS_PER_USER: {max_logs_str}, используется значение по умолчанию: 10")
         
+        # Максимальное количество пустых логов в день
+        self.MAX_EMPTY_LOGS_PER_DAY = 5
+        
         # Флаг для блокировки выдачи логов
         self.LOGS_BLOCKED = False
 
 settings = Settings()
 
 # Вывод настроек для отладки
-print(f"Настройки загружены:")
-print(f"BOT_TOKEN: {'*' * 10}{settings.BOT_TOKEN[-5:] if settings.BOT_TOKEN else 'Не задан'}")
+print(f"BOT_TOKEN: {'*' * 10 if settings.BOT_TOKEN else 'Not set'}")
 print(f"ADMIN_IDS: {settings.ADMIN_IDS}")
 print(f"DATABASE_URL: {settings.DATABASE_URL}")
 print(f"REDIS_URL: {settings.REDIS_URL}")
 print(f"MAX_LOGS_PER_USER: {settings.MAX_LOGS_PER_USER}")
+print(f"MAX_EMPTY_LOGS_PER_DAY: {settings.MAX_EMPTY_LOGS_PER_DAY}")
 print(f"LOGS_BLOCKED: {settings.LOGS_BLOCKED}") 

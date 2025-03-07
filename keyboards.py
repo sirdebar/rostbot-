@@ -56,10 +56,14 @@ def get_worker_keyboard() -> ReplyKeyboardMarkup:
 def get_worker_inline_keyboard() -> InlineKeyboardMarkup:
     """Инлайн-клавиатура для работника"""
     keyboard = [
-        [InlineKeyboardButton(text="📊 Статистика", callback_data="worker_statistics")],
-        [InlineKeyboardButton(text="🗑️ Пустой лог", callback_data="worker_empty_log")],
-        [InlineKeyboardButton(text="📥 Взять логи", callback_data="worker_take_logs")],
-        [InlineKeyboardButton(text="📋 Ваши логи", callback_data="worker_your_logs")]
+        [
+            InlineKeyboardButton(text="📊 Статистика", callback_data="worker_statistics"),
+            InlineKeyboardButton(text="🗑️ Пустой лог", callback_data="worker_empty_log")
+        ],
+        [
+            InlineKeyboardButton(text="📥 Взять логи", callback_data="worker_take_logs"),
+            InlineKeyboardButton(text="📋 Ваши логи", callback_data="worker_your_logs")
+        ]
     ]
     return InlineKeyboardMarkup(inline_keyboard=keyboard)
 
@@ -68,30 +72,53 @@ def get_passwords_keyboard(passwords: List) -> InlineKeyboardMarkup:
     """Клавиатура для управления паролями"""
     keyboard = []
     
-    # Добавляем кнопку для создания нового пароля
-    keyboard.append([InlineKeyboardButton(text="➕ Создать новый пароль", callback_data="create_password")])
-    
-    # Добавляем кнопки для существующих паролей
+    # Добавляем кнопки для каждого пароля
     for password in passwords:
-        remaining_uses = password.max_uses - password.used_count
+        # Формируем текст кнопки с информацией о пароле
+        button_text = f"{password.password} ({password.used_count}/{password.max_uses})"
+        
+        # Добавляем кнопку для пароля
         keyboard.append([
             InlineKeyboardButton(
-                text=f"🔐 {password.password} ({remaining_uses}/{password.max_uses})",
+                text=button_text,
                 callback_data=f"password_{password.id}"
             )
         ])
     
-    # Добавляем кнопку для возврата назад
-    keyboard.append([InlineKeyboardButton(text="⬅️ Назад", callback_data="back_to_main")])
+    # Добавляем кнопку для создания нового пароля
+    keyboard.append([
+        InlineKeyboardButton(
+            text="➕ Создать новый пароль",
+            callback_data="create_password"
+        )
+    ])
+    
+    # Добавляем кнопку "Назад"
+    keyboard.append([
+        InlineKeyboardButton(
+            text="🔙 Назад",
+            callback_data="back_to_main"
+        )
+    ])
     
     return InlineKeyboardMarkup(inline_keyboard=keyboard)
 
 # Клавиатура для управления паролем
 def get_password_management_keyboard(password_id: int) -> InlineKeyboardMarkup:
-    """Клавиатура для управления конкретным паролем"""
+    """Клавиатура для управления выбранным паролем"""
     keyboard = [
-        [InlineKeyboardButton(text="❌ Удалить пароль", callback_data=f"delete_password_{password_id}")],
-        [InlineKeyboardButton(text="⬅️ Назад к паролям", callback_data="back_to_passwords")]
+        [
+            InlineKeyboardButton(
+                text="🗑️ Удалить пароль",
+                callback_data=f"delete_password_{password_id}"
+            )
+        ],
+        [
+            InlineKeyboardButton(
+                text="🔙 Назад к паролям",
+                callback_data="back_to_passwords"
+            )
+        ]
     ]
     return InlineKeyboardMarkup(inline_keyboard=keyboard)
 
@@ -131,19 +158,16 @@ def get_user_management_keyboard(user_id: int) -> InlineKeyboardMarkup:
 # Клавиатура для подтверждения действия
 def get_confirmation_keyboard(action: str, entity_id: int = None) -> InlineKeyboardMarkup:
     """Клавиатура для подтверждения действия"""
-    callback_data_confirm = f"confirm_{action}"
-    callback_data_cancel = f"cancel_{action}"
-    
-    if entity_id is not None:
-        callback_data_confirm += f"_{entity_id}"
-        callback_data_cancel += f"_{entity_id}"
-    
-    logger.info(f"Создаем клавиатуру подтверждения с callback_data: {callback_data_confirm} и {callback_data_cancel}")
-    
     keyboard = [
         [
-            InlineKeyboardButton(text="✅ Да", callback_data=callback_data_confirm),
-            InlineKeyboardButton(text="❌ Нет", callback_data=callback_data_cancel)
+            InlineKeyboardButton(
+                text="✅ Да",
+                callback_data=f"confirm_{action}_{entity_id}" if entity_id else f"confirm_{action}"
+            ),
+            InlineKeyboardButton(
+                text="❌ Нет",
+                callback_data=f"cancel_{action}_{entity_id}" if entity_id else f"cancel_{action}"
+            )
         ]
     ]
     return InlineKeyboardMarkup(inline_keyboard=keyboard) 
