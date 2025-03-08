@@ -97,6 +97,11 @@ async def process_empty_logs_count(message: Message, state: FSMContext) -> None:
 # Обработчик кнопки "Взять логи"
 async def take_logs(message: Message, state: FSMContext) -> None:
     """Обработчик кнопки 'Взять логи'"""
+    # Проверяем, не заблокирована ли выдача логов
+    if settings.LOGS_BLOCKED:
+        await message.answer("Выдача логов временно заблокирована администратором. Попробуйте позже.")
+        return
+    
     # Получаем сессию базы данных
     async with async_session() as session:
         session_repo = SessionRepository(session)
@@ -122,6 +127,12 @@ async def process_logs_count(message: Message, state: FSMContext, bot: Bot) -> N
     """Обработчик ввода количества сессий для выдачи"""
     # Получаем ID пользователя
     user_id = message.from_user.id
+    
+    # Проверяем, не заблокирована ли выдача логов
+    if settings.LOGS_BLOCKED:
+        await message.answer("Выдача логов временно заблокирована администратором. Попробуйте позже.")
+        await state.clear()
+        return
     
     try:
         count = int(message.text)

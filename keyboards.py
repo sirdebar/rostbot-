@@ -13,7 +13,7 @@ def get_admin_keyboard() -> ReplyKeyboardMarkup:
         [KeyboardButton(text="👥 Пользователи")],
         [KeyboardButton(text="📤 Загрузить логи")],
         [KeyboardButton(text="🚫 Стоп логи"), KeyboardButton(text="✅ Разрешить логи")],
-        [KeyboardButton(text="🗑️ Очистить базу логов")]
+        [KeyboardButton(text="🗑️ Очистить базу данных")]
     ]
     return ReplyKeyboardMarkup(keyboard=keyboard, resize_keyboard=True)
 
@@ -33,7 +33,7 @@ def get_admin_inline_keyboard() -> InlineKeyboardMarkup:
             InlineKeyboardButton(text="✅ Разрешить логи", callback_data="admin_allow_logs")
         ],
         [
-            InlineKeyboardButton(text="🗑️ Очистить базу логов", callback_data="admin_clear_logs")
+            InlineKeyboardButton(text="🗑️ Очистить базу данных", callback_data="admin_clear_logs")
         ],
         [
             InlineKeyboardButton(text="📢 Сообщение", callback_data="admin_broadcast")
