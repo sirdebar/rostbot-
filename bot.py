@@ -5,6 +5,8 @@ from aiogram import Bot, Dispatcher
 from aiogram.enums import ParseMode
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.fsm.storage.redis import RedisStorage
+from aiogram.client.session.aiohttp import AiohttpSession
+from aiogram.client.telegram import TelegramAPIServer
 
 from config import settings
 from database.base import init_db
@@ -32,15 +34,21 @@ async def main():
         logger.info("Используется MemoryStorage для хранения состояний")
     
     # Инициализация бота и диспетчера
-    bot_settings = {}
+    token = settings.BOT_TOKEN
     
     # Если используется локальный API сервер
     if settings.USE_LOCAL_API:
-        bot_settings["base_url"] = f"{settings.LOCAL_API_URL}/bot{settings.BOT_TOKEN}"
+        # Создаем объект TelegramAPIServer для локального API
+        local_server = TelegramAPIServer.from_base(settings.LOCAL_API_URL)
+        # Создаем сессию с локальным сервером
+        session = AiohttpSession(api=local_server)
+        # Создаем бота с настроенной сессией
+        bot = Bot(token=token, parse_mode=ParseMode.HTML, session=session)
         logger.info(f"Используется локальный Telegram Bot API сервер: {settings.LOCAL_API_URL}")
+    else:
+        # Стандартная инициализация
+        bot = Bot(token=token, parse_mode=ParseMode.HTML)
     
-    # Создаем экземпляр бота
-    bot = Bot(token=settings.BOT_TOKEN, parse_mode=ParseMode.HTML, **bot_settings)
     dp = Dispatcher(storage=storage)
     
     # Регистрация обработчиков
