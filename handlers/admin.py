@@ -519,7 +519,34 @@ async def process_log_file(message: Message, state: FSMContext) -> None:
         timeout = 600 if file_size > 50 * 1024 * 1024 else 60  # 10 минут для больших файлов, 1 минута для обычных
         
         # Скачиваем файл с увеличенным таймаутом
-        await message.bot.download_file(file_path_on_server, file_path, timeout=timeout)
+        if settings.USE_LOCAL_API:
+            # Для локального API сервера используем прямое скачивание файла
+            logger.info(f"Скачивание файла через локальный API сервер: {file_path_on_server}")
+            
+            # Создаем URL для скачивания файла
+            download_url = f"{settings.LOCAL_API_URL}/file/bot{message.bot.token}/{file_path_on_server}"
+            
+            # Используем aiohttp для скачивания файла
+            import aiohttp
+            async with aiohttp.ClientSession() as session:
+                async with session.get(download_url, timeout=timeout) as resp:
+                    if resp.status == 200:
+                        # Создаем директорию, если она не существует
+                        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+                        
+                        # Скачиваем файл
+                        with open(file_path, 'wb') as fd:
+                            async for chunk in resp.content.iter_chunked(1024 * 1024):  # 1 МБ за раз
+                                fd.write(chunk)
+                        
+                        logger.info(f"Файл успешно скачан: {file_path}")
+                    else:
+                        error_text = await resp.text()
+                        logger.error(f"Ошибка при скачивании файла: {resp.status}, {error_text}")
+                        raise Exception(f"Ошибка при скачивании файла: {resp.status}, {error_text}")
+        else:
+            # Для стандартного API используем встроенный метод
+            await message.bot.download_file(file_path_on_server, file_path, timeout=timeout)
         
         # Обновляем статус
         await message.bot.edit_message_text(
