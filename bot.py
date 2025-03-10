@@ -21,6 +21,10 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# Увеличенные таймауты для больших файлов (в секундах)
+UPLOAD_TIMEOUT = 600  # 10 минут
+DOWNLOAD_TIMEOUT = 600  # 10 минут
+
 async def main():
     # Инициализация базы данных
     await init_db()
@@ -40,11 +44,15 @@ async def main():
     if settings.USE_LOCAL_API:
         # Создаем объект TelegramAPIServer для локального API
         local_server = TelegramAPIServer.from_base(settings.LOCAL_API_URL)
-        # Создаем сессию с локальным сервером
-        session = AiohttpSession(api=local_server)
+        # Создаем сессию с локальным сервером и увеличенными таймаутами
+        session = AiohttpSession(
+            api=local_server,
+            timeout=UPLOAD_TIMEOUT  # Устанавливаем увеличенный таймаут
+        )
         # Создаем бота с настроенной сессией
         bot = Bot(token=token, parse_mode=ParseMode.HTML, session=session)
         logger.info(f"Используется локальный Telegram Bot API сервер: {settings.LOCAL_API_URL}")
+        logger.info(f"Установлен увеличенный таймаут: {UPLOAD_TIMEOUT} секунд")
     else:
         # Стандартная инициализация
         bot = Bot(token=token, parse_mode=ParseMode.HTML)

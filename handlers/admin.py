@@ -469,7 +469,7 @@ async def process_log_file(message: Message, state: FSMContext) -> None:
     file_id = message.document.file_id
     file_size = message.document.file_size
     
-    # Проверяем размер файла и предупреждаем о возможной длительной загрузке
+    # Проверяем размер файла - Telegram Bot API ограничивает размер файлов до 50 МБ
     if file_size > 50 * 1024 * 1024:  # Если файл больше 50 МБ
         # Проверяем, используется ли локальный API сервер
         if not settings.USE_LOCAL_API:
@@ -486,7 +486,7 @@ async def process_log_file(message: Message, state: FSMContext) -> None:
             # Если используется локальный API, предупреждаем о длительной загрузке
             await message.answer(
                 f"Размер файла: {get_file_size_str(file_size)}. "
-                f"Загрузка может занять длительное время. Пожалуйста, подождите..."
+                f"Загрузка может занять длительное время (до 10 минут). Пожалуйста, подождите..."
             )
     elif file_size > 20 * 1024 * 1024:  # Если файл больше 20 МБ
         await message.answer(
@@ -515,8 +515,11 @@ async def process_log_file(message: Message, state: FSMContext) -> None:
             text=f"Загружаю файл ({get_file_size_str(file_size)})..."
         )
         
-        # Скачиваем файл
-        await message.bot.download_file(file_path_on_server, file_path)
+        # Увеличиваем таймаут для больших файлов
+        timeout = 600 if file_size > 50 * 1024 * 1024 else 60  # 10 минут для больших файлов, 1 минута для обычных
+        
+        # Скачиваем файл с увеличенным таймаутом
+        await message.bot.download_file(file_path_on_server, file_path, timeout=timeout)
         
         # Обновляем статус
         await message.bot.edit_message_text(
