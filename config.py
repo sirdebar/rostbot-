@@ -46,6 +46,10 @@ class Settings:
         # Флаг для блокировки выдачи логов
         self.LOGS_BLOCKED = False
 
+        # Настройки для локального Telegram Bot API сервера
+        self.USE_LOCAL_API = os.getenv("USE_LOCAL_API", "False").lower() in ("true", "1", "t")
+        self.LOCAL_API_URL = os.getenv("LOCAL_API_URL", "http://localhost:8081")
+
 settings = Settings()
 
 # Вывод настроек для отладки
@@ -55,4 +59,6 @@ print(f"DATABASE_URL: {settings.DATABASE_URL}")
 print(f"REDIS_URL: {settings.REDIS_URL}")
 print(f"MAX_LOGS_PER_USER: {settings.MAX_LOGS_PER_USER}")
 print(f"MAX_EMPTY_LOGS_PER_DAY: {settings.MAX_EMPTY_LOGS_PER_DAY}")
-print(f"LOGS_BLOCKED: {settings.LOGS_BLOCKED}") 
+print(f"LOGS_BLOCKED: {settings.LOGS_BLOCKED}")
+print(f"USE_LOCAL_API: {settings.USE_LOCAL_API}")
+print(f"LOCAL_API_URL: {settings.LOCAL_API_URL}") 

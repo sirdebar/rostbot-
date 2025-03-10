@@ -9,6 +9,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text
+from datetime import datetime
 
 from config import settings
 from database.base import async_session
@@ -20,7 +21,10 @@ from keyboards import (
 )
 from states import AdminState
 from handlers.common import get_welcome_message
-from utils.archive import download_telegram_file, extract_archive, TEMP_DIR
+from utils.archive import (
+    extract_archive, download_telegram_file, TEMP_DIR, 
+    get_file_size_str, split_file_instructions
+)
 
 # Состояния для рассылки сообщений
 class BroadcastState(StatesGroup):
@@ -448,7 +452,7 @@ async def upload_logs(message: Message, state: FSMContext) -> None:
     await state.set_state(AdminState.waiting_for_log_file)
 
 # Обработчик загрузки файла с логами
-async def process_log_file(message: Message, state: FSMContext, bot: Bot) -> None:
+async def process_log_file(message: Message, state: FSMContext) -> None:
     """Обработчик загрузки файла с логами"""
     # Проверяем, что сообщение содержит документ
     if not message.document:
@@ -465,82 +469,149 @@ async def process_log_file(message: Message, state: FSMContext, bot: Bot) -> Non
     file_id = message.document.file_id
     file_size = message.document.file_size
     
+    # Проверяем размер файла и предупреждаем о возможной длительной загрузке
+    if file_size > 50 * 1024 * 1024:  # Если файл больше 50 МБ
+        # Проверяем, используется ли локальный API сервер
+        if not settings.USE_LOCAL_API:
+            await message.answer(
+                f"Файл слишком большой для стандартного API Telegram ({get_file_size_str(file_size)}). "
+                f"Максимальный размер файла - 50 МБ.\n\n"
+                f"Пожалуйста, разделите архив на части по 45-50 МБ и загрузите их по отдельности."
+            )
+            # Отправляем инструкции по разделению файлов
+            await message.answer(split_file_instructions())
+            await state.clear()
+            return
+        else:
+            # Если используется локальный API, предупреждаем о длительной загрузке
+            await message.answer(
+                f"Размер файла: {get_file_size_str(file_size)}. "
+                f"Загрузка может занять длительное время. Пожалуйста, подождите..."
+            )
+    elif file_size > 20 * 1024 * 1024:  # Если файл больше 20 МБ
+        await message.answer(
+            f"Размер файла: {get_file_size_str(file_size)}. "
+            f"Загрузка может занять некоторое время. Пожалуйста, подождите..."
+        )
+    
     # Отправляем сообщение о начале обработки
-    status_message = await message.answer("Начинаю обработку архива...")
+    status_message = await message.answer("Начинаю загрузку архива...")
+    
+    # Создаем директорию для временных файлов, если она не существует
+    os.makedirs(TEMP_DIR, exist_ok=True)
     
     # Скачиваем файл
     file_path = os.path.join(TEMP_DIR, file_name)
-    downloaded_file = await download_telegram_file(bot, file_id, file_path)
     
-    if not downloaded_file:
-        await bot.edit_message_text(
+    try:
+        # Получаем информацию о файле
+        file = await message.bot.get_file(file_id)
+        file_path_on_server = file.file_path
+        
+        # Обновляем статус
+        await message.bot.edit_message_text(
             chat_id=message.chat.id,
             message_id=status_message.message_id,
-            text="Ошибка при скачивании файла. Попробуйте еще раз."
-        )
-        return
-    
-    # Получаем сессию базы данных
-    async with async_session() as session:
-        log_repo = LogRepository(session)
-        session_repo = SessionRepository(session)
-        used_phone_repo = UsedPhoneNumberRepository(session)
-        
-        # Сохраняем информацию о файле в базе данных
-        log = await log_repo.create_log(
-            file_id=file_id,
-            file_name=file_name,
-            file_size=file_size
+            text=f"Загружаю файл ({get_file_size_str(file_size)})..."
         )
         
-        # Распаковываем архив и получаем список вложенных архивов
-        await bot.edit_message_text(
+        # Скачиваем файл
+        await message.bot.download_file(file_path_on_server, file_path)
+        
+        # Обновляем статус
+        await message.bot.edit_message_text(
             chat_id=message.chat.id,
             message_id=status_message.message_id,
-            text="Распаковываю архив и обрабатываю вложенные архивы..."
+            text="Файл успешно загружен. Начинаю обработку архива..."
         )
         
-        extracted_archives = await extract_archive(file_path)
-        
-        # Счетчики для статистики
-        total_archives = len(extracted_archives)
-        new_archives = 0
-        duplicate_archives = 0
-        
-        # Обрабатываем каждый архив
-        for phone_number, archive_name in extracted_archives:
-            # Проверяем, использовался ли номер ранее
-            is_used = await used_phone_repo.is_phone_number_used(phone_number)
+        # Получаем сессию базы данных
+        async with async_session() as session:
+            log_repo = LogRepository(session)
+            session_repo = SessionRepository(session)
+            used_phone_repo = UsedPhoneNumberRepository(session)
             
-            if is_used:
-                duplicate_archives += 1
-                continue
-            
-            # Добавляем сессию в базу данных
-            await session_repo.create_session(
-                phone_number=phone_number
+            # Сохраняем информацию о файле в базе данных
+            log = await log_repo.create_log(
+                file_id=file_id,
+                file_name=file_name,
+                file_size=file_size
             )
             
-            # Добавляем номер в список использованных
-            await used_phone_repo.add_used_phone_number(phone_number)
-            new_archives += 1
+            # Распаковываем архив и получаем список вложенных архивов
+            await message.bot.edit_message_text(
+                chat_id=message.chat.id,
+                message_id=status_message.message_id,
+                text="Распаковываю архив и обрабатываю вложенные архивы..."
+            )
+            
+            extracted_archives = await extract_archive(file_path)
+            
+            # Счетчики для статистики
+            total_archives = len(extracted_archives)
+            new_archives = 0
+            duplicate_archives = 0
+            
+            # Обновляем статус с прогрессом
+            await message.bot.edit_message_text(
+                chat_id=message.chat.id,
+                message_id=status_message.message_id,
+                text=f"Найдено {total_archives} архивов. Обрабатываю..."
+            )
+            
+            # Обрабатываем каждый архив
+            for i, (phone_number, archive_name) in enumerate(extracted_archives):
+                # Периодически обновляем статус с прогрессом (каждые 10 архивов)
+                if i % 10 == 0 and i > 0:
+                    await message.bot.edit_message_text(
+                        chat_id=message.chat.id,
+                        message_id=status_message.message_id,
+                        text=f"Обработано {i}/{total_archives} архивов..."
+                    )
+                
+                # Проверяем, использовался ли номер ранее
+                is_used = await used_phone_repo.is_phone_number_used(phone_number)
+                
+                if is_used:
+                    duplicate_archives += 1
+                    continue
+                
+                # Добавляем сессию в базу данных
+                await session_repo.create_session(
+                    phone_number=phone_number
+                )
+                
+                # Добавляем номер в список использованных
+                await used_phone_repo.add_used_phone_number(phone_number)
+                new_archives += 1
+            
+            # Удаляем скачанный файл
+            try:
+                os.remove(file_path)
+            except Exception as e:
+                logger.error(f"Ошибка при удалении файла {file_path}: {e}")
+            
+            # Отправляем сообщение об успешной загрузке
+            await message.bot.edit_message_text(
+                chat_id=message.chat.id,
+                message_id=status_message.message_id,
+                text=f"Архив успешно обработан!\n\n"
+                     f"📊 Статистика:\n"
+                     f"- Всего архивов в загрузке: {total_archives}\n"
+                     f"- Новых архивов добавлено: {new_archives}\n"
+                     f"- Дубликатов пропущено: {duplicate_archives}"
+            )
+    
+    except Exception as e:
+        logger.error(f"Ошибка при обработке файла: {e}")
+        await message.answer(f"Произошла ошибка при обработке файла: {str(e)}")
         
-        # Удаляем скачанный файл
+        # Удаляем скачанный файл в случае ошибки
         try:
-            os.remove(file_path)
-        except Exception as e:
-            logger.error(f"Ошибка при удалении файла {file_path}: {e}")
-        
-        # Отправляем сообщение об успешной загрузке
-        await bot.edit_message_text(
-            chat_id=message.chat.id,
-            message_id=status_message.message_id,
-            text=f"Архив успешно обработан!\n\n"
-                 f"📊 Статистика:\n"
-                 f"- Всего архивов в загрузке: {total_archives}\n"
-                 f"- Новых архивов добавлено: {new_archives}\n"
-                 f"- Дубликатов пропущено: {duplicate_archives}"
-        )
+            if os.path.exists(file_path):
+                os.remove(file_path)
+        except Exception as cleanup_error:
+            logger.error(f"Ошибка при удалении файла после ошибки: {cleanup_error}")
     
     # Очищаем состояние
     await state.clear()

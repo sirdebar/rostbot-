@@ -1,90 +1,104 @@
-# Telegram Bot для работы с логами
+# Telegram Bot для выдачи логов WhatsApp
 
-Телеграм бот для управления логами с системой авторизации по паролю, разделением прав администраторов и работников.
+Бот для выдачи логов WhatsApp пользователям по паролю.
 
 ## Функциональность
 
-### Для администраторов:
-- Управление паролями (создание, удаление)
-- Управление пользователями (просмотр, удаление)
-- Загрузка логов в формате RAR или ZIP
-- Блокировка/разблокировка выдачи логов
-- Очистка базы логов
+- Авторизация пользователей по паролю
+- Выдача логов WhatsApp пользователям
+- Статистика по выданным логам
+- Управление паролями и пользователями
+- Загрузка логов администратором
 
-### Для работников:
-- Просмотр статистики (взятые логи, пустые логи)
-- Отметка пустых логов
-- Получение логов из базы
-- Просмотр своих логов
-
-## Требования
-
-- Python 3.8+
-- PostgreSQL
-- Redis
-
-## Установка
+## Установка и запуск
 
 1. Клонируйте репозиторий:
 ```bash
-git clone https://github.com/yourusername/telegram-log-bot.git
-cd telegram-log-bot
+git clone https://github.com/yourusername/telegram-bot.git
+cd telegram-bot
 ```
 
-2. Создайте виртуальное окружение и активируйте его:
+2. Создайте виртуальное окружение и установите зависимости:
 ```bash
 python -m venv venv
-# Для Windows
-venv\Scripts\activate
-# Для Linux/Mac
-source venv/bin/activate
-```
-
-3. Установите зависимости:
-```bash
+source venv/bin/activate  # На Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-4. Создайте базу данных PostgreSQL:
+3. Создайте файл `.env` на основе `.env.example` и заполните его:
 ```bash
-createdb telegram_bot
+cp .env.example .env
+# Отредактируйте файл .env, указав токен бота и другие настройки
 ```
 
-5. Настройте файл `.env` с вашими параметрами:
-```
-BOT_TOKEN=your_bot_token
-ADMIN_IDS=123456789,987654321
-DATABASE_URL=postgresql+asyncpg://username:password@localhost/telegram_bot
-REDIS_URL=redis://localhost:6379/0
-MAX_LOGS_PER_USER=10
-```
-
-## Запуск
-
+4. Запустите бота:
 ```bash
 python bot.py
 ```
 
-## Использование
+## Настройка локального Telegram Bot API сервера (для загрузки файлов >50 МБ)
 
-1. Запустите бота и отправьте команду `/start`
-2. Если вы администратор (ваш ID указан в `ADMIN_IDS`), вы получите доступ к админской панели
-3. Если вы работник, вам потребуется ввести пароль, созданный администратором
+Стандартный Telegram Bot API имеет ограничение на размер файлов в 50 МБ. Для загрузки больших файлов (до 2000 МБ) можно использовать локальный Telegram Bot API сервер.
+
+### Установка на Ubuntu
+
+1. Получите API ID и API Hash на сайте Telegram:
+   - Перейдите на https://my.telegram.org/auth
+   - Войдите в свой аккаунт Telegram
+   - Выберите "API development tools"
+   - Создайте новое приложение
+   - Запишите полученные API ID и API Hash
+
+2. Установите зависимости:
+```bash
+sudo apt-get update
+sudo apt-get install -y build-essential cmake g++ git zlib1g-dev libssl-dev gperf libreadline-dev
+```
+
+3. Клонируйте и соберите Telegram Bot API:
+```bash
+mkdir -p ~/telegram-bot-api
+cd ~/telegram-bot-api
+git clone --recursive https://github.com/tdlib/telegram-bot-api.git
+cd telegram-bot-api
+mkdir build
+cd build
+cmake -DCMAKE_BUILD_TYPE=Release ..
+cmake --build . --target install
+```
+
+4. Запустите локальный API сервер:
+```bash
+cd ~/telegram-bot-api/telegram-bot-api/bin
+./telegram-bot-api --api-id=ВАШЕ_API_ID --api-hash=ВАШ_API_HASH --local
+```
+
+5. Для запуска в фоновом режиме:
+```bash
+nohup ./telegram-bot-api --api-id=ВАШЕ_API_ID --api-hash=ВАШ_API_HASH --local > telegram-bot-api.log 2>&1 &
+```
+
+6. Настройте бота для использования локального API сервера:
+   - В файле `.env` установите:
+   ```
+   USE_LOCAL_API=True
+   LOCAL_API_URL=http://localhost:8081
+   ```
+
+7. Перезапустите бота:
+```bash
+python bot.py
+```
 
 ## Структура проекта
 
-- `bot.py` - Основной файл бота
-- `config.py` - Конфигурация и настройки
-- `states.py` - Состояния для FSM (Finite State Machine)
-- `keyboards.py` - Клавиатуры для бота
-- `database/` - Модуль для работы с базой данных
-  - `base.py` - Базовые функции для работы с БД
-  - `models.py` - Модели данных
-  - `repositories.py` - Репозитории для работы с данными
-- `handlers/` - Обработчики команд
-  - `common.py` - Общие обработчики
-  - `admin.py` - Обработчики для администраторов
-  - `worker.py` - Обработчики для работников
+- `bot.py` - основной файл бота
+- `config.py` - конфигурация бота
+- `database/` - модули для работы с базой данных
+- `handlers/` - обработчики команд и сообщений
+- `keyboards/` - клавиатуры для бота
+- `states/` - состояния для FSM
+- `utils/` - вспомогательные функции
 
 ## Лицензия
 

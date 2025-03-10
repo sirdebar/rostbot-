@@ -13,7 +13,7 @@ from database.repositories import UserRepository, LogRepository, SessionReposito
 from keyboards import get_worker_inline_keyboard
 from states import WorkerState
 from handlers.common import get_welcome_message
-from utils.archive import create_archive_with_sessions, delete_session_archives, TEMP_DIR, ARCHIVES_DIR
+from utils.archive import create_archive_with_sessions, delete_session_archives, cleanup_chunks_directory, TEMP_DIR, ARCHIVES_DIR
 
 logger = logging.getLogger(__name__)
 
@@ -123,7 +123,7 @@ async def take_logs(message: Message, state: FSMContext) -> None:
         await state.set_state(WorkerState.waiting_for_logs_count)
 
 # Обработчик ввода количества сессий для выдачи
-async def process_logs_count(message: Message, state: FSMContext, bot: Bot) -> None:
+async def process_logs_count(message: Message, state: FSMContext) -> None:
     """Обработчик ввода количества сессий для выдачи"""
     # Получаем ID пользователя
     user_id = message.from_user.id
@@ -163,7 +163,7 @@ async def process_logs_count(message: Message, state: FSMContext, bot: Bot) -> N
             sessions = await session_repo.assign_sessions_to_user(user_id, count)
             
             if not sessions:
-                await bot.edit_message_text(
+                await message.bot.edit_message_text(
                     chat_id=message.chat.id,
                     message_id=status_message.message_id,
                     text="Произошла ошибка при получении сессий. Попробуйте позже."
@@ -202,10 +202,10 @@ async def process_logs_count(message: Message, state: FSMContext, bot: Bot) -> N
                 logger.warning(f"Найдено {len(archive_files)} архивов из {count} запрошенных")
             
             # Создаем архив
-            success = await create_archive_with_sessions(archive_files, archive_path)
+            archive_paths = await create_archive_with_sessions(archive_files, archive_path)
             
-            if not success:
-                await bot.edit_message_text(
+            if not archive_paths:
+                await message.bot.edit_message_text(
                     chat_id=message.chat.id,
                     message_id=status_message.message_id,
                     text="Произошла ошибка при создании архива. Попробуйте позже."
@@ -213,26 +213,51 @@ async def process_logs_count(message: Message, state: FSMContext, bot: Bot) -> N
                 await state.clear()
                 return
             
-            # Отправляем архив пользователю
-            await bot.edit_message_text(
-                chat_id=message.chat.id,
-                message_id=status_message.message_id,
-                text=f"Архив с {len(archive_files)} сессиями готов! Отправляю..."
-            )
-            
-            # Отправляем файл
-            zip_path = f"{archive_path}.zip"
-            await message.answer_document(
-                FSInputFile(zip_path),
-                caption=f"Ваши логи WhatsApp ({len(archive_files)} шт.)"
-            )
-            
-            # Удаляем временный архив
-            try:
-                if os.path.exists(zip_path):
-                    os.remove(zip_path)
-            except Exception as e:
-                logger.error(f"Ошибка при удалении архива {zip_path}: {e}")
+            # Проверяем, разделен ли архив на части
+            if len(archive_paths) > 1:
+                # Отправляем сообщение о разделении архива
+                await message.bot.edit_message_text(
+                    chat_id=message.chat.id,
+                    message_id=status_message.message_id,
+                    text=f"Архив с {len(archive_files)} сессиями разделен на {len(archive_paths)} частей из-за большого размера. Отправляю части..."
+                )
+                
+                # Отправляем каждую часть архива
+                for i, part_path in enumerate(archive_paths):
+                    await message.answer_document(
+                        FSInputFile(part_path),
+                        caption=f"Ваши логи WhatsApp ({len(archive_files)} шт.) - Часть {i+1} из {len(archive_paths)}"
+                    )
+                    
+                    # Удаляем отправленную часть
+                    try:
+                        if os.path.exists(part_path):
+                            os.remove(part_path)
+                    except Exception as e:
+                        logger.error(f"Ошибка при удалении части архива {part_path}: {e}")
+                
+                # Очищаем директорию с частями архивов
+                await cleanup_chunks_directory()
+            else:
+                # Отправляем архив пользователю
+                await message.bot.edit_message_text(
+                    chat_id=message.chat.id,
+                    message_id=status_message.message_id,
+                    text=f"Архив с {len(archive_files)} сессиями готов! Отправляю..."
+                )
+                
+                # Отправляем файл
+                await message.answer_document(
+                    FSInputFile(archive_paths[0]),
+                    caption=f"Ваши логи WhatsApp ({len(archive_files)} шт.)"
+                )
+                
+                # Удаляем временный архив
+                try:
+                    if os.path.exists(archive_paths[0]):
+                        os.remove(archive_paths[0])
+                except Exception as e:
+                    logger.error(f"Ошибка при удалении архива {archive_paths[0]}: {e}")
             
             # Удаляем архивы сессий
             await delete_session_archives(archive_files)
