@@ -13,7 +13,7 @@ from database.repositories import UserRepository, LogRepository, SessionReposito
 from keyboards import get_worker_inline_keyboard
 from states import WorkerState
 from handlers.common import get_welcome_message
-from utils.archive import create_archive_with_sessions, delete_session_folders, TEMP_DIR, SESSIONS_DIR
+from utils.archive import create_archive_with_sessions, delete_session_archives, TEMP_DIR, ARCHIVES_DIR
 
 logger = logging.getLogger(__name__)
 
@@ -188,16 +188,21 @@ async def process_logs_count(message: Message, state: FSMContext, bot: Bot) -> N
             # Получаем номера телефонов сессий
             phone_numbers = [session.phone_number for session in sessions]
             
-            # Создаем папки сессий для архивации
-            folder_names = []
+            # Собираем имена архивов для включения в итоговый архив
+            archive_files = []
             for phone in phone_numbers:
-                folder_name = f"session_{phone}"
-                folder_path = SESSIONS_DIR / folder_name
-                os.makedirs(folder_path, exist_ok=True)
-                folder_names.append(folder_name)
+                # Ищем архив с соответствующим номером телефона
+                for file_name in os.listdir(ARCHIVES_DIR):
+                    if file_name.startswith(f"session_{phone}.") and (file_name.endswith('.zip') or file_name.endswith('.rar')):
+                        archive_files.append(file_name)
+                        break
+            
+            # Проверяем, что все архивы найдены
+            if len(archive_files) != count:
+                logger.warning(f"Найдено {len(archive_files)} архивов из {count} запрошенных")
             
             # Создаем архив
-            success = await create_archive_with_sessions(folder_names, archive_path)
+            success = await create_archive_with_sessions(archive_files, archive_path)
             
             if not success:
                 await bot.edit_message_text(
@@ -212,14 +217,14 @@ async def process_logs_count(message: Message, state: FSMContext, bot: Bot) -> N
             await bot.edit_message_text(
                 chat_id=message.chat.id,
                 message_id=status_message.message_id,
-                text=f"Архив с {count} сессиями готов! Отправляю..."
+                text=f"Архив с {len(archive_files)} сессиями готов! Отправляю..."
             )
             
             # Отправляем файл
             zip_path = f"{archive_path}.zip"
             await message.answer_document(
                 FSInputFile(zip_path),
-                caption=f"Ваши логи WhatsApp ({count} шт.)"
+                caption=f"Ваши логи WhatsApp ({len(archive_files)} шт.)"
             )
             
             # Удаляем временный архив
@@ -229,8 +234,8 @@ async def process_logs_count(message: Message, state: FSMContext, bot: Bot) -> N
             except Exception as e:
                 logger.error(f"Ошибка при удалении архива {zip_path}: {e}")
             
-            # Удаляем папки сессий
-            await delete_session_folders(folder_names)
+            # Удаляем архивы сессий
+            await delete_session_archives(archive_files)
             
             # Отправляем сообщение об успешной выдаче
             await message.answer(

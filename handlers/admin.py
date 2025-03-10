@@ -493,27 +493,27 @@ async def process_log_file(message: Message, state: FSMContext, bot: Bot) -> Non
             file_size=file_size
         )
         
-        # Распаковываем архив и получаем список сессий
+        # Распаковываем архив и получаем список вложенных архивов
         await bot.edit_message_text(
             chat_id=message.chat.id,
             message_id=status_message.message_id,
-            text="Распаковываю архив и обрабатываю сессии..."
+            text="Распаковываю архив и обрабатываю вложенные архивы..."
         )
         
-        extracted_sessions = await extract_archive(file_path)
+        extracted_archives = await extract_archive(file_path)
         
         # Счетчики для статистики
-        total_sessions = len(extracted_sessions)
-        new_sessions = 0
-        duplicate_sessions = 0
+        total_archives = len(extracted_archives)
+        new_archives = 0
+        duplicate_archives = 0
         
-        # Обрабатываем каждую сессию
-        for phone_number, folder_name in extracted_sessions:
+        # Обрабатываем каждый архив
+        for phone_number, archive_name in extracted_archives:
             # Проверяем, использовался ли номер ранее
             is_used = await used_phone_repo.is_phone_number_used(phone_number)
             
             if is_used:
-                duplicate_sessions += 1
+                duplicate_archives += 1
                 continue
             
             # Добавляем сессию в базу данных
@@ -523,7 +523,7 @@ async def process_log_file(message: Message, state: FSMContext, bot: Bot) -> Non
             
             # Добавляем номер в список использованных
             await used_phone_repo.add_used_phone_number(phone_number)
-            new_sessions += 1
+            new_archives += 1
         
         # Удаляем скачанный файл
         try:
@@ -537,9 +537,9 @@ async def process_log_file(message: Message, state: FSMContext, bot: Bot) -> Non
             message_id=status_message.message_id,
             text=f"Архив успешно обработан!\n\n"
                  f"📊 Статистика:\n"
-                 f"- Всего сессий в архиве: {total_sessions}\n"
-                 f"- Новых сессий добавлено: {new_sessions}\n"
-                 f"- Дубликатов пропущено: {duplicate_sessions}"
+                 f"- Всего архивов в загрузке: {total_archives}\n"
+                 f"- Новых архивов добавлено: {new_archives}\n"
+                 f"- Дубликатов пропущено: {duplicate_archives}"
         )
     
     # Очищаем состояние

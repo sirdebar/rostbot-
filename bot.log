@@ -8126,3 +8126,477 @@ WHERE sessions.is_taken = 0
 2025-03-08 12:10:54,392 - aiogram.dispatcher - INFO - Polling stopped
 2025-03-08 12:10:54,642 - aiogram.dispatcher - INFO - Polling stopped for bot @testsirderobot id=8126821875 - 'test_botik'
 2025-03-08 12:10:54,643 - __main__ - INFO - Бот остановлен
+2025-03-10 18:28:32,067 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:28:32,069 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("users")
+2025-03-10 18:28:32,069 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-10 18:28:32,070 - sqlalchemy.engine.Engine - INFO - PRAGMA temp.table_info("users")
+2025-03-10 18:28:32,072 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-10 18:28:32,072 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("passwords")
+2025-03-10 18:28:32,072 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-10 18:28:32,072 - sqlalchemy.engine.Engine - INFO - PRAGMA temp.table_info("passwords")
+2025-03-10 18:28:32,072 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-10 18:28:32,073 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("logs")
+2025-03-10 18:28:32,074 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-10 18:28:32,075 - sqlalchemy.engine.Engine - INFO - PRAGMA temp.table_info("logs")
+2025-03-10 18:28:32,076 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-10 18:28:32,077 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("sessions")
+2025-03-10 18:28:32,078 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-10 18:28:32,079 - sqlalchemy.engine.Engine - INFO - PRAGMA temp.table_info("sessions")
+2025-03-10 18:28:32,080 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-10 18:28:32,080 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("used_phone_numbers")
+2025-03-10 18:28:32,082 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-10 18:28:32,082 - sqlalchemy.engine.Engine - INFO - PRAGMA temp.table_info("used_phone_numbers")
+2025-03-10 18:28:32,082 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2025-03-10 18:28:32,084 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE users (
+	id INTEGER NOT NULL, 
+	user_id BIGINT NOT NULL, 
+	username VARCHAR(255), 
+	first_name VARCHAR(255), 
+	last_name VARCHAR(255), 
+	is_admin BOOLEAN, 
+	is_active BOOLEAN, 
+	created_at DATETIME, 
+	updated_at DATETIME, 
+	taken_logs_count INTEGER, 
+	empty_logs_count INTEGER, 
+	daily_empty_logs_count INTEGER, 
+	last_empty_log_date DATETIME, 
+	PRIMARY KEY (id), 
+	UNIQUE (user_id)
+)
+
+
+2025-03-10 18:28:32,086 - sqlalchemy.engine.Engine - INFO - [no key 0.00102s] ()
+2025-03-10 18:28:32,091 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE passwords (
+	id INTEGER NOT NULL, 
+	password VARCHAR(255) NOT NULL, 
+	max_uses INTEGER, 
+	used_count INTEGER, 
+	is_active BOOLEAN, 
+	created_at DATETIME, 
+	created_by BIGINT, 
+	PRIMARY KEY (id)
+)
+
+
+2025-03-10 18:28:32,091 - sqlalchemy.engine.Engine - INFO - [no key 0.00061s] ()
+2025-03-10 18:28:32,097 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE used_phone_numbers (
+	id INTEGER NOT NULL, 
+	phone_number VARCHAR(255) NOT NULL, 
+	created_at DATETIME, 
+	PRIMARY KEY (id), 
+	UNIQUE (phone_number)
+)
+
+
+2025-03-10 18:28:32,097 - sqlalchemy.engine.Engine - INFO - [no key 0.00059s] ()
+2025-03-10 18:28:32,101 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE logs (
+	id INTEGER NOT NULL, 
+	file_id VARCHAR(255) NOT NULL, 
+	file_name VARCHAR(255) NOT NULL, 
+	file_size INTEGER, 
+	is_taken BOOLEAN, 
+	uploaded_at DATETIME, 
+	taken_at DATETIME, 
+	user_id INTEGER, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(user_id) REFERENCES users (id)
+)
+
+
+2025-03-10 18:28:32,102 - sqlalchemy.engine.Engine - INFO - [no key 0.00052s] ()
+2025-03-10 18:28:32,105 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE sessions (
+	id INTEGER NOT NULL, 
+	phone_number VARCHAR(255) NOT NULL, 
+	is_taken BOOLEAN, 
+	created_at DATETIME, 
+	taken_at DATETIME, 
+	user_id INTEGER, 
+	PRIMARY KEY (id), 
+	UNIQUE (phone_number), 
+	FOREIGN KEY(user_id) REFERENCES users (id)
+)
+
+
+2025-03-10 18:28:32,106 - sqlalchemy.engine.Engine - INFO - [no key 0.00048s] ()
+2025-03-10 18:28:32,110 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 18:28:32,111 - database.base - INFO - База данных успешно инициализирована
+2025-03-10 18:28:32,112 - __main__ - INFO - Используется MemoryStorage для хранения состояний
+2025-03-10 18:28:32,416 - __main__ - INFO - Бот запущен
+2025-03-10 18:28:32,417 - aiogram.dispatcher - INFO - Start polling
+2025-03-10 18:28:32,756 - aiogram.dispatcher - INFO - Run polling for bot @testsirderobot id=8126821875 - 'test_botik'
+2025-03-10 18:28:34,320 - database.repositories - INFO - Запрос пользователя с ID 8014080433
+2025-03-10 18:28:34,325 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:28:34,335 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-10 18:28:34,336 - sqlalchemy.engine.Engine - INFO - [generated in 0.00085s] (8014080433,)
+2025-03-10 18:28:34,338 - database.repositories - INFO - Пользователь с ID 8014080433 не найден
+2025-03-10 18:28:34,340 - sqlalchemy.engine.Engine - INFO - INSERT INTO users (user_id, username, first_name, last_name, is_admin, is_active, created_at, updated_at, taken_logs_count, empty_logs_count, daily_empty_logs_count, last_empty_log_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2025-03-10 18:28:34,341 - sqlalchemy.engine.Engine - INFO - [generated in 0.00084s] (8014080433, 'Sxldmy', 'picme', None, 0, 1, '2025-03-10 15:28:34.340061', '2025-03-10 15:28:34.340061', 0, 0, 0, None)
+2025-03-10 18:28:34,343 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 18:28:34,349 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:28:34,351 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.id = ?
+2025-03-10 18:28:34,351 - sqlalchemy.engine.Engine - INFO - [generated in 0.00040s] (1,)
+2025-03-10 18:28:34,789 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 18:28:34,792 - aiogram.event - INFO - Update id=117256335 is handled. Duration 1937 ms by bot id=8126821875
+2025-03-10 18:28:47,603 - database.repositories - INFO - Запрос пользователя с ID 1083294848
+2025-03-10 18:28:47,607 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:28:47,608 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-10 18:28:47,609 - sqlalchemy.engine.Engine - INFO - [cached since 13.27s ago] (1083294848,)
+2025-03-10 18:28:47,612 - database.repositories - INFO - Пользователь с ID 1083294848 не найден
+2025-03-10 18:28:47,614 - sqlalchemy.engine.Engine - INFO - INSERT INTO users (user_id, username, first_name, last_name, is_admin, is_active, created_at, updated_at, taken_logs_count, empty_logs_count, daily_empty_logs_count, last_empty_log_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2025-03-10 18:28:47,614 - sqlalchemy.engine.Engine - INFO - [cached since 13.27s ago] (1083294848, 'sirdebar', 'doraemon', None, 1, 1, '2025-03-10 15:28:47.614327', '2025-03-10 15:28:47.614327', 0, 0, 0, None)
+2025-03-10 18:28:47,620 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 18:28:47,627 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:28:47,629 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.id = ?
+2025-03-10 18:28:47,629 - sqlalchemy.engine.Engine - INFO - [cached since 13.28s ago] (2,)
+2025-03-10 18:28:47,789 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 18:28:47,793 - aiogram.event - INFO - Update id=117256336 is handled. Duration 1625 ms by bot id=8126821875
+2025-03-10 18:28:49,509 - aiogram.event - INFO - Update id=117256337 is handled. Duration 218 ms by bot id=8126821875
+2025-03-10 18:29:44,886 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:29:44,888 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-10 18:29:44,889 - sqlalchemy.engine.Engine - INFO - [generated in 0.00073s] ('BQACAgIAAxkBAAINrGfPBWfoIBfEm7Sdrg_gWRx3jISFAALhZwACWlZ4SmTiIVHqSwABYzYE', 'tesb.rar', 440, 0, '2025-03-10 15:29:44.888730', None, None)
+2025-03-10 18:29:44,891 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 18:29:44,896 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:29:44,898 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-10 18:29:44,899 - sqlalchemy.engine.Engine - INFO - [generated in 0.00098s] (1,)
+2025-03-10 18:29:45,035 - sqlalchemy.engine.Engine - INFO - SELECT used_phone_numbers.id, used_phone_numbers.phone_number, used_phone_numbers.created_at 
+FROM used_phone_numbers 
+WHERE used_phone_numbers.phone_number = ?
+2025-03-10 18:29:45,035 - sqlalchemy.engine.Engine - INFO - [generated in 0.00049s] ('01010109191919281',)
+2025-03-10 18:29:45,038 - sqlalchemy.engine.Engine - INFO - INSERT INTO sessions (phone_number, is_taken, created_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?)
+2025-03-10 18:29:45,038 - sqlalchemy.engine.Engine - INFO - [generated in 0.00072s] ('01010109191919281', 0, '2025-03-10 15:29:45.038895', None, None)
+2025-03-10 18:29:45,040 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 18:29:45,044 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:29:45,045 - sqlalchemy.engine.Engine - INFO - SELECT sessions.id, sessions.phone_number, sessions.is_taken, sessions.created_at, sessions.taken_at, sessions.user_id 
+FROM sessions 
+WHERE sessions.id = ?
+2025-03-10 18:29:45,046 - sqlalchemy.engine.Engine - INFO - [generated in 0.00030s] (1,)
+2025-03-10 18:29:45,048 - sqlalchemy.engine.Engine - INFO - SELECT used_phone_numbers.id, used_phone_numbers.phone_number, used_phone_numbers.created_at 
+FROM used_phone_numbers 
+WHERE used_phone_numbers.phone_number = ?
+2025-03-10 18:29:45,050 - sqlalchemy.engine.Engine - INFO - [cached since 0.01386s ago] ('01010109191919281',)
+2025-03-10 18:29:45,052 - sqlalchemy.engine.Engine - INFO - INSERT INTO used_phone_numbers (phone_number, created_at) VALUES (?, ?)
+2025-03-10 18:29:45,052 - sqlalchemy.engine.Engine - INFO - [generated in 0.00072s] ('01010109191919281', '2025-03-10 15:29:45.052578')
+2025-03-10 18:29:45,055 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 18:29:45,059 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:29:45,060 - sqlalchemy.engine.Engine - INFO - SELECT used_phone_numbers.id, used_phone_numbers.phone_number, used_phone_numbers.created_at 
+FROM used_phone_numbers 
+WHERE used_phone_numbers.id = ?
+2025-03-10 18:29:45,061 - sqlalchemy.engine.Engine - INFO - [generated in 0.00067s] (1,)
+2025-03-10 18:29:45,063 - sqlalchemy.engine.Engine - INFO - SELECT used_phone_numbers.id, used_phone_numbers.phone_number, used_phone_numbers.created_at 
+FROM used_phone_numbers 
+WHERE used_phone_numbers.phone_number = ?
+2025-03-10 18:29:45,063 - sqlalchemy.engine.Engine - INFO - [cached since 0.02836s ago] ('773747237237211',)
+2025-03-10 18:29:45,065 - sqlalchemy.engine.Engine - INFO - INSERT INTO sessions (phone_number, is_taken, created_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?)
+2025-03-10 18:29:45,065 - sqlalchemy.engine.Engine - INFO - [cached since 0.02708s ago] ('773747237237211', 0, '2025-03-10 15:29:45.065715', None, None)
+2025-03-10 18:29:45,067 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 18:29:45,071 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:29:45,072 - sqlalchemy.engine.Engine - INFO - SELECT sessions.id, sessions.phone_number, sessions.is_taken, sessions.created_at, sessions.taken_at, sessions.user_id 
+FROM sessions 
+WHERE sessions.id = ?
+2025-03-10 18:29:45,072 - sqlalchemy.engine.Engine - INFO - [cached since 0.02661s ago] (2,)
+2025-03-10 18:29:45,074 - sqlalchemy.engine.Engine - INFO - SELECT used_phone_numbers.id, used_phone_numbers.phone_number, used_phone_numbers.created_at 
+FROM used_phone_numbers 
+WHERE used_phone_numbers.phone_number = ?
+2025-03-10 18:29:45,074 - sqlalchemy.engine.Engine - INFO - [cached since 0.03889s ago] ('773747237237211',)
+2025-03-10 18:29:45,075 - sqlalchemy.engine.Engine - INFO - INSERT INTO used_phone_numbers (phone_number, created_at) VALUES (?, ?)
+2025-03-10 18:29:45,075 - sqlalchemy.engine.Engine - INFO - [cached since 0.02344s ago] ('773747237237211', '2025-03-10 15:29:45.075261')
+2025-03-10 18:29:45,077 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 18:29:45,082 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:29:45,083 - sqlalchemy.engine.Engine - INFO - SELECT used_phone_numbers.id, used_phone_numbers.phone_number, used_phone_numbers.created_at 
+FROM used_phone_numbers 
+WHERE used_phone_numbers.id = ?
+2025-03-10 18:29:45,083 - sqlalchemy.engine.Engine - INFO - [cached since 0.02335s ago] (2,)
+2025-03-10 18:29:45,180 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 18:29:45,182 - aiogram.event - INFO - Update id=117256338 is handled. Duration 718 ms by bot id=8126821875
+2025-03-10 18:29:54,952 - database.repositories - INFO - Запрос пользователя с ID 7442982117
+2025-03-10 18:29:54,954 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:29:54,954 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-10 18:29:54,954 - sqlalchemy.engine.Engine - INFO - [cached since 80.62s ago] (7442982117,)
+2025-03-10 18:29:54,955 - database.repositories - INFO - Пользователь с ID 7442982117 не найден
+2025-03-10 18:29:54,956 - sqlalchemy.engine.Engine - INFO - INSERT INTO users (user_id, username, first_name, last_name, is_admin, is_active, created_at, updated_at, taken_logs_count, empty_logs_count, daily_empty_logs_count, last_empty_log_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2025-03-10 18:29:54,956 - sqlalchemy.engine.Engine - INFO - [cached since 80.62s ago] (7442982117, 'the_trueon', 'l', None, 0, 1, '2025-03-10 15:29:54.956595', '2025-03-10 15:29:54.956595', 0, 0, 0, None)
+2025-03-10 18:29:54,959 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 18:29:54,964 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:29:54,965 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.id = ?
+2025-03-10 18:29:54,965 - sqlalchemy.engine.Engine - INFO - [cached since 80.61s ago] (3,)
+2025-03-10 18:29:55,116 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 18:29:55,117 - aiogram.event - INFO - Update id=117256339 is handled. Duration 1530 ms by bot id=8126821875
+2025-03-10 18:29:56,624 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:29:56,625 - sqlalchemy.engine.Engine - INFO - SELECT count(*) AS count_1 
+FROM sessions 
+WHERE sessions.is_taken = 0
+2025-03-10 18:29:56,626 - sqlalchemy.engine.Engine - INFO - [generated in 0.00039s] ()
+2025-03-10 18:29:56,813 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 18:29:56,814 - aiogram.event - INFO - Update id=117256340 is handled. Duration 342 ms by bot id=8126821875
+2025-03-10 18:29:58,581 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:29:58,582 - sqlalchemy.engine.Engine - INFO - SELECT count(*) AS count_1 
+FROM sessions 
+WHERE sessions.is_taken = 0
+2025-03-10 18:29:58,582 - sqlalchemy.engine.Engine - INFO - [cached since 1.956s ago] ()
+2025-03-10 18:29:58,752 - sqlalchemy.engine.Engine - INFO - SELECT users.id 
+FROM users 
+WHERE users.user_id = ?
+2025-03-10 18:29:58,753 - sqlalchemy.engine.Engine - INFO - [generated in 0.00059s] (7442982117,)
+2025-03-10 18:29:58,755 - sqlalchemy.engine.Engine - INFO - SELECT sessions.id, sessions.phone_number, sessions.is_taken, sessions.created_at, sessions.taken_at, sessions.user_id 
+FROM sessions 
+WHERE sessions.is_taken = 0 ORDER BY sessions.created_at
+ LIMIT ? OFFSET ?
+2025-03-10 18:29:58,755 - sqlalchemy.engine.Engine - INFO - [generated in 0.00039s] (1, 0)
+2025-03-10 18:29:58,757 - sqlalchemy.engine.Engine - INFO - UPDATE sessions SET is_taken=?, taken_at=?, user_id=? WHERE sessions.id = ?
+2025-03-10 18:29:58,758 - sqlalchemy.engine.Engine - INFO - [generated in 0.00055s] (1, '2025-03-10 15:29:58.756502', 3, 1)
+2025-03-10 18:29:58,761 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 18:29:58,763 - handlers.worker - INFO - Пользователь 7442982117 берет 1 сессий
+2025-03-10 18:29:58,763 - database.repositories - INFO - Запрос пользователя с ID 7442982117
+2025-03-10 18:29:58,766 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:29:58,767 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-10 18:29:58,768 - sqlalchemy.engine.Engine - INFO - [cached since 84.43s ago] (7442982117,)
+2025-03-10 18:29:58,769 - database.repositories - INFO - Найден пользователь: ID=3, user_id=7442982117, taken_logs_count=0, empty_logs_count=0
+2025-03-10 18:29:58,770 - database.repositories - INFO - Обновление статистики для пользователя 7442982117:
+2025-03-10 18:29:58,770 - database.repositories - INFO -   Текущие значения: taken=0, empty=0
+2025-03-10 18:29:58,770 - database.repositories - INFO -   Добавляем: taken=1, empty=0
+2025-03-10 18:29:58,770 - database.repositories - INFO -   Новые значения: taken=1, empty=0
+2025-03-10 18:29:58,772 - sqlalchemy.engine.Engine - INFO - UPDATE users SET updated_at=?, taken_logs_count=?, empty_logs_count=? WHERE users.user_id = ?
+2025-03-10 18:29:58,772 - sqlalchemy.engine.Engine - INFO - [generated in 0.00041s] ('2025-03-10 15:29:58.770667', 1, 0, 7442982117)
+2025-03-10 18:29:58,774 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 18:29:58,776 - database.repositories - INFO - Запрос пользователя с ID 7442982117
+2025-03-10 18:29:58,778 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:29:58,778 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-10 18:29:58,778 - sqlalchemy.engine.Engine - INFO - [cached since 84.44s ago] (7442982117,)
+2025-03-10 18:29:58,780 - database.repositories - INFO - Найден пользователь: ID=3, user_id=7442982117, taken_logs_count=1, empty_logs_count=0
+2025-03-10 18:29:58,780 - database.repositories - INFO - Пользователь после обновления: taken=1, empty=0
+2025-03-10 18:29:59,407 - handlers.worker - INFO - Сессии успешно выданы пользователю 7442982117. Всего взято: 1
+2025-03-10 18:29:59,408 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 18:29:59,411 - aiogram.event - INFO - Update id=117256341 is handled. Duration 844 ms by bot id=8126821875
+2025-03-10 18:30:25,707 - aiogram.event - INFO - Update id=117256342 is handled. Duration 344 ms by bot id=8126821875
+2025-03-10 18:30:29,344 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:30:29,345 - sqlalchemy.engine.Engine - INFO - DELETE FROM logs
+2025-03-10 18:30:29,345 - sqlalchemy.engine.Engine - INFO - [generated in 0.00033s] ()
+2025-03-10 18:30:29,349 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 18:30:29,355 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:30:29,356 - sqlalchemy.engine.Engine - INFO - DELETE FROM sessions
+2025-03-10 18:30:29,356 - sqlalchemy.engine.Engine - INFO - [generated in 0.00049s] ()
+2025-03-10 18:30:29,359 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 18:30:29,563 - aiogram.event - INFO - Update id=117256343 is handled. Duration 218 ms by bot id=8126821875
+2025-03-10 18:30:40,058 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:30:40,059 - sqlalchemy.engine.Engine - INFO - SELECT count(*) AS count_1 
+FROM sessions 
+WHERE sessions.is_taken = 0
+2025-03-10 18:30:40,061 - sqlalchemy.engine.Engine - INFO - [cached since 43.43s ago] ()
+2025-03-10 18:30:40,183 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 18:30:40,186 - aiogram.event - INFO - Update id=117256344 is handled. Duration 515 ms by bot id=8126821875
+2025-03-10 18:30:43,932 - handlers.worker - INFO - Запрос статистики от пользователя 7442982117 через инлайн-кнопку
+2025-03-10 18:30:43,936 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:30:43,937 - sqlalchemy.engine.Engine - INFO - 
+        SELECT taken_logs_count, empty_logs_count 
+        FROM users 
+        WHERE user_id = ?
+        
+2025-03-10 18:30:43,937 - sqlalchemy.engine.Engine - INFO - [generated in 0.00040s] (7442982117,)
+2025-03-10 18:30:43,942 - database.repositories - INFO - Свежая статистика пользователя 7442982117 из базы данных: taken=1, empty=0
+2025-03-10 18:30:44,202 - handlers.worker - INFO - Статистика отправлена пользователю 7442982117: taken=1, empty=0
+2025-03-10 18:30:44,203 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 18:30:44,204 - aiogram.event - INFO - Update id=117256345 is handled. Duration 375 ms by bot id=8126821875
+2025-03-10 18:30:52,568 - database.repositories - INFO - Запрос пользователя с ID 1083294848
+2025-03-10 18:30:52,570 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:30:52,571 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-10 18:30:52,571 - sqlalchemy.engine.Engine - INFO - [cached since 138.2s ago] (1083294848,)
+2025-03-10 18:30:52,573 - database.repositories - INFO - Найден пользователь: ID=2, user_id=1083294848, taken_logs_count=0, empty_logs_count=0
+2025-03-10 18:30:52,735 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 18:30:52,737 - aiogram.event - INFO - Update id=117256346 is handled. Duration 1405 ms by bot id=8126821875
+2025-03-10 18:32:28,026 - aiogram.event - INFO - Update id=117256347 is handled. Duration 344 ms by bot id=8126821875
+2025-03-10 18:32:30,886 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:32:30,887 - sqlalchemy.engine.Engine - INFO - INSERT INTO logs (file_id, file_name, file_size, is_taken, uploaded_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-03-10 18:32:30,887 - sqlalchemy.engine.Engine - INFO - [cached since 166s ago] ('BQACAgIAAxkBAAINvmfPBg2ti_dr8VJ9O2e2Ka31Al6FAALmZwACWlZ4ShMsFhG73HHvNgQ', 'tesb.rar', 511, 0, '2025-03-10 15:32:30.887929', None, None)
+2025-03-10 18:32:30,888 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 18:32:30,894 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:32:30,894 - sqlalchemy.engine.Engine - INFO - SELECT logs.id, logs.file_id, logs.file_name, logs.file_size, logs.is_taken, logs.uploaded_at, logs.taken_at, logs.user_id 
+FROM logs 
+WHERE logs.id = ?
+2025-03-10 18:32:30,894 - sqlalchemy.engine.Engine - INFO - [cached since 166s ago] (1,)
+2025-03-10 18:32:31,014 - sqlalchemy.engine.Engine - INFO - SELECT used_phone_numbers.id, used_phone_numbers.phone_number, used_phone_numbers.created_at 
+FROM used_phone_numbers 
+WHERE used_phone_numbers.phone_number = ?
+2025-03-10 18:32:31,014 - sqlalchemy.engine.Engine - INFO - [cached since 166s ago] ('00000000000000',)
+2025-03-10 18:32:31,016 - sqlalchemy.engine.Engine - INFO - INSERT INTO sessions (phone_number, is_taken, created_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?)
+2025-03-10 18:32:31,016 - sqlalchemy.engine.Engine - INFO - [cached since 166s ago] ('00000000000000', 0, '2025-03-10 15:32:31.016964', None, None)
+2025-03-10 18:32:31,018 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 18:32:31,022 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:32:31,022 - sqlalchemy.engine.Engine - INFO - SELECT sessions.id, sessions.phone_number, sessions.is_taken, sessions.created_at, sessions.taken_at, sessions.user_id 
+FROM sessions 
+WHERE sessions.id = ?
+2025-03-10 18:32:31,024 - sqlalchemy.engine.Engine - INFO - [cached since 166s ago] (1,)
+2025-03-10 18:32:31,026 - sqlalchemy.engine.Engine - INFO - SELECT used_phone_numbers.id, used_phone_numbers.phone_number, used_phone_numbers.created_at 
+FROM used_phone_numbers 
+WHERE used_phone_numbers.phone_number = ?
+2025-03-10 18:32:31,026 - sqlalchemy.engine.Engine - INFO - [cached since 166s ago] ('00000000000000',)
+2025-03-10 18:32:31,027 - sqlalchemy.engine.Engine - INFO - INSERT INTO used_phone_numbers (phone_number, created_at) VALUES (?, ?)
+2025-03-10 18:32:31,028 - sqlalchemy.engine.Engine - INFO - [cached since 166s ago] ('00000000000000', '2025-03-10 15:32:31.027033')
+2025-03-10 18:32:31,030 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 18:32:31,034 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:32:31,035 - sqlalchemy.engine.Engine - INFO - SELECT used_phone_numbers.id, used_phone_numbers.phone_number, used_phone_numbers.created_at 
+FROM used_phone_numbers 
+WHERE used_phone_numbers.id = ?
+2025-03-10 18:32:31,035 - sqlalchemy.engine.Engine - INFO - [cached since 166s ago] (3,)
+2025-03-10 18:32:31,037 - sqlalchemy.engine.Engine - INFO - SELECT used_phone_numbers.id, used_phone_numbers.phone_number, used_phone_numbers.created_at 
+FROM used_phone_numbers 
+WHERE used_phone_numbers.phone_number = ?
+2025-03-10 18:32:31,037 - sqlalchemy.engine.Engine - INFO - [cached since 166s ago] ('2222222333333333',)
+2025-03-10 18:32:31,038 - sqlalchemy.engine.Engine - INFO - INSERT INTO sessions (phone_number, is_taken, created_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?)
+2025-03-10 18:32:31,039 - sqlalchemy.engine.Engine - INFO - [cached since 166s ago] ('2222222333333333', 0, '2025-03-10 15:32:31.038591', None, None)
+2025-03-10 18:32:31,040 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 18:32:31,045 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:32:31,045 - sqlalchemy.engine.Engine - INFO - SELECT sessions.id, sessions.phone_number, sessions.is_taken, sessions.created_at, sessions.taken_at, sessions.user_id 
+FROM sessions 
+WHERE sessions.id = ?
+2025-03-10 18:32:31,046 - sqlalchemy.engine.Engine - INFO - [cached since 166s ago] (2,)
+2025-03-10 18:32:31,047 - sqlalchemy.engine.Engine - INFO - SELECT used_phone_numbers.id, used_phone_numbers.phone_number, used_phone_numbers.created_at 
+FROM used_phone_numbers 
+WHERE used_phone_numbers.phone_number = ?
+2025-03-10 18:32:31,048 - sqlalchemy.engine.Engine - INFO - [cached since 166s ago] ('2222222333333333',)
+2025-03-10 18:32:31,049 - sqlalchemy.engine.Engine - INFO - INSERT INTO used_phone_numbers (phone_number, created_at) VALUES (?, ?)
+2025-03-10 18:32:31,049 - sqlalchemy.engine.Engine - INFO - [cached since 166s ago] ('2222222333333333', '2025-03-10 15:32:31.049768')
+2025-03-10 18:32:31,050 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 18:32:31,054 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:32:31,055 - sqlalchemy.engine.Engine - INFO - SELECT used_phone_numbers.id, used_phone_numbers.phone_number, used_phone_numbers.created_at 
+FROM used_phone_numbers 
+WHERE used_phone_numbers.id = ?
+2025-03-10 18:32:31,055 - sqlalchemy.engine.Engine - INFO - [cached since 166s ago] (4,)
+2025-03-10 18:32:31,057 - sqlalchemy.engine.Engine - INFO - SELECT used_phone_numbers.id, used_phone_numbers.phone_number, used_phone_numbers.created_at 
+FROM used_phone_numbers 
+WHERE used_phone_numbers.phone_number = ?
+2025-03-10 18:32:31,057 - sqlalchemy.engine.Engine - INFO - [cached since 166s ago] ('777777777777',)
+2025-03-10 18:32:31,058 - sqlalchemy.engine.Engine - INFO - INSERT INTO sessions (phone_number, is_taken, created_at, taken_at, user_id) VALUES (?, ?, ?, ?, ?)
+2025-03-10 18:32:31,058 - sqlalchemy.engine.Engine - INFO - [cached since 166s ago] ('777777777777', 0, '2025-03-10 15:32:31.058934', None, None)
+2025-03-10 18:32:31,060 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 18:32:31,065 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:32:31,066 - sqlalchemy.engine.Engine - INFO - SELECT sessions.id, sessions.phone_number, sessions.is_taken, sessions.created_at, sessions.taken_at, sessions.user_id 
+FROM sessions 
+WHERE sessions.id = ?
+2025-03-10 18:32:31,066 - sqlalchemy.engine.Engine - INFO - [cached since 166s ago] (3,)
+2025-03-10 18:32:31,067 - sqlalchemy.engine.Engine - INFO - SELECT used_phone_numbers.id, used_phone_numbers.phone_number, used_phone_numbers.created_at 
+FROM used_phone_numbers 
+WHERE used_phone_numbers.phone_number = ?
+2025-03-10 18:32:31,067 - sqlalchemy.engine.Engine - INFO - [cached since 166s ago] ('777777777777',)
+2025-03-10 18:32:31,069 - sqlalchemy.engine.Engine - INFO - INSERT INTO used_phone_numbers (phone_number, created_at) VALUES (?, ?)
+2025-03-10 18:32:31,069 - sqlalchemy.engine.Engine - INFO - [cached since 166s ago] ('777777777777', '2025-03-10 15:32:31.069542')
+2025-03-10 18:32:31,070 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 18:32:31,076 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:32:31,076 - sqlalchemy.engine.Engine - INFO - SELECT used_phone_numbers.id, used_phone_numbers.phone_number, used_phone_numbers.created_at 
+FROM used_phone_numbers 
+WHERE used_phone_numbers.id = ?
+2025-03-10 18:32:31,077 - sqlalchemy.engine.Engine - INFO - [cached since 166s ago] (5,)
+2025-03-10 18:32:31,186 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 18:32:31,189 - aiogram.event - INFO - Update id=117256348 is handled. Duration 625 ms by bot id=8126821875
+2025-03-10 18:32:37,969 - database.repositories - INFO - Запрос пользователя с ID 7442982117
+2025-03-10 18:32:37,971 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:32:37,973 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-10 18:32:37,974 - sqlalchemy.engine.Engine - INFO - [cached since 243.6s ago] (7442982117,)
+2025-03-10 18:32:37,976 - database.repositories - INFO - Найден пользователь: ID=3, user_id=7442982117, taken_logs_count=1, empty_logs_count=0
+2025-03-10 18:32:38,110 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 18:32:38,111 - aiogram.event - INFO - Update id=117256349 is handled. Duration 1358 ms by bot id=8126821875
+2025-03-10 18:32:44,463 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:32:44,464 - sqlalchemy.engine.Engine - INFO - SELECT count(*) AS count_1 
+FROM sessions 
+WHERE sessions.is_taken = 0
+2025-03-10 18:32:44,465 - sqlalchemy.engine.Engine - INFO - [cached since 167.8s ago] ()
+2025-03-10 18:32:44,567 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 18:32:44,568 - aiogram.event - INFO - Update id=117256350 is handled. Duration 187 ms by bot id=8126821875
+2025-03-10 18:32:46,087 - aiogram.event - INFO - Update id=117256351 is handled. Duration 141 ms by bot id=8126821875
+2025-03-10 18:32:47,377 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:32:47,378 - sqlalchemy.engine.Engine - INFO - SELECT count(*) AS count_1 
+FROM sessions 
+WHERE sessions.is_taken = 0
+2025-03-10 18:32:47,378 - sqlalchemy.engine.Engine - INFO - [cached since 170.8s ago] ()
+2025-03-10 18:32:47,534 - sqlalchemy.engine.Engine - INFO - SELECT users.id 
+FROM users 
+WHERE users.user_id = ?
+2025-03-10 18:32:47,536 - sqlalchemy.engine.Engine - INFO - [cached since 168.8s ago] (7442982117,)
+2025-03-10 18:32:47,540 - sqlalchemy.engine.Engine - INFO - SELECT sessions.id, sessions.phone_number, sessions.is_taken, sessions.created_at, sessions.taken_at, sessions.user_id 
+FROM sessions 
+WHERE sessions.is_taken = 0 ORDER BY sessions.created_at
+ LIMIT ? OFFSET ?
+2025-03-10 18:32:47,542 - sqlalchemy.engine.Engine - INFO - [cached since 168.8s ago] (3, 0)
+2025-03-10 18:32:47,546 - sqlalchemy.engine.Engine - INFO - UPDATE sessions SET is_taken=?, taken_at=?, user_id=? WHERE sessions.id = ?
+2025-03-10 18:32:47,547 - sqlalchemy.engine.Engine - INFO - [cached since 168.8s ago] (1, '2025-03-10 15:32:47.544828', 3, 1)
+2025-03-10 18:32:47,552 - sqlalchemy.engine.Engine - INFO - UPDATE sessions SET is_taken=?, taken_at=?, user_id=? WHERE sessions.id = ?
+2025-03-10 18:32:47,553 - sqlalchemy.engine.Engine - INFO - [cached since 168.8s ago] (1, '2025-03-10 15:32:47.551885', 3, 2)
+2025-03-10 18:32:47,557 - sqlalchemy.engine.Engine - INFO - UPDATE sessions SET is_taken=?, taken_at=?, user_id=? WHERE sessions.id = ?
+2025-03-10 18:32:47,557 - sqlalchemy.engine.Engine - INFO - [cached since 168.8s ago] (1, '2025-03-10 15:32:47.556041', 3, 3)
+2025-03-10 18:32:47,560 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 18:32:47,566 - handlers.worker - INFO - Пользователь 7442982117 берет 3 сессий
+2025-03-10 18:32:47,566 - database.repositories - INFO - Запрос пользователя с ID 7442982117
+2025-03-10 18:32:47,569 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:32:47,570 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-10 18:32:47,570 - sqlalchemy.engine.Engine - INFO - [cached since 253.2s ago] (7442982117,)
+2025-03-10 18:32:47,571 - database.repositories - INFO - Найден пользователь: ID=3, user_id=7442982117, taken_logs_count=1, empty_logs_count=0
+2025-03-10 18:32:47,572 - database.repositories - INFO - Обновление статистики для пользователя 7442982117:
+2025-03-10 18:32:47,572 - database.repositories - INFO -   Текущие значения: taken=1, empty=0
+2025-03-10 18:32:47,573 - database.repositories - INFO -   Добавляем: taken=3, empty=0
+2025-03-10 18:32:47,573 - database.repositories - INFO -   Новые значения: taken=4, empty=0
+2025-03-10 18:32:47,574 - sqlalchemy.engine.Engine - INFO - UPDATE users SET updated_at=?, taken_logs_count=?, empty_logs_count=? WHERE users.user_id = ?
+2025-03-10 18:32:47,574 - sqlalchemy.engine.Engine - INFO - [cached since 168.8s ago] ('2025-03-10 15:32:47.573320', 4, 0, 7442982117)
+2025-03-10 18:32:47,577 - sqlalchemy.engine.Engine - INFO - COMMIT
+2025-03-10 18:32:47,580 - database.repositories - INFO - Запрос пользователя с ID 7442982117
+2025-03-10 18:32:47,581 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:32:47,583 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.user_id = ?
+2025-03-10 18:32:47,583 - sqlalchemy.engine.Engine - INFO - [cached since 253.2s ago] (7442982117,)
+2025-03-10 18:32:47,584 - database.repositories - INFO - Найден пользователь: ID=3, user_id=7442982117, taken_logs_count=4, empty_logs_count=0
+2025-03-10 18:32:47,585 - database.repositories - INFO - Пользователь после обновления: taken=4, empty=0
+2025-03-10 18:32:48,199 - handlers.worker - INFO - Сессии успешно выданы пользователю 7442982117. Всего взято: 4
+2025-03-10 18:32:48,201 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 18:32:48,203 - aiogram.event - INFO - Update id=117256352 is handled. Duration 828 ms by bot id=8126821875
+2025-03-10 18:32:56,540 - handlers.worker - INFO - Запрос статистики от пользователя 7442982117 через инлайн-кнопку
+2025-03-10 18:32:56,542 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:32:56,543 - sqlalchemy.engine.Engine - INFO - 
+        SELECT taken_logs_count, empty_logs_count 
+        FROM users 
+        WHERE user_id = ?
+        
+2025-03-10 18:32:56,543 - sqlalchemy.engine.Engine - INFO - [cached since 132.6s ago] (7442982117,)
+2025-03-10 18:32:56,545 - database.repositories - INFO - Свежая статистика пользователя 7442982117 из базы данных: taken=4, empty=0
+2025-03-10 18:32:56,951 - handlers.worker - INFO - Статистика отправлена пользователю 7442982117: taken=4, empty=0
+2025-03-10 18:32:56,951 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 18:32:56,951 - aiogram.event - INFO - Update id=117256353 is handled. Duration 608 ms by bot id=8126821875
+2025-03-10 18:35:16,108 - aiogram.event - INFO - Update id=117256354 is handled. Duration 500 ms by bot id=8126821875
+2025-03-10 18:35:24,231 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2025-03-10 18:35:24,235 - sqlalchemy.engine.Engine - INFO - SELECT users.id, users.user_id, users.username, users.first_name, users.last_name, users.is_admin, users.is_active, users.created_at, users.updated_at, users.taken_logs_count, users.empty_logs_count, users.daily_empty_logs_count, users.last_empty_log_date 
+FROM users 
+WHERE users.is_active = 1
+2025-03-10 18:35:24,236 - sqlalchemy.engine.Engine - INFO - [generated in 0.00110s] ()
+2025-03-10 18:35:24,854 - sqlalchemy.engine.Engine - INFO - ROLLBACK
+2025-03-10 18:35:24,952 - aiogram.event - INFO - Update id=117256355 is handled. Duration 717 ms by bot id=8126821875
+2025-03-10 18:35:32,798 - aiogram.dispatcher - INFO - Polling stopped
+2025-03-10 18:35:33,059 - aiogram.dispatcher - INFO - Polling stopped for bot @testsirderobot id=8126821875 - 'test_botik'
+2025-03-10 18:35:33,067 - __main__ - INFO - Бот остановлен
