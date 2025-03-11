@@ -504,9 +504,8 @@ async def process_log_file(message: Message, state: FSMContext) -> None:
     file_path = os.path.join(TEMP_DIR, file_name)
     
     try:
-        # Получаем информацию о файле
-        file = await message.bot.get_file(file_id)
-        file_path_on_server = file.file_path
+        # Увеличиваем таймаут для больших файлов
+        timeout = 600 if file_size > 50 * 1024 * 1024 else 60  # 10 минут для больших файлов, 1 минута для обычных
         
         # Обновляем статус
         await message.bot.edit_message_text(
@@ -515,101 +514,55 @@ async def process_log_file(message: Message, state: FSMContext) -> None:
             text=f"Загружаю файл ({get_file_size_str(file_size)})..."
         )
         
-        # Увеличиваем таймаут для больших файлов
-        timeout = 600 if file_size > 50 * 1024 * 1024 else 60  # 10 минут для больших файлов, 1 минута для обычных
+        # Скачиваем файл напрямую через API
+        import aiohttp
+        import json
         
-        # Скачиваем файл с увеличенным таймаутом
-        if settings.USE_LOCAL_API:
-            # Для локального API сервера используем прямое скачивание файла
-            logger.info(f"Скачивание файла через локальный API сервер: {file_path_on_server}")
-            
-            # Создаем URL для скачивания файла
-            # Правильный формат URL для локального API сервера
-            download_url = f"{settings.LOCAL_API_URL}/file/bot{message.bot.token}/{file_path_on_server}"
-            
-            # Выводим URL для отладки
-            logger.info(f"URL для скачивания: {download_url}")
-            
-            # Пробуем альтернативные форматы URL, если основной не работает
-            try:
-                # Используем aiohttp для скачивания файла
-                import aiohttp
-                async with aiohttp.ClientSession() as session:
-                    # Пробуем первый формат URL
-                    async with session.get(download_url, timeout=timeout) as resp:
-                        if resp.status == 200:
-                            # Создаем директорию, если она не существует
-                            os.makedirs(os.path.dirname(file_path), exist_ok=True)
-                            
-                            # Скачиваем файл
-                            with open(file_path, 'wb') as fd:
-                                async for chunk in resp.content.iter_chunked(1024 * 1024):  # 1 МБ за раз
-                                    fd.write(chunk)
-                            
-                            logger.info(f"Файл успешно скачан: {file_path}")
-                        else:
-                            error_text = await resp.text()
-                            logger.error(f"Ошибка при скачивании файла (формат 1): {resp.status}, {error_text}")
-                            
-                            # Пробуем второй формат URL (без префикса bot)
-                            download_url2 = f"{settings.LOCAL_API_URL}/file/{message.bot.token}/{file_path_on_server}"
-                            logger.info(f"Пробуем альтернативный URL: {download_url2}")
-                            
-                            async with session.get(download_url2, timeout=timeout) as resp2:
-                                if resp2.status == 200:
-                                    # Создаем директорию, если она не существует
-                                    os.makedirs(os.path.dirname(file_path), exist_ok=True)
-                                    
-                                    # Скачиваем файл
-                                    with open(file_path, 'wb') as fd:
-                                        async for chunk in resp2.content.iter_chunked(1024 * 1024):
-                                            fd.write(chunk)
-                                    
-                                    logger.info(f"Файл успешно скачан (формат 2): {file_path}")
-                                else:
-                                    error_text2 = await resp2.text()
-                                    logger.error(f"Ошибка при скачивании файла (формат 2): {resp2.status}, {error_text2}")
-                                    
-                                    # Пробуем третий формат URL (прямой путь к файлу)
-                                    download_url3 = file_path_on_server
-                                    if not download_url3.startswith("http"):
-                                        download_url3 = f"http://localhost:8082/{file_path_on_server}"
-                                    
-                                    logger.info(f"Пробуем прямой URL: {download_url3}")
-                                    
-                                    async with session.get(download_url3, timeout=timeout) as resp3:
-                                        if resp3.status == 200:
-                                            # Создаем директорию, если она не существует
-                                            os.makedirs(os.path.dirname(file_path), exist_ok=True)
-                                            
-                                            # Скачиваем файл
-                                            with open(file_path, 'wb') as fd:
-                                                async for chunk in resp3.content.iter_chunked(1024 * 1024):
-                                                    fd.write(chunk)
-                                            
-                                            logger.info(f"Файл успешно скачан (формат 3): {file_path}")
-                                        else:
-                                            error_text3 = await resp3.text()
-                                            logger.error(f"Ошибка при скачивании файла (формат 3): {resp3.status}, {error_text3}")
-                                            
-                                            # Если все форматы URL не сработали, пробуем использовать встроенный метод
-                                            logger.info("Пробуем использовать встроенный метод download_file")
-                                            await message.bot.download_file(file_path_on_server, file_path, timeout=timeout)
-                                            logger.info(f"Файл успешно скачан встроенным методом: {file_path}")
-            except Exception as e:
-                logger.error(f"Ошибка при скачивании файла: {str(e)}")
+        # Получаем информацию о файле через getFile
+        api_url = f"{settings.LOCAL_API_URL}/bot{message.bot.token}/getFile"
+        logger.info(f"Запрос getFile: {api_url}")
+        
+        async with aiohttp.ClientSession() as session:
+            # Шаг 1: Получаем file_path через getFile
+            async with session.post(
+                api_url, 
+                json={"file_id": file_id},
+                timeout=timeout
+            ) as resp:
+                if resp.status != 200:
+                    error_text = await resp.text()
+                    logger.error(f"Ошибка при получении информации о файле: {resp.status}, {error_text}")
+                    raise Exception(f"Ошибка при получении информации о файле: {resp.status}, {error_text}")
                 
-                # В случае ошибки пробуем использовать встроенный метод как запасной вариант
-                try:
-                    logger.info("Пробуем использовать встроенный метод download_file после ошибки")
-                    await message.bot.download_file(file_path_on_server, file_path, timeout=timeout)
-                    logger.info(f"Файл успешно скачан встроенным методом после ошибки: {file_path}")
-                except Exception as e2:
-                    logger.error(f"Ошибка при использовании встроенного метода: {str(e2)}")
-                    raise Exception(f"Не удалось скачать файл: {str(e2)}")
-        else:
-            # Для стандартного API используем встроенный метод
-            await message.bot.download_file(file_path_on_server, file_path, timeout=timeout)
+                result = await resp.json()
+                logger.info(f"Ответ getFile: {result}")
+                
+                if not result.get("ok"):
+                    logger.error(f"Ошибка API: {result}")
+                    raise Exception(f"Ошибка API: {result}")
+                
+                file_path_on_server = result["result"]["file_path"]
+                logger.info(f"Путь к файлу на сервере: {file_path_on_server}")
+                
+                # Шаг 2: Скачиваем файл по полученному file_path
+                download_url = f"{settings.LOCAL_API_URL}/file/bot{message.bot.token}/{file_path_on_server}"
+                logger.info(f"URL для скачивания: {download_url}")
+                
+                async with session.get(download_url, timeout=timeout) as download_resp:
+                    if download_resp.status != 200:
+                        error_text = await download_resp.text()
+                        logger.error(f"Ошибка при скачивании файла: {download_resp.status}, {error_text}")
+                        raise Exception(f"Ошибка при скачивании файла: {download_resp.status}, {error_text}")
+                    
+                    # Создаем директорию, если она не существует
+                    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+                    
+                    # Скачиваем файл по частям
+                    with open(file_path, 'wb') as fd:
+                        async for chunk in download_resp.content.iter_chunked(1024 * 1024):  # 1 МБ за раз
+                            fd.write(chunk)
+                    
+                    logger.info(f"Файл успешно скачан: {file_path}")
         
         # Обновляем статус
         await message.bot.edit_message_text(
@@ -696,7 +649,7 @@ async def process_log_file(message: Message, state: FSMContext) -> None:
             )
     
     except Exception as e:
-        logger.error(f"Ошибка при обработке файла: {e}")
+        logger.error(f"Ошибка при обработке файла: {str(e)}")
         await message.answer(f"Произошла ошибка при обработке файла: {str(e)}")
         
         # Удаляем скачанный файл в случае ошибки
