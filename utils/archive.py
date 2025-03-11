@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 rarfile.UNRAR_TOOL = "unrar"
 
 # Регулярное выражение для извлечения номера телефона из имени архива
-SESSION_PATTERN = re.compile(r'session_(\d+)\.(zip|rar)')
+SESSION_PATTERN = re.compile(r'(?:session_)?(\d{10,15})(?:\.(zip|rar))?')
 
 # Создаем директории для хранения сессий и архивов
 SESSIONS_DIR = Path("data/sessions")
@@ -34,9 +34,26 @@ MAX_CHUNK_SIZE = 45 * 1024 * 1024  # 45 МБ в байтах
 
 def extract_phone_number(file_name: str) -> Optional[str]:
     """Извлекает номер телефона из имени архива"""
-    match = SESSION_PATTERN.match(file_name)
+    # Пробуем найти номер телефона по шаблону
+    match = SESSION_PATTERN.search(file_name)
     if match:
-        return match.group(1)
+        phone = match.group(1)
+        # Проверяем, что это действительно похоже на номер телефона (10-15 цифр)
+        if len(phone) >= 10 and len(phone) <= 15:
+            return phone
+    
+    # Если не нашли по шаблону, ищем любую последовательность из 10-15 цифр
+    digits_match = re.search(r'(\d{10,15})', file_name)
+    if digits_match:
+        return digits_match.group(1)
+    
+    # Если не нашли номер, но файл является архивом, используем имя файла без расширения
+    if file_name.endswith('.zip') or file_name.endswith('.rar'):
+        base_name = os.path.splitext(file_name)[0]
+        # Если имя файла содержит только цифры, используем его как номер телефона
+        if base_name.isdigit() and len(base_name) >= 10:
+            return base_name
+    
     return None
 
 async def extract_archive(file_path: str) -> List[Tuple[str, str]]:
@@ -51,18 +68,114 @@ async def extract_archive(file_path: str) -> List[Tuple[str, str]]:
         # Создаем временную директорию для распаковки
         os.makedirs(temp_extract_dir, exist_ok=True)
         
+        logger.info(f"Распаковка архива {file_path} в {temp_extract_dir}")
+        
         # Определяем тип архива и распаковываем
         if file_path.endswith('.zip'):
             with zipfile.ZipFile(file_path, 'r') as zip_ref:
                 zip_ref.extractall(temp_extract_dir)
+                logger.info(f"ZIP архив распакован: {len(zip_ref.namelist())} файлов")
         elif file_path.endswith('.rar'):
             with rarfile.RarFile(file_path, 'r') as rar_ref:
                 rar_ref.extractall(temp_extract_dir)
+                logger.info(f"RAR архив распакован: {len(rar_ref.namelist())} файлов")
         else:
             logger.error(f"Неподдерживаемый формат архива: {file_path}")
             return []
         
         # Ищем вложенные архивы в распакованном архиве
+        logger.info(f"Поиск вложенных архивов в {temp_extract_dir}")
+        
+        # Сначала проверяем, есть ли архивы в корне
+        for file_name in os.listdir(temp_extract_dir):
+            full_path = os.path.join(temp_extract_dir, file_name)
+            if os.path.isfile(full_path) and (file_name.endswith('.zip') or file_name.endswith('.rar')):
+                # Пробуем извлечь номер телефона из имени архива
+                phone_number = extract_phone_number(file_name)
+                
+                if phone_number:
+                    # Сохраняем архив в директорию архивов
+                    dest_path = ARCHIVES_DIR / file_name
+                    shutil.copy2(full_path, dest_path)
+                    logger.info(f"Найден архив с номером телефона: {file_name} -> {phone_number}")
+                    extracted_archives.append((phone_number, file_name))
+                else:
+                    logger.warning(f"Не удалось извлечь номер телефона из имени архива: {file_name}")
+                    # Если не удалось извлечь номер, пробуем распаковать этот архив
+                    nested_archives = await extract_nested_archive(Path(full_path))
+                    extracted_archives.extend(nested_archives)
+        
+        # Затем рекурсивно ищем во всех поддиректориях
+        for root, dirs, files in os.walk(temp_extract_dir):
+            for file_name in files:
+                if file_name.endswith('.zip') or file_name.endswith('.rar'):
+                    # Пропускаем файлы, которые уже обработали в корне
+                    if root == str(temp_extract_dir):
+                        continue
+                    
+                    # Извлекаем номер телефона из имени архива
+                    phone_number = extract_phone_number(file_name)
+                    
+                    if phone_number:
+                        # Сохраняем архив в директорию архивов
+                        source_path = Path(root) / file_name
+                        dest_path = ARCHIVES_DIR / file_name
+                        shutil.copy2(source_path, dest_path)
+                        logger.info(f"Найден вложенный архив с номером телефона: {file_name} -> {phone_number}")
+                        extracted_archives.append((phone_number, file_name))
+                    else:
+                        logger.warning(f"Не удалось извлечь номер телефона из вложенного архива: {file_name}")
+                        # Если не удалось извлечь номер, пробуем распаковать этот архив
+                        nested_archives = await extract_nested_archive(Path(root) / file_name)
+                        extracted_archives.extend(nested_archives)
+        
+        # Если не нашли ни одного архива с номером телефона, пробуем использовать имя основного архива
+        if not extracted_archives:
+            main_file_name = os.path.basename(file_path)
+            phone_number = extract_phone_number(main_file_name)
+            
+            if phone_number:
+                # Сохраняем копию основного архива в директорию архивов
+                dest_path = ARCHIVES_DIR / main_file_name
+                shutil.copy2(file_path, dest_path)
+                logger.info(f"Используем основной архив как сессию: {main_file_name} -> {phone_number}")
+                extracted_archives.append((phone_number, main_file_name))
+        
+        logger.info(f"Всего найдено архивов с номерами телефонов: {len(extracted_archives)}")
+        return extracted_archives
+    
+    except Exception as e:
+        logger.error(f"Ошибка при распаковке архива {file_path}: {e}")
+        return []
+    finally:
+        # Удаляем временную директорию
+        shutil.rmtree(temp_extract_dir, ignore_errors=True)
+
+async def extract_nested_archive(archive_path: Path) -> List[Tuple[str, str]]:
+    """
+    Распаковывает вложенный архив и ищет в нем архивы с номерами телефонов
+    """
+    extracted_archives = []
+    temp_extract_dir = TEMP_DIR / f"nested_{archive_path.name}"
+    
+    try:
+        # Создаем временную директорию для распаковки
+        os.makedirs(temp_extract_dir, exist_ok=True)
+        
+        logger.info(f"Распаковка вложенного архива {archive_path} в {temp_extract_dir}")
+        
+        # Определяем тип архива и распаковываем
+        if str(archive_path).endswith('.zip'):
+            with zipfile.ZipFile(archive_path, 'r') as zip_ref:
+                zip_ref.extractall(temp_extract_dir)
+        elif str(archive_path).endswith('.rar'):
+            with rarfile.RarFile(archive_path, 'r') as rar_ref:
+                rar_ref.extractall(temp_extract_dir)
+        else:
+            logger.error(f"Неподдерживаемый формат вложенного архива: {archive_path}")
+            return []
+        
+        # Ищем архивы в распакованном вложенном архиве
         for root, dirs, files in os.walk(temp_extract_dir):
             for file_name in files:
                 if file_name.endswith('.zip') or file_name.endswith('.rar'):
@@ -74,15 +187,13 @@ async def extract_archive(file_path: str) -> List[Tuple[str, str]]:
                         source_path = Path(root) / file_name
                         dest_path = ARCHIVES_DIR / file_name
                         shutil.copy2(source_path, dest_path)
-                        
+                        logger.info(f"Найден архив во вложенном архиве: {file_name} -> {phone_number}")
                         extracted_archives.append((phone_number, file_name))
-                    else:
-                        logger.warning(f"Не удалось извлечь номер телефона из имени архива: {file_name}")
         
         return extracted_archives
     
     except Exception as e:
-        logger.error(f"Ошибка при распаковке архива {file_path}: {e}")
+        logger.error(f"Ошибка при распаковке вложенного архива {archive_path}: {e}")
         return []
     finally:
         # Удаляем временную директорию
