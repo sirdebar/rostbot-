@@ -469,29 +469,16 @@ async def process_log_file(message: Message, state: FSMContext) -> None:
     file_id = message.document.file_id
     file_size = message.document.file_size
     
-    # Проверяем размер файла - Telegram Bot API ограничивает размер файлов до 50 МБ
-    if file_size > 50 * 1024 * 1024:  # Если файл больше 50 МБ
-        # Проверяем, используется ли локальный API сервер
-        if not settings.USE_LOCAL_API:
-            await message.answer(
-                f"Файл слишком большой для стандартного API Telegram ({get_file_size_str(file_size)}). "
-                f"Максимальный размер файла - 50 МБ.\n\n"
-                f"Пожалуйста, разделите архив на части по 45-50 МБ и загрузите их по отдельности."
-            )
-            # Отправляем инструкции по разделению файлов
-            await message.answer(split_file_instructions())
-            await state.clear()
-            return
-        else:
-            # Если используется локальный API, предупреждаем о длительной загрузке
-            await message.answer(
-                f"Размер файла: {get_file_size_str(file_size)}. "
-                f"Загрузка может занять длительное время (до 10 минут). Пожалуйста, подождите..."
-            )
-    elif file_size > 20 * 1024 * 1024:  # Если файл больше 20 МБ
+    # Предупреждаем о длительной загрузке для больших файлов
+    if file_size > 1024 * 1024 * 1024:  # Если файл больше 1 ГБ
         await message.answer(
-            f"Размер файла: {get_file_size_str(file_size)}. "
-            f"Загрузка может занять некоторое время. Пожалуйста, подождите..."
+            f"Размер файла: {file_size / (1024 * 1024 * 1024):.2f} ГБ. "
+            f"Загрузка может занять длительное время (до 15 минут). Пожалуйста, подождите..."
+        )
+    elif file_size > 100 * 1024 * 1024:  # Если файл больше 100 МБ
+        await message.answer(
+            f"Размер файла: {file_size / (1024 * 1024):.2f} МБ. "
+            f"Загрузка может занять некоторое время (до 5 минут). Пожалуйста, подождите..."
         )
     
     # Отправляем сообщение о начале обработки
@@ -500,7 +487,7 @@ async def process_log_file(message: Message, state: FSMContext) -> None:
     # Создаем директорию для временных файлов, если она не существует
     os.makedirs(TEMP_DIR, exist_ok=True)
     
-    # Скачиваем файл
+    # Путь для сохранения файла
     file_path = os.path.join(TEMP_DIR, file_name)
     
     try:
@@ -508,83 +495,147 @@ async def process_log_file(message: Message, state: FSMContext) -> None:
         await message.bot.edit_message_text(
             chat_id=message.chat.id,
             message_id=status_message.message_id,
-            text=f"Загружаю файл ({get_file_size_str(file_size)})..."
+            text=f"Загружаю файл ({file_size / (1024 * 1024):.2f} МБ)..."
         )
         
-        # Используем subprocess для запуска curl для скачивания файла
-        # Это обходит проблемы с API и работает напрямую с файловой системой
-        import subprocess
-        import time
-        
-        # Получаем информацию о файле через getFile
-        import aiohttp
-        
-        api_url = f"{settings.LOCAL_API_URL}/bot{message.bot.token}/getFile"
-        logger.info(f"Запрос getFile: {api_url}")
-        
-        async with aiohttp.ClientSession() as session:
-            async with session.post(
-                api_url, 
-                json={"file_id": file_id}
-            ) as resp:
-                if resp.status != 200:
-                    error_text = await resp.text()
-                    logger.error(f"Ошибка при получении информации о файле: {resp.status}, {error_text}")
-                    raise Exception(f"Ошибка при получении информации о файле: {resp.status}, {error_text}")
-                
-                result = await resp.json()
-                logger.info(f"Ответ getFile: {result}")
-                
-                if not result.get("ok"):
-                    logger.error(f"Ошибка API: {result}")
-                    raise Exception(f"Ошибка API: {result}")
-                
-                file_path_on_server = result["result"]["file_path"]
-                logger.info(f"Путь к файлу на сервере: {file_path_on_server}")
-        
-        # Прямой путь к файлу на сервере
-        # Обычно файлы хранятся в директории, где запущен локальный API сервер
-        # Путь может быть примерно таким: /root/telegram-bot-api/telegram-bot-api/build/<token>/documents/file_X
-        
-        # Определяем базовую директорию локального API сервера
-        api_base_dir = "/root/telegram-bot-api/telegram-bot-api/build"
-        
-        # Формируем полный путь к файлу на сервере
-        server_file_path = os.path.join(api_base_dir, file_path_on_server)
-        logger.info(f"Полный путь к файлу на сервере: {server_file_path}")
-        
-        # Проверяем, существует ли файл
-        if os.path.exists(server_file_path):
-            # Копируем файл
-            import shutil
-            shutil.copy2(server_file_path, file_path)
-            logger.info(f"Файл успешно скопирован: {file_path}")
-        else:
-            # Если файл не найден, пробуем другие варианты пути
-            logger.warning(f"Файл не найден по пути: {server_file_path}")
+        # Метод 1: Прямое скачивание через subprocess (curl)
+        # Этот метод обходит ограничения API и работает с файлами любого размера
+        try:
+            # Получаем информацию о файле через getFile API
+            import aiohttp
+            import subprocess
+            import time
             
-            # Вариант 1: Путь относительно токена
-            token_dir = os.path.join(api_base_dir, message.bot.token)
-            if os.path.exists(token_dir):
-                for root, dirs, files in os.walk(token_dir):
+            # Формируем URL для getFile
+            api_url = f"{settings.LOCAL_API_URL}/bot{message.bot.token}/getFile"
+            logger.info(f"Запрос getFile: {api_url}")
+            
+            # Отправляем запрос getFile
+            async with aiohttp.ClientSession() as session:
+                async with session.post(api_url, json={"file_id": file_id}, timeout=60) as resp:
+                    if resp.status != 200:
+                        error_text = await resp.text()
+                        logger.error(f"Ошибка при получении информации о файле: {resp.status}, {error_text}")
+                        raise Exception(f"Ошибка при получении информации о файле: {resp.status}, {error_text}")
+                    
+                    result = await resp.json()
+                    logger.info(f"Ответ getFile: {result}")
+                    
+                    if not result.get("ok"):
+                        logger.error(f"Ошибка API: {result}")
+                        raise Exception(f"Ошибка API: {result}")
+                    
+                    # Получаем путь к файлу на сервере
+                    file_path_on_server = result["result"]["file_path"]
+                    logger.info(f"Путь к файлу на сервере: {file_path_on_server}")
+            
+            # Метод 1.1: Прямой доступ к файлу в локальной файловой системе
+            # Проверяем несколько возможных путей к файлу
+            possible_paths = [
+                # Путь 1: Стандартный путь в директории storage
+                os.path.join("/root/telegram-bot-api/telegram-bot-api/build/storage", file_path_on_server),
+                # Путь 2: Путь относительно корня build
+                os.path.join("/root/telegram-bot-api/telegram-bot-api/build", file_path_on_server),
+                # Путь 3: Путь с токеном бота
+                os.path.join("/root/telegram-bot-api/telegram-bot-api/build/storage", message.bot.token, "documents", os.path.basename(file_path_on_server)),
+                # Путь 4: Путь без токена бота
+                os.path.join("/root/telegram-bot-api/telegram-bot-api/build/storage/documents", os.path.basename(file_path_on_server)),
+            ]
+            
+            file_found = False
+            for local_path in possible_paths:
+                logger.info(f"Проверяю путь: {local_path}")
+                if os.path.exists(local_path):
+                    logger.info(f"Файл найден по пути: {local_path}")
+                    # Копируем файл
+                    import shutil
+                    shutil.copy2(local_path, file_path)
+                    logger.info(f"Файл успешно скопирован: {file_path}")
+                    file_found = True
+                    break
+            
+            # Метод 1.2: Если файл не найден, ищем его по всей директории storage
+            if not file_found:
+                logger.info("Файл не найден по стандартным путям, выполняю поиск по всей директории storage")
+                storage_dir = "/root/telegram-bot-api/telegram-bot-api/build/storage"
+                
+                # Ищем файл по всей директории storage
+                for root, dirs, files in os.walk(storage_dir):
                     for file in files:
-                        if file_id in file:
+                        # Проверяем, содержит ли имя файла file_id или последние 10 символов file_id
+                        if file_id[-10:] in file:
                             found_path = os.path.join(root, file)
                             logger.info(f"Найден файл: {found_path}")
                             shutil.copy2(found_path, file_path)
                             logger.info(f"Файл успешно скопирован: {file_path}")
+                            file_found = True
                             break
+                    if file_found:
+                        break
             
-            # Если файл все еще не найден, пробуем использовать стандартный метод
-            if not os.path.exists(file_path):
-                logger.warning("Файл не найден на сервере, пробуем стандартный метод скачивания")
-                # Увеличиваем таймаут для больших файлов
-                timeout = 600 if file_size > 50 * 1024 * 1024 else 60
-                await message.bot.download_file(file_path_on_server, file_path, timeout=timeout)
-        
-        # Проверяем, что файл успешно скачан
-        if not os.path.exists(file_path):
-            raise Exception("Не удалось скачать файл ни одним из методов")
+            # Метод 2: Если файл не найден, используем curl для скачивания
+            if not file_found:
+                logger.info("Файл не найден в файловой системе, пробую скачать через curl")
+                download_url = f"{settings.LOCAL_API_URL}/file/bot{message.bot.token}/{file_path_on_server}"
+                logger.info(f"URL для скачивания: {download_url}")
+                
+                # Используем curl для скачивания файла
+                curl_command = f"curl -o {file_path} {download_url}"
+                logger.info(f"Выполняю команду: {curl_command}")
+                
+                process = subprocess.Popen(curl_command, shell=True)
+                process.wait()
+                
+                if process.returncode == 0 and os.path.exists(file_path) and os.path.getsize(file_path) > 0:
+                    logger.info(f"Файл успешно скачан через curl: {file_path}")
+                    file_found = True
+                else:
+                    logger.error(f"Ошибка при скачивании файла через curl: {process.returncode}")
+            
+            # Метод 3: Если все предыдущие методы не сработали, используем aiohttp
+            if not file_found:
+                logger.info("Пробую скачать файл через aiohttp")
+                download_url = f"{settings.LOCAL_API_URL}/file/bot{message.bot.token}/{file_path_on_server}"
+                
+                async with aiohttp.ClientSession() as session:
+                    async with session.get(download_url, timeout=1800) as resp:  # 30 минут таймаут
+                        if resp.status == 200:
+                            # Создаем директорию, если она не существует
+                            os.makedirs(os.path.dirname(file_path), exist_ok=True)
+                            
+                            # Скачиваем файл по частям
+                            with open(file_path, 'wb') as fd:
+                                # Используем большие чанки для ускорения скачивания
+                                async for chunk in resp.content.iter_chunked(8 * 1024 * 1024):  # 8 МБ за раз
+                                    fd.write(chunk)
+                                    # Обновляем статус каждые 100 МБ
+                                    if fd.tell() % (100 * 1024 * 1024) < 8 * 1024 * 1024:
+                                        await message.bot.edit_message_text(
+                                            chat_id=message.chat.id,
+                                            message_id=status_message.message_id,
+                                            text=f"Загружено {fd.tell() / (1024 * 1024):.2f} МБ из {file_size / (1024 * 1024):.2f} МБ..."
+                                        )
+                            
+                            logger.info(f"Файл успешно скачан через aiohttp: {file_path}")
+                            file_found = True
+                        else:
+                            error_text = await resp.text()
+                            logger.error(f"Ошибка при скачивании файла через aiohttp: {resp.status}, {error_text}")
+            
+            # Метод 4: Если все предыдущие методы не сработали, используем стандартный метод
+            if not file_found:
+                logger.info("Пробую стандартный метод download_file")
+                await message.bot.download_file(file_path_on_server, file_path, timeout=1800)  # 30 минут таймаут
+                logger.info(f"Файл успешно скачан стандартным методом: {file_path}")
+                file_found = True
+            
+            # Проверяем, что файл успешно скачан
+            if not os.path.exists(file_path) or os.path.getsize(file_path) == 0:
+                raise Exception("Не удалось скачать файл ни одним из методов")
+            
+        except Exception as e:
+            logger.error(f"Ошибка при скачивании файла: {str(e)}")
+            raise Exception(f"Ошибка при скачивании файла: {str(e)}")
         
         # Обновляем статус
         await message.bot.edit_message_text(
