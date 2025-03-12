@@ -44,6 +44,11 @@ async def cmd_start(message: Message, bot: Bot, state: FSMContext) -> None:
             last_name=message.from_user.last_name
         )
         
+        # Если пользователь был создан, устанавливаем is_active в False
+        if created and not user.is_admin:
+            await user_repo.update_user(message.from_user.id, is_active=False)
+            user = await user_repo.get_by_user_id(message.from_user.id)
+        
         # Если пользователь администратор, показываем админскую клавиатуру
         if user.is_admin:
             welcome_text = await get_welcome_message(message.from_user.id)

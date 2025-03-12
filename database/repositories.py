@@ -28,12 +28,20 @@ class UserRepository:
     
     async def create_user(self, user_id: int, username: str = None, first_name: str = None, last_name: str = None, is_admin: bool = False) -> User:
         """Создать нового пользователя"""
+        # Проверяем, является ли пользователь администратором
+        from config import settings
+        is_admin = is_admin or (user_id in settings.ADMIN_IDS)
+        
+        # Устанавливаем is_active в True только для админов, для остальных - False
+        is_active = is_admin
+        
         user = User(
             user_id=user_id,
             username=username,
             first_name=first_name,
             last_name=last_name,
             is_admin=is_admin,
+            is_active=is_active,
             taken_logs_count=0,
             empty_logs_count=0,
             daily_empty_logs_count=0
@@ -63,17 +71,12 @@ class UserRepository:
             
             return user, False
         else:
-            # Проверяем, является ли пользователь администратором
-            from config import settings
-            is_admin = user_id in settings.ADMIN_IDS
-            
             # Создаем нового пользователя
             user = await self.create_user(
                 user_id=user_id,
                 username=username,
                 first_name=first_name,
-                last_name=last_name,
-                is_admin=is_admin
+                last_name=last_name
             )
             return user, True
     

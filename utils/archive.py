@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 rarfile.UNRAR_TOOL = "unrar"
 
 # Регулярное выражение для извлечения номера телефона из имени архива
-SESSION_PATTERN = re.compile(r'(?:session_)?(\d{10,15})(?:\.(zip|rar))?')
+SESSION_PATTERN = re.compile(r'(?:session[_\-])?(\d{10,15})(?:\.(zip|rar))?')
 
 # Создаем директории для хранения сессий и архивов
 SESSIONS_DIR = Path("data/sessions")
